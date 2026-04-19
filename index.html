@@ -56,8 +56,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(255,255,255,
 .btn-cart{background:linear-gradient(135deg,var(--pink),#f06292);color:#fff;border:none;padding:9px 18px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.85rem;display:flex;align-items:center;gap:6px;box-shadow:0 4px 15px rgba(244,143,177,.4);transition:all .2s}
 .btn-cart:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(244,143,177,.5)}
 .cart-badge{background:#fff;color:var(--pink-dark);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900}
-.btn-admin{background:transparent;border:2px solid var(--blue-mid);color:var(--text-light);padding:7px 14px;border-radius:50px;cursor:pointer;font-size:.8rem;font-weight:700;transition:all .2s}
-.btn-admin:hover{background:var(--blue-light);color:var(--text)}
 
 /* ─── HERO ─── */
 .hero{min-height:100vh;background:linear-gradient(160deg,var(--pink-light) 0%,var(--blue-light) 50%,var(--lavender) 100%);display:flex;align-items:center;padding:100px 24px 60px;position:relative;overflow:hidden}
@@ -251,36 +249,7 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50p
 .alert.success{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
 .alert.error{background:#fce4ec;color:#c62828;border:1px solid #ef9a9a}
 
-/* ─── ADMIN PANEL ─── */
-.admin-overlay{position:fixed;inset:0;background:rgba(74,48,64,.6);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
-.admin-overlay.open{display:flex}
-.admin-panel{background:#fff;border-radius:24px;width:100%;max-width:900px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(244,143,177,.3)}
-.admin-header{background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;padding:20px 28px;display:flex;align-items:center;justify-content:space-between}
-.admin-header h3{font-family:'Pacifico',cursive;font-size:1.4rem}
-.admin-tabs{display:flex;gap:6px;padding:16px 24px;border-bottom:2px solid var(--pink-light);background:var(--cream);flex-wrap:wrap}
-.admin-tab{background:#fff;border:2px solid var(--pink-light);color:var(--text-light);padding:8px 18px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;transition:all .2s}
-.admin-tab.active{background:var(--pink-dark);border-color:var(--pink-dark);color:#fff}
-.admin-body{flex:1;overflow-y:auto;padding:24px}
-.admin-tab-content{display:none}
-.admin-tab-content.active{display:block}
-.product-list-admin{display:grid;gap:12px}
-.admin-product-row{display:flex;align-items:center;gap:14px;background:var(--cream);border-radius:14px;padding:14px;flex-wrap:wrap}
-.admin-product-emoji{font-size:2rem;width:52px;height:52px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid var(--pink-light)}
-.admin-product-info{flex:1;min-width:150px}
-.admin-product-info strong{display:block;font-weight:800;color:var(--text);font-size:.9rem}
-.admin-product-info span{font-size:.8rem;color:var(--text-light);font-weight:600}
-.admin-actions{display:flex;gap:6px}
-.btn-edit,.btn-del{border:none;padding:7px 14px;border-radius:10px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.8rem;transition:all .2s}
-.btn-edit{background:var(--blue-light);color:#1565c0}
-.btn-edit:hover{background:var(--blue-mid);color:#fff}
-.btn-del{background:#fce4ec;color:#c62828}
-.btn-del:hover{background:#e53935;color:#fff}
-.btn-add-product{background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;border:none;padding:12px 22px;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;display:flex;align-items:center;gap:8px;margin-bottom:20px;transition:all .2s}
-.btn-add-product:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(233,30,140,.35)}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px}
-.stat-card{background:linear-gradient(135deg,var(--pink-light),var(--blue-light));border-radius:16px;padding:20px;text-align:center}
-.stat-card .stat-num{font-family:'Quicksand',sans-serif;font-size:2rem;font-weight:700;color:var(--pink-dark)}
-.stat-card .stat-label{font-size:.82rem;color:var(--text-light);font-weight:700}
+
 
 /* ─── NOTICE BANNER ─── */
 .notice-bar{background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;text-align:center;padding:8px 24px;font-size:.83rem;font-weight:700;letter-spacing:.5px}
@@ -299,8 +268,6 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50p
   .hero-btns{justify-content:center}
   .hero-features{justify-content:center}
   .cart-sidebar{width:100vw}
-  .admin-panel{max-width:100%}
-  .form-row{grid-template-columns:1fr}
   .footer-bottom{flex-direction:column;text-align:center}
 }
 </style>
@@ -333,7 +300,6 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50p
     <a href="#about">About</a>
   </div>
   <div class="nav-actions">
-    <button class="btn-admin" onclick="openAdminLogin()"><i class="fas fa-cog"></i> Admin</button>
     <button class="btn-cart" onclick="toggleCart()">
       <i class="fas fa-shopping-bag"></i>
       Cart <span class="cart-badge" id="cart-count">0</span>
@@ -432,7 +398,7 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50p
         <div class="package-top">⭐ Starter</div>
         <div class="package-icon">🌸</div>
         <div class="package-name">Baby Starter</div>
-        <div class="package-price">Rs. 17,500 <small>/ pack</small></div>
+        <div class="package-price">Rs. 3,500 <small>/ pack</small></div>
         <ul class="package-items">
           <li><i class="fas fa-check-circle"></i> 2 Newborn Onesies</li>
           <li><i class="fas fa-check-circle"></i> Baby Hat & Mittens</li>
@@ -440,7 +406,7 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50p
           <li><i class="fas fa-check-circle"></i> Soft Muslin Cloth x2</li>
           <li><i class="fas fa-check-circle"></i> Gift Wrapped Box</li>
         </ul>
-        <button class="btn-package" onclick="orderPackage('Baby Starter Pack','Rs. 17,500')">
+        <button class="btn-package" onclick="orderPackage('Baby Starter Pack','Rs. 3,500')">
           <i class="fab fa-whatsapp"></i> Order via WhatsApp
         </button>
       </div>
@@ -448,7 +414,7 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50p
         <div class="package-top">🏆 Most Popular</div>
         <div class="package-icon">👑</div>
         <div class="package-name">Royal Bundle</div>
-        <div class="package-price">Rs. 24,000 <small>/ pack</small></div>
+        <div class="package-price">Rs. 7,500 <small>/ pack</small></div>
         <ul class="package-items">
           <li><i class="fas fa-check-circle"></i> 4 Newborn Outfits</li>
           <li><i class="fas fa-check-circle"></i> Baby Bath Kit (5 items)</li>
@@ -458,7 +424,7 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50p
           <li><i class="fas fa-check-circle"></i> Diaper Bag</li>
           <li><i class="fas fa-check-circle"></i> Luxury Gift Box</li>
         </ul>
-        <button class="btn-package" onclick="orderPackage('Royal Bundle','Rs. 24,000')">
+        <button class="btn-package" onclick="orderPackage('Royal Bundle','Rs. 7,500')">
           <i class="fab fa-whatsapp"></i> Order via WhatsApp
         </button>
       </div>
@@ -466,7 +432,7 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50p
         <div class="package-top">💎 Premium</div>
         <div class="package-icon">🦋</div>
         <div class="package-name">Mama & Baby</div>
-        <div class="package-price">Rs. 29,000 <small>/ pack</small></div>
+        <div class="package-price">Rs. 12,000 <small>/ pack</small></div>
         <ul class="package-items">
           <li><i class="fas fa-check-circle"></i> Full Newborn Kit</li>
           <li><i class="fas fa-check-circle"></i> Maternity Pillow</li>
@@ -475,15 +441,8 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50p
           <li><i class="fas fa-check-circle"></i> Baby Sleeping Bag</li>
           <li><i class="fas fa-check-circle"></i> Postpartum Recovery Kit</li>
           <li><i class="fas fa-check-circle"></i> Premium Gift Hamper</li>
-          <li><i class="fas fa-check-circle"></i> Full Newborn Kit</li>
-          <li><i class="fas fa-check-circle"></i> Maternity Pillow</li>
-          <li><i class="fas fa-check-circle"></i> Nursing Cover</li>
-          <li><i class="fas fa-check-circle"></i> Mom Care Essentials</li>
-          <li><i class="fas fa-check-circle"></i> Baby Sleeping Bag</li>
-          <li><i class="fas fa-check-circle"></i> Postpartum Recovery Kit</li>
-          <li><i class="fas fa-check-circle"></i> Premium Gift Hamper</li>
         </ul>
-        <button class="btn-package" onclick="orderPackage('Mama & Baby Premium Pack','Rs. 29,000')">
+        <button class="btn-package" onclick="orderPackage('Mama & Baby Premium Pack','Rs. 12,000')">
           <i class="fab fa-whatsapp"></i> Order via WhatsApp
         </button>
       </div>
@@ -620,107 +579,6 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50p
   </div>
 </div>
 
-<!-- ADMIN LOGIN MODAL -->
-<div class="modal-overlay" id="admin-login-modal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('admin-login-modal')"><i class="fas fa-times"></i></button>
-    <h3>🔐 Admin Login</h3>
-    <div class="alert" id="login-alert"></div>
-    <div class="form-group">
-      <label>Username</label>
-      <input type="text" id="admin-user" placeholder="Enter username">
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="admin-pass" placeholder="Enter password">
-    </div>
-    <button class="btn-modal" onclick="adminLogin()"><i class="fas fa-unlock"></i> Login</button>
-    <p style="text-align:center;margin-top:14px;font-size:.8rem;color:var(--text-light)">Default: admin / littlecuddle2024</p>
-  </div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="admin-overlay" id="admin-panel">
-  <div class="admin-panel">
-    <div class="admin-header">
-      <h3>🏪 Little Cuddle Admin Panel</h3>
-      <button class="btn-close" onclick="closeModal('admin-panel')" style="background:rgba(255,255,255,.2);color:#fff"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="admin-tabs">
-      <button class="admin-tab active" onclick="switchTab('tab-dashboard')">📊 Dashboard</button>
-      <button class="admin-tab" onclick="switchTab('tab-products')">📦 Products</button>
-      <button class="admin-tab" onclick="switchTab('tab-add')">➕ Add Product</button>
-    </div>
-    <div class="admin-body">
-      <!-- DASHBOARD -->
-      <div class="admin-tab-content active" id="tab-dashboard">
-        <div class="stats-grid" id="stats-grid"></div>
-        <h4 style="font-weight:800;color:var(--text);margin-bottom:12px">Quick Actions</h4>
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <button class="btn-add-product" onclick="switchTab('tab-add')"><i class="fas fa-plus"></i> Add Product</button>
-          <a href="https://wa.me/94766787992" target="_blank" style="background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:12px 22px;border-radius:12px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;display:inline-flex;align-items:center;gap:8px;text-decoration:none">
-            <i class="fab fa-whatsapp"></i> Open WhatsApp
-          </a>
-        </div>
-      </div>
-      <!-- PRODUCTS -->
-      <div class="admin-tab-content" id="tab-products">
-        <div id="admin-product-list"></div>
-      </div>
-      <!-- ADD PRODUCT -->
-      <div class="admin-tab-content" id="tab-add">
-        <h4 style="font-weight:800;color:var(--text);margin-bottom:16px" id="product-form-title">Add New Product</h4>
-        <div class="alert" id="product-alert"></div>
-        <input type="hidden" id="edit-product-id">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Product Name *</label>
-            <input type="text" id="p-name" placeholder="e.g. Baby Onesie Set">
-          </div>
-          <div class="form-group">
-            <label>Category *</label>
-            <select id="p-category">
-              <option value="newborn">Newborn</option>
-              <option value="clothing">Clothing</option>
-              <option value="feeding">Feeding</option>
-              <option value="bath">Bath & Care</option>
-              <option value="mother">Mother Care</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Description</label>
-          <textarea id="p-desc" rows="2" placeholder="Brief product description..."></textarea>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Price (Rs.) *</label>
-            <input type="number" id="p-price" placeholder="e.g. 1500">
-          </div>
-          <div class="form-group">
-            <label>Discount %</label>
-            <input type="number" id="p-discount" placeholder="e.g. 10" min="0" max="90">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Emoji Icon</label>
-            <input type="text" id="p-emoji" placeholder="e.g. 👶">
-          </div>
-          <div class="form-group">
-            <label>Badge (optional)</label>
-            <input type="text" id="p-badge" placeholder="e.g. NEW, HOT">
-          </div>
-        </div>
-        <div style="display:flex;gap:10px">
-          <button class="btn-modal" onclick="saveProduct()" id="save-btn"><i class="fas fa-save"></i> Save Product</button>
-          <button class="btn-modal" style="background:var(--blue-light);color:var(--text)" onclick="cancelEdit()"><i class="fas fa-times"></i> Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -755,7 +613,6 @@ const DEFAULT_PRODUCTS = [
 let products = JSON.parse(localStorage.getItem('lc_products')) || DEFAULT_PRODUCTS;
 let cart = JSON.parse(localStorage.getItem('lc_cart')) || [];
 let currentFilter = 'all';
-let isAdminLoggedIn = false;
 
 function saveProducts() { localStorage.setItem('lc_products', JSON.stringify(products)); }
 function saveCart()     { localStorage.setItem('lc_cart', JSON.stringify(cart)); }
@@ -782,8 +639,6 @@ window.addEventListener('load', () => {
   renderProducts();
   renderCart();
   updateCartBadge();
-  renderAdminProducts();
-  renderStats();
 });
 
 function getLogoBase64() {
@@ -944,141 +799,7 @@ function orderPackage(name, price) {
   window.open(`https://wa.me/94766787992?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-// ─── ADMIN ──────────────────────────────────────────────────────────
-function openAdminLogin() { openModal('admin-login-modal'); }
 
-function adminLogin() {
-  const u = document.getElementById('admin-user').value;
-  const p = document.getElementById('admin-pass').value;
-  if(u==='admin' && p==='littlecuddle2024'){
-    isAdminLoggedIn=true;
-    closeModal('admin-login-modal');
-    renderAdminProducts();
-    renderStats();
-    document.getElementById('admin-panel').classList.add('open');
-  } else {
-    const a = document.getElementById('login-alert');
-    a.style.display='block';a.className='alert error';
-    a.textContent='❌ Incorrect username or password.';
-  }
-}
-
-function switchTab(tabId) {
-  document.querySelectorAll('.admin-tab-content').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  const idx = ['tab-dashboard','tab-products','tab-add'].indexOf(tabId);
-  document.querySelectorAll('.admin-tab')[idx].classList.add('active');
-  if(tabId==='tab-products') renderAdminProducts();
-  if(tabId==='tab-dashboard') renderStats();
-}
-
-function renderAdminProducts() {
-  const el = document.getElementById('admin-product-list');
-  if(!el) return;
-  el.innerHTML = `<button class="btn-add-product" onclick="switchTab('tab-add')"><i class="fas fa-plus"></i> Add New Product</button>
-  <div class="product-list-admin">${
-    products.map(p=>{
-      const discPrice = p.discount>0?Math.round(p.price*(1-p.discount/100)):p.price;
-      return `<div class="admin-product-row">
-        <div class="admin-product-emoji">${p.emoji}</div>
-        <div class="admin-product-info">
-          <strong>${p.name}</strong>
-          <span>Rs. ${discPrice.toLocaleString()}${p.discount>0?` (${p.discount}% off)`:''} · ${p.category}</span>
-        </div>
-        <div class="admin-actions">
-          <button class="btn-edit" onclick="editProduct(${p.id})"><i class="fas fa-edit"></i> Edit</button>
-          <button class="btn-del" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i> Delete</button>
-        </div>
-      </div>`;
-    }).join('')
-  }</div>`;
-}
-
-function renderStats() {
-  const el = document.getElementById('stats-grid');
-  if(!el) return;
-  const cats = [...new Set(products.map(p=>p.category))].length;
-  el.innerHTML = `
-    <div class="stat-card"><div class="stat-num">${products.length}</div><div class="stat-label">Total Products</div></div>
-    <div class="stat-card"><div class="stat-num">${cats}</div><div class="stat-label">Categories</div></div>
-    <div class="stat-card"><div class="stat-num">${products.filter(p=>p.discount>0).length}</div><div class="stat-label">On Sale</div></div>
-    <div class="stat-card"><div class="stat-num">${cart.reduce((s,i)=>s+i.qty,0)}</div><div class="stat-label">Cart Items</div></div>
-  `;
-}
-
-function editProduct(id) {
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
-  document.getElementById('edit-product-id').value = id;
-  document.getElementById('p-name').value = p.name;
-  document.getElementById('p-category').value = p.category;
-  document.getElementById('p-desc').value = p.desc;
-  document.getElementById('p-price').value = p.price;
-  document.getElementById('p-discount').value = p.discount;
-  document.getElementById('p-emoji').value = p.emoji;
-  document.getElementById('p-badge').value = p.badge||'';
-  document.getElementById('product-form-title').textContent = '✏️ Edit Product';
-  switchTab('tab-add');
-}
-
-function cancelEdit() {
-  document.getElementById('edit-product-id').value='';
-  ['p-name','p-desc','p-price','p-discount','p-emoji','p-badge'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('p-category').value='newborn';
-  document.getElementById('product-form-title').textContent='Add New Product';
-}
-
-function saveProduct() {
-  const name=document.getElementById('p-name').value.trim();
-  const price=parseFloat(document.getElementById('p-price').value);
-  const alertEl=document.getElementById('product-alert');
-  if(!name||!price){alertEl.style.display='block';alertEl.className='alert error';alertEl.textContent='Please fill in Name and Price.';return;}
-  alertEl.style.display='none';
-  const editId = document.getElementById('edit-product-id').value;
-  const productData = {
-    name, price,
-    category: document.getElementById('p-category').value,
-    desc: document.getElementById('p-desc').value||'Quality product for your baby.',
-    discount: parseFloat(document.getElementById('p-discount').value)||0,
-    emoji: document.getElementById('p-emoji').value||'🛍️',
-    badge: document.getElementById('p-badge').value||''
-  };
-  if(editId){
-    const idx=products.findIndex(x=>x.id===parseInt(editId));
-    if(idx!==-1){products[idx]={...products[idx],...productData};}
-    showToast('✅ Product updated!');
-  } else {
-    productData.id = Date.now();
-    products.push(productData);
-    showToast('✅ Product added!');
-  }
-  saveProducts();
-  renderProducts();
-  renderAdminProducts();
-  renderStats();
-  cancelEdit();
-  switchTab('tab-products');
-}
-
-function deleteProduct(id) {
-  if(!confirm('Delete this product?')) return;
-  products = products.filter(x=>x.id!==id);
-  saveProducts();
-  renderProducts();
-  renderAdminProducts();
-  renderStats();
-  showToast('🗑️ Product deleted.');
-}
-
-// ─── MODALS ─────────────────────────────────────────────────────────
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(el=>{
-  el.addEventListener('click',e=>{ if(e.target===el) el.classList.remove('open'); });
-});
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.modal-overlay.open,.admin-overlay.open').forEach(m=>m.classList.remove('open')); });
-document.getElementById('admin-pass').addEventListener('keydown',e=>{ if(e.key==='Enter') adminLogin(); });
 
 // ─── TOAST ─────────────────────────────────────────────────────────
 function showToast(msg) {
