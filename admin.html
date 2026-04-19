@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Cuddle – Admin</title>
+<!-- NO SEARCH ENGINE INDEXING — keeps this page off Google -->
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --pink:#f48fb1;--pink-light:#fce4ec;--pink-dark:#e91e8c;
+  --blue:#81d4fa;--blue-light:#e1f5fe;--blue-mid:#90caf9;
+  --cream:#fff8f0;--text:#4a3040;--text-light:#9e7e8e;
+  --radius:16px;--shadow:0 8px 32px rgba(244,143,177,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+
+/* ─── LOGIN SCREEN ─── */
+#login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--pink-light) 0%,var(--blue-light) 100%);
+  padding:20px;
+}
+.login-box{
+  background:#fff;border-radius:28px;padding:48px 40px;width:100%;max-width:420px;
+  box-shadow:0 20px 60px rgba(244,143,177,.25);text-align:center;
+}
+.login-box img{width:90px;height:90px;border-radius:50%;border:3px solid var(--pink);margin-bottom:16px;object-fit:cover}
+.login-box h2{font-family:'Pacifico',cursive;color:var(--pink-dark);font-size:1.6rem;margin-bottom:4px}
+.login-box p{color:var(--text-light);font-size:.88rem;font-weight:600;margin-bottom:28px}
+.form-group{margin-bottom:16px;text-align:left}
+.form-group label{display:block;font-weight:700;font-size:.85rem;color:var(--text);margin-bottom:6px}
+.form-group input{width:100%;padding:13px 16px;border:2px solid var(--pink-light);border-radius:12px;font-family:'Nunito',sans-serif;font-size:.95rem;color:var(--text);transition:border-color .2s}
+.form-group input:focus{outline:none;border-color:var(--pink)}
+.btn-login{width:100%;background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;border:none;padding:15px;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;margin-top:8px;transition:all .2s}
+.btn-login:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(233,30,140,.35)}
+.login-error{background:#fce4ec;color:#c62828;border:1px solid #ef9a9a;padding:11px 14px;border-radius:10px;font-size:.88rem;font-weight:700;margin-bottom:14px;display:none}
+.login-attempts{color:var(--text-light);font-size:.8rem;margin-top:14px;font-weight:600}
+.locked-msg{color:#e53935;font-size:.85rem;font-weight:700;margin-top:10px;display:none}
+
+/* ─── ADMIN DASHBOARD ─── */
+#admin-screen{display:none;min-height:100vh}
+.admin-topbar{background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(233,30,140,.3)}
+.admin-topbar-left{display:flex;align-items:center;gap:12px}
+.admin-topbar-left img{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.5);object-fit:cover}
+.admin-topbar h1{font-family:'Pacifico',cursive;font-size:1.2rem}
+.admin-topbar small{font-size:.75rem;opacity:.8;display:block;font-weight:600}
+.admin-topbar-right{display:flex;gap:10px;align-items:center}
+.topbar-btn{background:rgba(255,255,255,.15);color:#fff;border:none;padding:8px 16px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;display:flex;align-items:center;gap:6px;transition:all .2s;text-decoration:none}
+.topbar-btn:hover{background:rgba(255,255,255,.25)}
+
+.admin-content{max-width:960px;margin:0 auto;padding:28px 20px}
+
+/* ─── TABS ─── */
+.tab-bar{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.tab-btn{background:#fff;border:2px solid var(--pink-light);color:var(--text-light);padding:10px 22px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;transition:all .2s}
+.tab-btn.active{background:var(--pink-dark);border-color:var(--pink-dark);color:#fff}
+.tab-pane{display:none}.tab-pane.active{display:block}
+
+/* ─── STATS ─── */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:28px}
+.stat-card{background:#fff;border-radius:var(--radius);padding:20px;text-align:center;box-shadow:var(--shadow)}
+.stat-card .num{font-family:'Pacifico',cursive;font-size:2.2rem;color:var(--pink-dark)}
+.stat-card .lbl{font-size:.82rem;color:var(--text-light);font-weight:700;margin-top:2px}
+
+/* ─── ALERT ─── */
+.alert{padding:12px 16px;border-radius:12px;font-weight:700;font-size:.88rem;margin-bottom:14px;display:none}
+.alert.success{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.alert.error{background:#fce4ec;color:#c62828;border:1px solid #ef9a9a}
+
+/* ─── PRODUCT LIST ─── */
+.product-list{display:grid;gap:12px}
+.product-row{display:flex;align-items:center;gap:14px;background:#fff;border-radius:14px;padding:14px 16px;box-shadow:0 2px 12px rgba(244,143,177,.08);flex-wrap:wrap}
+.product-emoji-box{font-size:2rem;width:54px;height:54px;background:var(--pink-light);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.product-info{flex:1;min-width:140px}
+.product-info strong{display:block;font-weight:800;color:var(--text);font-size:.92rem}
+.product-info span{font-size:.8rem;color:var(--text-light);font-weight:600}
+.product-actions{display:flex;gap:8px}
+.btn-edit{background:var(--blue-light);color:#1565c0;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;transition:all .2s}
+.btn-edit:hover{background:var(--blue-mid);color:#fff}
+.btn-del{background:#fce4ec;color:#c62828;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;transition:all .2s}
+.btn-del:hover{background:#e53935;color:#fff}
+
+/* ─── FORM ─── */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.form-grid{grid-template-columns:1fr}}
+.field{margin-bottom:0}
+.field label{display:block;font-weight:700;font-size:.85rem;color:var(--text);margin-bottom:5px}
+.field input,.field textarea,.field select{width:100%;padding:11px 14px;border:2px solid var(--pink-light);border-radius:12px;font-family:'Nunito',sans-serif;font-size:.9rem;color:var(--text);transition:border-color .2s;background:#fff}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--pink)}
+.field-full{grid-column:1/-1}
+.form-actions{grid-column:1/-1;display:flex;gap:10px;margin-top:6px}
+.btn-save{background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;border:none;padding:13px 28px;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;transition:all .2s;display:flex;align-items:center;gap:8px}
+.btn-save:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(233,30,140,.3)}
+.btn-cancel{background:var(--blue-light);color:#1565c0;border:none;padding:11px 22px;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.92rem;transition:all .2s}
+.btn-cancel:hover{background:var(--blue-mid);color:#fff}
+.btn-new{background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;border:none;padding:11px 22px;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;margin-bottom:20px;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-new:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(233,30,140,.3)}
+
+/* ─── PACKAGES ─── */
+.package-editor{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:20px}
+.package-editor h3{font-family:'Pacifico',cursive;color:var(--pink-dark);margin-bottom:18px;font-size:1.2rem}
+.items-list{margin-bottom:12px}
+.item-row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+.item-row input{flex:1;padding:9px 12px;border:2px solid var(--pink-light);border-radius:10px;font-family:'Nunito',sans-serif;font-size:.88rem;color:var(--text)}
+.item-row input:focus{outline:none;border-color:var(--pink)}
+.btn-remove-item{background:#fce4ec;color:#c62828;border:none;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:.9rem;flex-shrink:0;transition:all .2s}
+.btn-remove-item:hover{background:#e53935;color:#fff}
+.btn-add-item{background:var(--pink-light);color:var(--pink-dark);border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.82rem;display:inline-flex;align-items:center;gap:6px;transition:all .2s;margin-bottom:12px}
+.btn-add-item:hover{background:var(--pink);color:#fff}
+.btn-save-pkg{background:linear-gradient(135deg,#66bb6a,#43a047);color:#fff;border:none;padding:10px 22px;border-radius:10px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+.btn-save-pkg:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(102,187,106,.4)}
+
+/* ─── PASSWORD CHANGE ─── */
+.settings-card{background:#fff;border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);max-width:500px;margin-bottom:24px}
+.settings-card h3{font-family:'Pacifico',cursive;color:var(--pink-dark);margin-bottom:18px}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:#333;color:#fff;padding:12px 24px;border-radius:50px;font-weight:700;font-size:.9rem;z-index:2000;opacity:0;transition:all .35s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ─── SECURITY BADGE ─── */
+.security-note{background:var(--blue-light);border-left:4px solid var(--blue-mid);padding:12px 16px;border-radius:0 10px 10px 0;font-size:.83rem;font-weight:700;color:#1565c0;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+
+@media(max-width:600px){
+  .admin-topbar-right .topbar-btn span{display:none}
+  .login-box{padding:36px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── LOGIN SCREEN ─── -->
+<div id="login-screen">
+  <div class="login-box">
+    <img id="login-logo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><circle cx='45' cy='45' r='45' fill='%23fce4ec'/><text y='65' x='45' text-anchor='middle' font-size='55'>👶</text></svg>" alt="Logo">
+    <h2>Admin Panel</h2>
+    <p>Little Cuddle Shop Management</p>
+    <div class="login-error" id="login-error"></div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="Enter admin password" autocomplete="current-password">
+    </div>
+    <button class="btn-login" onclick="attemptLogin()"><i class="fas fa-unlock"></i> Login</button>
+    <p class="login-attempts" id="attempts-msg"></p>
+    <p class="locked-msg" id="locked-msg">🔒 Too many failed attempts. Try again in <span id="countdown">60</span>s</p>
+  </div>
+</div>
+
+<!-- ─── ADMIN SCREEN ─── -->
+<div id="admin-screen">
+  <div class="admin-topbar">
+    <div class="admin-topbar-left">
+      <img id="topbar-logo" src="" alt="Logo">
+      <div>
+        <h1>Little Cuddle Admin</h1>
+        <small>Shop Management Panel</small>
+      </div>
+    </div>
+    <div class="admin-topbar-right">
+      <a href="index.html" class="topbar-btn" target="_blank"><i class="fas fa-store"></i> <span>View Shop</span></a>
+      <a href="https://wa.me/94766787992" class="topbar-btn" target="_blank"><i class="fab fa-whatsapp"></i> <span>WhatsApp</span></a>
+      <button class="topbar-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></button>
+    </div>
+  </div>
+
+  <div class="admin-content">
+    <div class="security-note">
+      <i class="fas fa-shield-alt"></i>
+      Secure Admin Area — This page is not linked anywhere on the public website.
+    </div>
+
+    <!-- TABS -->
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="showTab('tab-dash')">📊 Dashboard</button>
+      <button class="tab-btn" onclick="showTab('tab-products')">📦 Products</button>
+      <button class="tab-btn" onclick="showTab('tab-packages')">🎁 Packages</button>
+      <button class="tab-btn" onclick="showTab('tab-settings')">⚙️ Settings</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="tab-pane active" id="tab-dash">
+      <div class="stats-row" id="stats-row"></div>
+      <div style="background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)">
+        <h3 style="font-weight:800;color:var(--text);margin-bottom:16px">Quick Actions</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn-new" onclick="showTab('tab-products');setTimeout(()=>showAddForm(),100)"><i class="fas fa-plus"></i> Add Product</button>
+          <button class="btn-new" style="background:linear-gradient(135deg,#66bb6a,#43a047)" onclick="showTab('tab-packages')"><i class="fas fa-gift"></i> Edit Packages</button>
+          <a href="https://wa.me/94766787992" class="btn-new" style="background:linear-gradient(135deg,#25D366,#128C7E);text-decoration:none" target="_blank"><i class="fab fa-whatsapp"></i> Open WhatsApp</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="tab-pane" id="tab-products">
+      <div class="alert" id="product-alert"></div>
+
+      <!-- ADD/EDIT FORM -->
+      <div id="product-form-wrap" style="background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:24px;display:none">
+        <h3 style="font-weight:800;color:var(--text);margin-bottom:18px" id="form-heading">Add New Product</h3>
+        <input type="hidden" id="edit-id">
+        <div class="form-grid">
+          <div class="field">
+            <label>Product Name *</label>
+            <input type="text" id="f-name" placeholder="e.g. Baby Onesie Set">
+          </div>
+          <div class="field">
+            <label>Category *</label>
+            <select id="f-category">
+              <option value="newborn">Newborn</option>
+              <option value="clothing">Clothing</option>
+              <option value="feeding">Feeding</option>
+              <option value="bath">Bath & Care</option>
+              <option value="mother">Mother Care</option>
+            </select>
+          </div>
+          <div class="field field-full">
+            <label>Description</label>
+            <textarea id="f-desc" rows="2" placeholder="Brief product description..."></textarea>
+          </div>
+          <div class="field">
+            <label>Price (Rs.) *</label>
+            <input type="number" id="f-price" placeholder="e.g. 1500" min="0">
+          </div>
+          <div class="field">
+            <label>Discount % (0 = no discount)</label>
+            <input type="number" id="f-discount" placeholder="e.g. 10" min="0" max="90">
+          </div>
+          <div class="field">
+            <label>Emoji Icon</label>
+            <input type="text" id="f-emoji" placeholder="e.g. 👶">
+          </div>
+          <div class="field">
+            <label>Badge (leave empty for none)</label>
+            <input type="text" id="f-badge" placeholder="e.g. NEW, HOT, SALE">
+          </div>
+          <div class="form-actions">
+            <button class="btn-save" onclick="saveProduct()"><i class="fas fa-save"></i> Save Product</button>
+            <button class="btn-cancel" onclick="hideForm()"><i class="fas fa-times"></i> Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT LIST -->
+      <button class="btn-new" onclick="showAddForm()"><i class="fas fa-plus"></i> Add New Product</button>
+      <div class="product-list" id="admin-product-list"></div>
+    </div>
+
+    <!-- PACKAGES -->
+    <div class="tab-pane" id="tab-packages">
+      <div class="alert" id="pkg-alert"></div>
+      <div id="packages-editor"></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="tab-pane" id="tab-settings">
+      <div class="settings-card">
+        <h3>🔐 Change Password</h3>
+        <div class="alert" id="pwd-alert"></div>
+        <div class="form-group" style="margin-bottom:14px">
+          <label style="font-weight:700;font-size:.85rem;color:var(--text);display:block;margin-bottom:5px">Current Password</label>
+          <input type="password" id="pwd-current" placeholder="Enter current password" style="width:100%;padding:11px 14px;border:2px solid var(--pink-light);border-radius:12px;font-family:'Nunito',sans-serif;font-size:.9rem">
+        </div>
+        <div class="form-group" style="margin-bottom:14px">
+          <label style="font-weight:700;font-size:.85rem;color:var(--text);display:block;margin-bottom:5px">New Password</label>
+          <input type="password" id="pwd-new" placeholder="Enter new password (min 8 chars)" style="width:100%;padding:11px 14px;border:2px solid var(--pink-light);border-radius:12px;font-family:'Nunito',sans-serif;font-size:.9rem">
+        </div>
+        <div class="form-group" style="margin-bottom:18px">
+          <label style="font-weight:700;font-size:.85rem;color:var(--text);display:block;margin-bottom:5px">Confirm New Password</label>
+          <input type="password" id="pwd-confirm" placeholder="Repeat new password" style="width:100%;padding:11px 14px;border:2px solid var(--pink-light);border-radius:12px;font-family:'Nunito',sans-serif;font-size:.9rem">
+        </div>
+        <button class="btn-save" onclick="changePassword()"><i class="fas fa-key"></i> Update Password</button>
+      </div>
+      <div class="settings-card">
+        <h3>🗄️ Data Management</h3>
+        <p style="color:var(--text-light);font-size:.88rem;font-weight:600;margin-bottom:16px;line-height:1.6">Reset all products back to the original default sample products. This cannot be undone.</p>
+        <button style="background:#fce4ec;color:#c62828;border:none;padding:12px 22px;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;transition:all .2s" onclick="resetProducts()">
+          <i class="fas fa-redo"></i> Reset to Default Products
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────
+//  SECURITY — Password stored as SHA-256 hash, NEVER plain text
+//  Default password: LittleCuddle@2024
+//  Change it from Settings > Change Password after first login
+// ─────────────────────────────────────────────────────────────────
+const DEFAULT_HASH = '5190ca19660bb1f1ec899433b2f68bb4ba99d100f96e22a692440b5dd2a6cbbb';
+const SESSION_KEY  = 'lc_admin_session';
+const PWD_KEY      = 'lc_admin_hash';
+const LOGO_URL     = '/mnt/user-data/uploads/618502847_1581045493000377_1623071738877251233_n.jpg';
+
+let failedAttempts = 0;
+let lockUntil = 0;
+
+async function sha256(text) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function getHash() { return localStorage.getItem(PWD_KEY) || DEFAULT_HASH; }
+
+async function attemptLogin() {
+  const now = Date.now();
+  if(now < lockUntil) { showLockCountdown(); return; }
+
+  const pwd = document.getElementById('login-password').value;
+  if(!pwd) return;
+
+  const hash = await sha256(pwd);
+  if(hash === getHash()) {
+    failedAttempts = 0;
+    sessionStorage.setItem(SESSION_KEY, '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').style.display = 'block';
+    initAdmin();
+  } else {
+    failedAttempts++;
+    const remaining = 5 - failedAttempts;
+    const errEl = document.getElementById('login-error');
+    errEl.style.display = 'block';
+    errEl.textContent = remaining > 0
+      ? `❌ Wrong password. ${remaining} attempt${remaining!==1?'s':''} left.`
+      : '🔒 Too many wrong attempts.';
+    if(failedAttempts >= 5) {
+      lockUntil = Date.now() + 60000;
+      document.getElementById('locked-msg').style.display = 'block';
+      showLockCountdown();
+    }
+    document.getElementById('login-password').value = '';
+  }
+}
+
+function showLockCountdown() {
+  const msg = document.getElementById('locked-msg');
+  msg.style.display = 'block';
+  const tick = setInterval(() => {
+    const s = Math.ceil((lockUntil - Date.now()) / 1000);
+    if(s <= 0) {
+      clearInterval(tick);
+      failedAttempts = 0;
+      msg.style.display = 'none';
+      document.getElementById('login-error').style.display = 'none';
+      document.getElementById('attempts-msg').textContent = '';
+    } else {
+      document.getElementById('countdown').textContent = s;
+    }
+  }, 1000);
+}
+
+function logout() {
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+}
+
+// Auto-login if session exists
+window.addEventListener('load', () => {
+  loadLogo();
+  if(sessionStorage.getItem(SESSION_KEY)) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').style.display = 'block';
+    initAdmin();
+  }
+});
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Enter') {
+    if(document.getElementById('login-screen').style.display !== 'none' ||
+       !document.getElementById('login-screen').classList.contains('hidden')) {
+      if(document.activeElement === document.getElementById('login-password')) attemptLogin();
+    }
+  }
+});
+document.getElementById('login-password').addEventListener('keydown', e => { if(e.key==='Enter') attemptLogin(); });
+
+function loadLogo() {
+  fetch(LOGO_URL).then(r=>r.blob()).then(blob=>{
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById('login-logo').src = e.target.result;
+      document.getElementById('topbar-logo').src = e.target.result;
+    };
+    reader.readAsDataURL(blob);
+  }).catch(()=>{});
+}
+
+// ─── DATA ─────────────────────────────────────────────────────────
+const DEFAULT_PRODUCTS = [
+  {id:1,name:"Newborn Gift Set",category:"newborn",desc:"Complete starter set: onesie, hat, mittens & booties.",price:2800,discount:10,emoji:"👶",badge:"NEW"},
+  {id:2,name:"Baby Swaddle Blanket",category:"newborn",desc:"Ultra-soft muslin swaddle blanket, breathable and gentle.",price:1200,discount:0,emoji:"🧸",badge:""},
+  {id:3,name:"Baby Onesie Set (5pcs)",category:"clothing",desc:"Pack of 5 soft cotton onesies in mixed colours, 0–3 months.",price:2500,discount:15,emoji:"👚",badge:"HOT"},
+  {id:4,name:"Newborn Sleepsuit",category:"clothing",desc:"Warm, cosy all-in-one sleepsuit for nighttime comfort.",price:1500,discount:0,emoji:"🌙",badge:""},
+  {id:5,name:"Baby Feeding Bottle Set",category:"feeding",desc:"Anti-colic feeding bottles, BPA-free, 3 sizes included.",price:1800,discount:10,emoji:"🍼",badge:""},
+  {id:6,name:"Breast Pump (Manual)",category:"feeding",desc:"Ergonomic manual breast pump, soft silicone, easy to clean.",price:3500,discount:20,emoji:"🤱",badge:"SALE"},
+  {id:7,name:"Baby Bath Kit",category:"bath",desc:"Complete bath set: shampoo, lotion, wash & soft brush.",price:2200,discount:0,emoji:"🛁",badge:""},
+  {id:8,name:"Baby Skincare Set",category:"bath",desc:"Gentle dermatologist-tested moisturiser and powder.",price:1600,discount:5,emoji:"🧴",badge:""},
+  {id:9,name:"Maternity Pillow",category:"mother",desc:"Full-body U-shaped pillow for pregnancy support.",price:4500,discount:10,emoji:"🌸",badge:"NEW"},
+  {id:10,name:"Nursing Cover",category:"mother",desc:"Breathable nursing cover for discreet breastfeeding on the go.",price:1200,discount:0,emoji:"🤍",badge:""},
+  {id:11,name:"Diaper Bag Backpack",category:"newborn",desc:"Large capacity, waterproof organiser bag with USB port.",price:3800,discount:15,emoji:"🎒",badge:"HOT"},
+  {id:12,name:"Baby Monitor",category:"newborn",desc:"Digital audio baby monitor with long range and clear sound.",price:5500,discount:0,emoji:"📻",badge:""},
+];
+
+const DEFAULT_PACKAGES = [
+  {
+    id:'pkg1', name:'Baby Starter', icon:'🌸', label:'⭐ Starter',
+    price:'Rs. 3,500', priceNum:3500,
+    items:['2 Newborn Onesies','Baby Hat & Mittens','Baby Wash & Lotion','Soft Muslin Cloth x2','Gift Wrapped Box']
+  },
+  {
+    id:'pkg2', name:'Royal Bundle', icon:'👑', label:'🏆 Most Popular',
+    price:'Rs. 7,500', priceNum:7500,
+    items:['4 Newborn Outfits','Baby Bath Kit (5 items)','Feeding Bottle Set','Muslin Swaddle x3','Baby Monitor','Diaper Bag','Luxury Gift Box']
+  },
+  {
+    id:'pkg3', name:'Mama & Baby', icon:'🦋', label:'💎 Premium',
+    price:'Rs. 12,000', priceNum:12000,
+    items:['Full Newborn Kit','Maternity Pillow','Nursing Cover','Mom Care Essentials','Baby Sleeping Bag','Postpartum Recovery Kit','Premium Gift Hamper']
+  }
+];
+
+function getProducts() { return JSON.parse(localStorage.getItem('lc_products')) || DEFAULT_PRODUCTS; }
+function saveProducts(p) { localStorage.setItem('lc_products', JSON.stringify(p)); }
+function getPackages() { return JSON.parse(localStorage.getItem('lc_packages')) || DEFAULT_PACKAGES; }
+function savePackages(p) { localStorage.setItem('lc_packages', JSON.stringify(p)); }
+
+// ─── INIT ──────────────────────────────────────────────────────────
+function initAdmin() {
+  renderStats();
+  renderProductList();
+  renderPackagesEditor();
+}
+
+// ─── TABS ──────────────────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const idx = ['tab-dash','tab-products','tab-packages','tab-settings'].indexOf(id);
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+}
+
+// ─── STATS ─────────────────────────────────────────────────────────
+function renderStats() {
+  const prods = getProducts();
+  const cats = [...new Set(prods.map(p=>p.category))].length;
+  const onSale = prods.filter(p=>p.discount>0).length;
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card"><div class="num">${prods.length}</div><div class="lbl">Products</div></div>
+    <div class="stat-card"><div class="num">${cats}</div><div class="lbl">Categories</div></div>
+    <div class="stat-card"><div class="num">${onSale}</div><div class="lbl">On Sale</div></div>
+    <div class="stat-card"><div class="num">${getPackages().length}</div><div class="lbl">Packages</div></div>
+  `;
+}
+
+// ─── PRODUCTS ──────────────────────────────────────────────────────
+function renderProductList() {
+  const prods = getProducts();
+  const el = document.getElementById('admin-product-list');
+  el.innerHTML = prods.map(p => {
+    const dp = p.discount>0 ? Math.round(p.price*(1-p.discount/100)) : p.price;
+    return `<div class="product-row">
+      <div class="product-emoji-box">${p.emoji}</div>
+      <div class="product-info">
+        <strong>${p.name}</strong>
+        <span>Rs. ${dp.toLocaleString()}${p.discount>0?` (${p.discount}% off)`:''} &nbsp;·&nbsp; ${p.category}${p.badge?' &nbsp;·&nbsp; '+p.badge:''}</span>
+      </div>
+      <div class="product-actions">
+        <button class="btn-edit" onclick="editProduct(${p.id})"><i class="fas fa-edit"></i> Edit</button>
+        <button class="btn-del" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`;
+  }).join('') || '<p style="color:var(--text-light);font-weight:600;text-align:center;padding:30px">No products yet. Add your first one!</p>';
+}
+
+function showAddForm() {
+  document.getElementById('edit-id').value = '';
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-category').value = 'newborn';
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-price').value = '';
+  document.getElementById('f-discount').value = '';
+  document.getElementById('f-emoji').value = '';
+  document.getElementById('f-badge').value = '';
+  document.getElementById('form-heading').textContent = 'Add New Product';
+  document.getElementById('product-form-wrap').style.display = 'block';
+  document.getElementById('product-form-wrap').scrollIntoView({behavior:'smooth'});
+}
+
+function hideForm() {
+  document.getElementById('product-form-wrap').style.display = 'none';
+}
+
+function editProduct(id) {
+  const p = getProducts().find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById('edit-id').value = id;
+  document.getElementById('f-name').value = p.name;
+  document.getElementById('f-category').value = p.category;
+  document.getElementById('f-desc').value = p.desc;
+  document.getElementById('f-price').value = p.price;
+  document.getElementById('f-discount').value = p.discount;
+  document.getElementById('f-emoji').value = p.emoji;
+  document.getElementById('f-badge').value = p.badge||'';
+  document.getElementById('form-heading').textContent = `✏️ Edit: ${p.name}`;
+  document.getElementById('product-form-wrap').style.display = 'block';
+  document.getElementById('product-form-wrap').scrollIntoView({behavior:'smooth'});
+}
+
+function saveProduct() {
+  const name = document.getElementById('f-name').value.trim();
+  const price = parseFloat(document.getElementById('f-price').value);
+  const alertEl = document.getElementById('product-alert');
+  if(!name || !price) {
+    alertEl.style.display='block'; alertEl.className='alert error';
+    alertEl.textContent='⚠️ Product Name and Price are required.'; return;
+  }
+  alertEl.style.display = 'none';
+  const data = {
+    name, price,
+    category: document.getElementById('f-category').value,
+    desc:     document.getElementById('f-desc').value || 'Quality baby care product.',
+    discount: parseFloat(document.getElementById('f-discount').value)||0,
+    emoji:    document.getElementById('f-emoji').value||'🛍️',
+    badge:    document.getElementById('f-badge').value||''
+  };
+  let prods = getProducts();
+  const editId = document.getElementById('edit-id').value;
+  if(editId) {
+    const idx = prods.findIndex(x=>x.id===parseInt(editId));
+    if(idx!==-1) prods[idx] = {...prods[idx], ...data};
+    showToast('✅ Product updated successfully!');
+  } else {
+    data.id = Date.now();
+    prods.push(data);
+    showToast('✅ New product added!');
+  }
+  saveProducts(prods);
+  renderProductList();
+  renderStats();
+  hideForm();
+}
+
+function deleteProduct(id) {
+  if(!confirm('Are you sure you want to delete this product?')) return;
+  let prods = getProducts().filter(x=>x.id!==id);
+  saveProducts(prods);
+  renderProductList();
+  renderStats();
+  showToast('🗑️ Product deleted.');
+}
+
+function resetProducts() {
+  if(!confirm('Reset ALL products to default samples? This cannot be undone.')) return;
+  localStorage.removeItem('lc_products');
+  renderProductList();
+  renderStats();
+  showToast('🔄 Products reset to defaults.');
+}
+
+// ─── PACKAGES ──────────────────────────────────────────────────────
+function renderPackagesEditor() {
+  const pkgs = getPackages();
+  document.getElementById('packages-editor').innerHTML = pkgs.map((pkg,pi) => `
+    <div class="package-editor">
+      <h3>${pkg.icon} ${pkg.name}</h3>
+      <div class="form-grid" style="margin-bottom:16px">
+        <div class="field">
+          <label>Package Name</label>
+          <input type="text" id="pkg-name-${pi}" value="${pkg.name}" placeholder="Package name">
+        </div>
+        <div class="field">
+          <label>Price Label (e.g. Rs. 3,500)</label>
+          <input type="text" id="pkg-price-${pi}" value="${pkg.price}" placeholder="Rs. 3,500">
+        </div>
+        <div class="field">
+          <label>Icon / Emoji</label>
+          <input type="text" id="pkg-icon-${pi}" value="${pkg.icon}" placeholder="🎁">
+        </div>
+        <div class="field">
+          <label>Top Label (e.g. ⭐ Starter)</label>
+          <input type="text" id="pkg-label-${pi}" value="${pkg.label}" placeholder="⭐ Starter">
+        </div>
+      </div>
+      <label style="font-weight:700;font-size:.85rem;color:var(--text);display:block;margin-bottom:8px">Package Items</label>
+      <div class="items-list" id="items-${pi}">
+        ${pkg.items.map((item,ii) => `
+          <div class="item-row" id="item-${pi}-${ii}">
+            <input type="text" value="${item}" id="item-text-${pi}-${ii}" placeholder="Item description">
+            <button class="btn-remove-item" onclick="removeItem(${pi},${ii})"><i class="fas fa-times"></i></button>
+          </div>`).join('')}
+      </div>
+      <button class="btn-add-item" onclick="addItem(${pi})"><i class="fas fa-plus"></i> Add Item</button>
+      <br>
+      <button class="btn-save-pkg" onclick="savePackage(${pi})"><i class="fas fa-save"></i> Save Package</button>
+    </div>`).join('');
+}
+
+function addItem(pi) {
+  const pkgs = getPackages();
+  pkgs[pi].items.push('New item');
+  savePackages(pkgs);
+  renderPackagesEditor();
+}
+
+function removeItem(pi, ii) {
+  const pkgs = getPackages();
+  pkgs[pi].items.splice(ii,1);
+  savePackages(pkgs);
+  renderPackagesEditor();
+}
+
+function savePackage(pi) {
+  const pkgs = getPackages();
+  pkgs[pi].name  = document.getElementById(`pkg-name-${pi}`).value;
+  pkgs[pi].price = document.getElementById(`pkg-price-${pi}`).value;
+  pkgs[pi].icon  = document.getElementById(`pkg-icon-${pi}`).value;
+  pkgs[pi].label = document.getElementById(`pkg-label-${pi}`).value;
+  const items = [];
+  document.querySelectorAll(`#items-${pi} .item-row`).forEach((row,ii) => {
+    const val = document.getElementById(`item-text-${pi}-${ii}`)?.value?.trim();
+    if(val) items.push(val);
+  });
+  pkgs[pi].items = items;
+  savePackages(pkgs);
+
+  // Also update the main shop page's packages in localStorage
+  localStorage.setItem('lc_packages', JSON.stringify(pkgs));
+
+  const alertEl = document.getElementById('pkg-alert');
+  alertEl.style.display='block'; alertEl.className='alert success';
+  alertEl.textContent=`✅ "${pkgs[pi].name}" package saved! Refresh the shop page to see changes.`;
+  setTimeout(()=>alertEl.style.display='none', 3500);
+  renderPackagesEditor();
+  showToast(`✅ Package saved!`);
+}
+
+// ─── PASSWORD CHANGE ───────────────────────────────────────────────
+async function changePassword() {
+  const cur = document.getElementById('pwd-current').value;
+  const nw  = document.getElementById('pwd-new').value;
+  const cf  = document.getElementById('pwd-confirm').value;
+  const alertEl = document.getElementById('pwd-alert');
+
+  const curHash = await sha256(cur);
+  if(curHash !== getHash()) {
+    alertEl.style.display='block'; alertEl.className='alert error';
+    alertEl.textContent='❌ Current password is incorrect.'; return;
+  }
+  if(nw.length < 8) {
+    alertEl.style.display='block'; alertEl.className='alert error';
+    alertEl.textContent='❌ New password must be at least 8 characters.'; return;
+  }
+  if(nw !== cf) {
+    alertEl.style.display='block'; alertEl.className='alert error';
+    alertEl.textContent='❌ New passwords do not match.'; return;
+  }
+  const newHash = await sha256(nw);
+  localStorage.setItem(PWD_KEY, newHash);
+  alertEl.style.display='block'; alertEl.className='alert success';
+  alertEl.textContent='✅ Password changed successfully!';
+  document.getElementById('pwd-current').value='';
+  document.getElementById('pwd-new').value='';
+  document.getElementById('pwd-confirm').value='';
+  showToast('🔐 Password updated!');
+}
+
+// ─── TOAST ─────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>
