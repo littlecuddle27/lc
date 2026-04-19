@@ -649,7 +649,7 @@ fetch(LOGO_URL).then(r=>r.blob()).then(blob=>{
     const src = e.target.result;
     ['nav-logo-img','hero-logo-img','footer-logo-img'].forEach(id=>{
       const el = document.getElementById(id);
-      if(el){el.src=src;el.style.display='';}
+      if(el){el.src=src;el.style.display='block';}
     });
     const li = document.getElementById('loader').querySelector('img');
     if(li) li.src=src;
