@@ -625,11 +625,7 @@ window.addEventListener('load', () => {
     document.getElementById('hero-logo-img').src = logoB64;
     document.getElementById('footer-logo-img').src = logoB64;
     document.getElementById('loader').querySelector('img').src = logoB64;
-  } else {
-    // Fallback: use emoji placeholder
-    ['nav-logo-img','hero-logo-img','footer-logo-img'].forEach(id=>{
-      document.getElementById(id).style.display='none';
-    });
+  } 
   }
   setTimeout(()=>{
     const l = document.getElementById('loader');
