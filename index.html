@@ -282,37 +282,7 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:48p
   </div>
 </section>
 
-<!-- CATEGORIES -->
-<div class="cats-wrap">
-  <div class="cats">
-    <div class="cat" onclick="filterProducts('newborn',null)"><div class="cat-ico">&#128118;</div><div class="cat-lbl">Newborn</div></div>
-    <div class="cat" onclick="filterProducts('clothing',null)"><div class="cat-ico">&#128090;</div><div class="cat-lbl">Clothing</div></div>
-    <div class="cat" onclick="filterProducts('feeding',null)"><div class="cat-ico">&#127868;</div><div class="cat-lbl">Feeding</div></div>
-    <div class="cat" onclick="filterProducts('bath',null)"><div class="cat-ico">&#128705;</div><div class="cat-lbl">Bath &amp; Care</div></div>
-    <div class="cat" onclick="filterProducts('mother',null)"><div class="cat-ico">&#128105;</div><div class="cat-lbl">Mother Care</div></div>
-    <div class="cat" onclick="filterProducts('all',null)"><div class="cat-ico">&#128717;</div><div class="cat-lbl">All Items</div></div>
-  </div>
-</div>
 
-<!-- PRODUCTS -->
-<section class="sec" id="products">
-  <div class="sec-inner">
-    <div class="sec-title">
-      <h2>Our <span>Products</span></h2>
-      <div class="divider"><span></span><i class="fas fa-baby"></i><span></span></div>
-      <p>Carefully selected products for your precious little one</p>
-    </div>
-    <div class="filter-bar">
-      <button class="fb active" onclick="filterProducts('all',this)">All</button>
-      <button class="fb" onclick="filterProducts('newborn',this)">Newborn</button>
-      <button class="fb" onclick="filterProducts('clothing',this)">Clothing</button>
-      <button class="fb" onclick="filterProducts('feeding',this)">Feeding</button>
-      <button class="fb" onclick="filterProducts('bath',this)">Bath &amp; Care</button>
-      <button class="fb" onclick="filterProducts('mother',this)">Mother Care</button>
-    </div>
-    <div class="pgrid" id="pgrid"></div>
-  </div>
-</section>
 
 <!-- PACKAGES — written directly in HTML, no JS rendering needed -->
 <div class="pkg-wrap" id="packages">
@@ -479,7 +449,37 @@ footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:48p
     </div>
   </div>
 </div>
+<!-- CATEGORIES -->
+<div class="cats-wrap">
+  <div class="cats">
+    <div class="cat" onclick="filterProducts('newborn',null)"><div class="cat-ico">&#128118;</div><div class="cat-lbl">Newborn</div></div>
+    <div class="cat" onclick="filterProducts('clothing',null)"><div class="cat-ico">&#128090;</div><div class="cat-lbl">Clothing</div></div>
+    <div class="cat" onclick="filterProducts('feeding',null)"><div class="cat-ico">&#127868;</div><div class="cat-lbl">Feeding</div></div>
+    <div class="cat" onclick="filterProducts('bath',null)"><div class="cat-ico">&#128705;</div><div class="cat-lbl">Bath &amp; Care</div></div>
+    <div class="cat" onclick="filterProducts('mother',null)"><div class="cat-ico">&#128105;</div><div class="cat-lbl">Mother Care</div></div>
+    <div class="cat" onclick="filterProducts('all',null)"><div class="cat-ico">&#128717;</div><div class="cat-lbl">All Items</div></div>
+  </div>
+</div>
 
+<!-- PRODUCTS -->
+<section class="sec" id="products">
+  <div class="sec-inner">
+    <div class="sec-title">
+      <h2>Our <span>Products</span></h2>
+      <div class="divider"><span></span><i class="fas fa-baby"></i><span></span></div>
+      <p>Carefully selected products for your precious little one</p>
+    </div>
+    <div class="filter-bar">
+      <button class="fb active" onclick="filterProducts('all',this)">All</button>
+      <button class="fb" onclick="filterProducts('newborn',this)">Newborn</button>
+      <button class="fb" onclick="filterProducts('clothing',this)">Clothing</button>
+      <button class="fb" onclick="filterProducts('feeding',this)">Feeding</button>
+      <button class="fb" onclick="filterProducts('bath',this)">Bath &amp; Care</button>
+      <button class="fb" onclick="filterProducts('mother',this)">Mother Care</button>
+    </div>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</section>
 <!-- VIDEOS -->
 <section class="vids" id="videos">
   <div style="max-width:1200px;margin:0 auto">
