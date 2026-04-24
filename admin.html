@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Cuddle – Admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--pink:#f48fb1;--pl:#fce4ec;--pd:#e91e8c;--blue:#81d4fa;--bl:#e1f5fe;--bm:#90caf9;--cream:#fff8f0;--text:#4a3040;--tl:#9e7e8e;--r:14px;--shadow:0 4px 20px rgba(244,143,177,.15)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito",sans-serif;background:#f5f0f8;color:var(--text);min-height:100vh}
+/* LOGIN */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--pl),var(--bl));padding:20px}
+.login-box{background:#fff;border-radius:24px;padding:44px 38px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(244,143,177,.25);text-align:center}
+.login-box img{width:86px;height:86px;border-radius:50%;border:3px solid var(--pink);margin-bottom:14px;object-fit:cover}
+.login-box h2{font-family:"Pacifico",cursive;color:var(--pd);font-size:1.55rem;margin-bottom:4px}
+.login-box p{color:var(--tl);font-size:.86rem;font-weight:600;margin-bottom:24px}
+.inp{width:100%;padding:12px 15px;border:2px solid var(--pl);border-radius:11px;font-family:"Nunito",sans-serif;font-size:.92rem;color:var(--text);margin-bottom:14px;transition:border-color .2s}
+.inp:focus{outline:none;border-color:var(--pink)}
+.btn-login{width:100%;background:linear-gradient(135deg,var(--pd),#f06292);color:#fff;border:none;padding:14px;border-radius:12px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:800;font-size:.97rem;transition:all .2s}
+.btn-login:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(233,30,140,.35)}
+.lerr{background:#fce4ec;color:#c62828;border:1px solid #ef9a9a;padding:10px 13px;border-radius:10px;font-size:.85rem;font-weight:700;margin-bottom:12px;display:none}
+.lock-msg{color:#e53935;font-size:.82rem;font-weight:700;margin-top:10px;display:none}
+/* ADMIN LAYOUT */
+#admin-screen{display:none;min-height:100vh;flex-direction:column}
+.topbar{background:linear-gradient(135deg,var(--pd),#f06292);color:#fff;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(233,30,140,.3)}
+.topbar-left{display:flex;align-items:center;gap:11px}
+.topbar-left img{width:42px;height:42px;border-radius:50%;border:2px solid rgba(255,255,255,.5);object-fit:cover}
+.topbar h1{font-family:"Pacifico",cursive;font-size:1.15rem}
+.topbar small{font-size:.72rem;opacity:.8;display:block;font-weight:600}
+.topbar-right{display:flex;gap:8px}
+.tbtn{background:rgba(255,255,255,.15);color:#fff;border:none;padding:7px 14px;border-radius:50px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:700;font-size:.8rem;display:flex;align-items:center;gap:5px;transition:all .2s;text-decoration:none}
+.tbtn:hover{background:rgba(255,255,255,.28)}
+.admin-wrap{display:flex;flex:1}
+/* SIDEBAR TABS */
+.sidebar{width:200px;background:#fff;border-right:2px solid var(--pl);padding:20px 0;flex-shrink:0;min-height:calc(100vh - 68px)}
+.stab{display:flex;align-items:center;gap:9px;padding:11px 20px;cursor:pointer;font-weight:700;font-size:.88rem;color:var(--tl);border-left:3px solid transparent;transition:all .2s;text-decoration:none}
+.stab:hover{background:var(--pl);color:var(--pd)}
+.stab.active{background:var(--pl);color:var(--pd);border-left-color:var(--pd)}
+.stab i{width:16px;text-align:center}
+.content{flex:1;padding:24px;overflow-y:auto;max-height:calc(100vh - 68px)}
+.pane{display:none}.pane.active{display:block}
+/* CARDS */
+.card{background:#fff;border-radius:var(--r);padding:22px;box-shadow:var(--shadow);margin-bottom:20px}
+.card-title{font-weight:800;color:var(--text);font-size:1rem;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.card-title i{color:var(--pd)}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-bottom:22px}
+.stat{background:#fff;border-radius:var(--r);padding:18px;text-align:center;box-shadow:var(--shadow)}
+.stat .num{font-family:"Pacifico",cursive;font-size:2rem;color:var(--pd)}
+.stat .lbl{font-size:.78rem;color:var(--tl);font-weight:700;margin-top:2px}
+/* FORMS */
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fcol{margin-bottom:12px}
+.fcol.full{grid-column:1/-1}
+.fcol label{display:block;font-weight:700;font-size:.82rem;color:var(--text);margin-bottom:5px}
+.fcol input,.fcol textarea,.fcol select{width:100%;padding:10px 13px;border:2px solid var(--pl);border-radius:10px;font-family:"Nunito",sans-serif;font-size:.88rem;color:var(--text);transition:border-color .2s;background:#fff}
+.fcol input:focus,.fcol textarea:focus,.fcol select:focus{outline:none;border-color:var(--pink)}
+/* PHOTO UPLOAD */
+.photo-upload-area{border:2px dashed var(--pink);border-radius:12px;padding:18px;text-align:center;cursor:pointer;transition:all .2s;background:var(--pl);position:relative}
+.photo-upload-area:hover{background:#f8d7e8;border-color:var(--pd)}
+.photo-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.photo-preview{width:100%;max-height:160px;object-fit:cover;border-radius:10px;margin-top:10px;display:none}
+.photo-preview.show{display:block}
+.photo-upload-text{font-size:.82rem;font-weight:700;color:var(--pd)}
+.photo-upload-text i{font-size:1.4rem;display:block;margin-bottom:5px;color:var(--pink)}
+/* BUTTONS */
+.btn-save{background:linear-gradient(135deg,var(--pd),#f06292);color:#fff;border:none;padding:11px 22px;border-radius:11px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:800;font-size:.88rem;display:inline-flex;align-items:center;gap:7px;transition:all .2s}
+.btn-save:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(233,30,140,.3)}
+.btn-cancel{background:var(--bl);color:#1565c0;border:none;padding:9px 18px;border-radius:11px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:700;font-size:.86rem;transition:all .2s}
+.btn-cancel:hover{background:var(--bm);color:#fff}
+.btn-new{background:linear-gradient(135deg,var(--pd),#f06292);color:#fff;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:800;font-size:.85rem;display:inline-flex;align-items:center;gap:7px;transition:all .2s;margin-bottom:16px}
+.btn-new:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(233,30,140,.3)}
+.btn-del{background:#fce4ec;color:#c62828;border:none;padding:8px 14px;border-radius:9px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:700;font-size:.8rem;transition:all .2s}
+.btn-del:hover{background:#e53935;color:#fff}
+.btn-edit{background:var(--bl);color:#1565c0;border:none;padding:8px 14px;border-radius:9px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:700;font-size:.8rem;transition:all .2s}
+.btn-edit:hover{background:var(--bm);color:#fff}
+.btn-green{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:800;font-size:.85rem;display:inline-flex;align-items:center;gap:7px;text-decoration:none;transition:all .2s}
+.btn-green:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(37,211,102,.35)}
+/* PRODUCT LIST */
+.prod-row{display:flex;align-items:center;gap:13px;background:var(--cream);border-radius:12px;padding:12px 15px;margin-bottom:9px;flex-wrap:wrap}
+.prod-thumb{width:54px;height:54px;border-radius:10px;object-fit:cover;flex-shrink:0;border:2px solid var(--pl);background:var(--pl);display:flex;align-items:center;justify-content:center;font-size:1.8rem;overflow:hidden}
+.prod-thumb img{width:100%;height:100%;object-fit:cover}
+.prod-info{flex:1;min-width:120px}
+.prod-info strong{display:block;font-weight:800;color:var(--text);font-size:.88rem}
+.prod-info span{font-size:.78rem;color:var(--tl);font-weight:600}
+.prod-actions{display:flex;gap:7px;flex-wrap:wrap}
+/* ALERTS */
+.alert{padding:11px 14px;border-radius:10px;font-weight:700;font-size:.86rem;margin-bottom:12px;display:none}
+.alert.ok{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.alert.err{background:#fce4ec;color:#c62828;border:1px solid #ef9a9a}
+/* PACKAGE EDITOR */
+.pkg-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.pkg-tab{padding:9px 20px;border-radius:50px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:700;font-size:.85rem;border:2px solid var(--pl);color:var(--tl);transition:all .2s;background:#fff}
+.pkg-tab.active{background:var(--pd);border-color:var(--pd);color:#fff}
+.pkg-pane{display:none}.pkg-pane.active{display:block}
+.items-list{display:flex;flex-direction:column;gap:7px;margin-bottom:10px}
+.item-row{display:flex;gap:7px;align-items:center}
+.item-row input{flex:1;padding:8px 11px;border:2px solid var(--pl);border-radius:9px;font-family:"Nunito",sans-serif;font-size:.84rem;color:var(--text);transition:border-color .2s}
+.item-row input:focus{outline:none;border-color:var(--pink)}
+.btn-rem-item{background:#fce4ec;color:#c62828;border:none;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:.85rem;flex-shrink:0;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.btn-rem-item:hover{background:#e53935;color:#fff}
+.btn-add-item{background:var(--pl);color:var(--pd);border:none;padding:7px 14px;border-radius:9px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:700;font-size:.8rem;display:inline-flex;align-items:center;gap:5px;transition:all .2s;margin-bottom:10px}
+.btn-add-item:hover{background:var(--pink);color:#fff}
+.pkg-preview{width:100%;height:140px;object-fit:cover;border-radius:11px;margin-bottom:10px;display:none;border:2px solid var(--pl)}
+.pkg-preview.show{display:block}
+.section-divider{height:1px;background:var(--pl);margin:18px 0}
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);background:#3a2040;color:#fff;padding:10px 22px;border-radius:50px;font-weight:700;font-size:.86rem;z-index:2000;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* MOBILE */
+@media(max-width:700px){
+  .sidebar{display:none}
+  .frow{grid-template-columns:1fr}
+  .topbar-right .tbtn span{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <img id="login-logo" src="logo.png" alt="Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2286%22 height=%2286%22%3E%3Ccircle cx=%2243%22 cy=%2243%22 r=%2243%22 fill=%22%23fce4ec%22/%3E%3Ctext y=%2265%22 x=%2243%22 text-anchor=%22middle%22 font-size=%2256%22%3E&#128118;%3C/text%3E%3C/svg%3E'">
+    <h2>Admin Login</h2>
+    <p>Little Cuddle Shop Management</p>
+    <div class="lerr" id="lerr"></div>
+    <input class="inp" type="password" id="lpwd" placeholder="Enter admin password">
+    <button class="btn-login" onclick="doLogin()"><i class="fas fa-unlock"></i> Login</button>
+    <p class="lock-msg" id="lock-msg">&#128274; Too many attempts. Wait <span id="cd">60</span>s</p>
+    <p style="color:var(--tl);font-size:.75rem;margin-top:12px;font-weight:600">Default password: LittleCuddle@2024</p>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin-screen">
+  <div class="topbar">
+    <div class="topbar-left">
+      <img src="logo.png" alt="Logo" onerror="this.style.display='none'" id="tlogo">
+      <div><h1>Little Cuddle</h1><small>Admin Panel</small></div>
+    </div>
+    <div class="topbar-right">
+      <a href="index.html" class="tbtn" target="_blank"><i class="fas fa-store"></i> <span>View Shop</span></a>
+      <a href="https://wa.me/94766787992" class="tbtn" target="_blank"><i class="fab fa-whatsapp"></i> <span>WhatsApp</span></a>
+      <button class="tbtn" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></button>
+    </div>
+  </div>
+  <div class="admin-wrap">
+    <div class="sidebar">
+      <div class="stab active" onclick="showPane('p-dash')"><i class="fas fa-chart-bar"></i> Dashboard</div>
+      <div class="stab" onclick="showPane('p-products')"><i class="fas fa-box"></i> Products</div>
+      <div class="stab" onclick="showPane('p-packages')"><i class="fas fa-gift"></i> Packages</div>
+      <div class="stab" onclick="showPane('p-settings')"><i class="fas fa-cog"></i> Settings</div>
+    </div>
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="pane active" id="p-dash">
+        <div class="stats" id="stats"></div>
+        <div class="card">
+          <div class="card-title"><i class="fas fa-bolt"></i> Quick Actions</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn-new" onclick="showPane('p-products');showAddForm()"><i class="fas fa-plus"></i> Add Product</button>
+            <button class="btn-new" style="background:linear-gradient(135deg,#5c35d4,#8a5cf6)" onclick="showPane('p-packages')"><i class="fas fa-gift"></i> Edit Packages</button>
+            <a href="https://wa.me/94766787992" class="btn-green" target="_blank"><i class="fab fa-whatsapp"></i> Open WhatsApp</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><i class="fas fa-info-circle"></i> How Admin Sync Works</div>
+          <p style="font-size:.85rem;color:var(--tl);font-weight:600;line-height:1.7">
+            Changes you save here are stored in the browser. When a customer visits the shop page on the <strong>same device/browser</strong>, they will see the updates.<br><br>
+            For changes to appear on all devices: after editing, use the <strong>Export &amp; Download</strong> button in Settings to download an updated index.html, then upload it to GitHub.
+          </p>
+        </div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="pane" id="p-products">
+        <div class="alert" id="prod-alert"></div>
+        <!-- ADD/EDIT FORM -->
+        <div class="card" id="prod-form" style="display:none">
+          <div class="card-title"><i class="fas fa-edit"></i> <span id="form-title">Add New Product</span></div>
+          <input type="hidden" id="edit-id">
+          <div class="frow">
+            <div class="fcol">
+              <label>Product Name *</label>
+              <input type="text" id="f-name" placeholder="e.g. Baby Onesie Set">
+            </div>
+            <div class="fcol">
+              <label>Category *</label>
+              <select id="f-cat">
+                <option value="newborn">Newborn</option>
+                <option value="clothing">Clothing</option>
+                <option value="feeding">Feeding</option>
+                <option value="bath">Bath &amp; Care</option>
+                <option value="mother">Mother Care</option>
+              </select>
+            </div>
+            <div class="fcol full">
+              <label>Description</label>
+              <textarea id="f-desc" rows="2" placeholder="Brief product description..."></textarea>
+            </div>
+            <div class="fcol">
+              <label>Price (Rs.) *</label>
+              <input type="number" id="f-price" placeholder="e.g. 1500" min="0">
+            </div>
+            <div class="fcol">
+              <label>Discount % (0 = none)</label>
+              <input type="number" id="f-disc" placeholder="e.g. 10" min="0" max="90">
+            </div>
+            <div class="fcol">
+              <label>Emoji Icon (if no photo)</label>
+              <input type="text" id="f-emo" placeholder="e.g. &#128118;">
+            </div>
+            <div class="fcol">
+              <label>Badge Label (optional)</label>
+              <input type="text" id="f-badge" placeholder="NEW / HOT / SALE">
+            </div>
+            <div class="fcol full">
+              <label>Product Photo (optional)</label>
+              <div class="photo-upload-area" id="prod-upload-area">
+                <input type="file" accept="image/*" id="f-photo" onchange="previewPhoto('f-photo','prod-preview','prod-upload-area')">
+                <div class="photo-upload-text"><i class="fas fa-camera"></i> Click to upload product photo</div>
+              </div>
+              <img class="photo-preview" id="prod-preview" alt="Preview">
+              <p style="font-size:.75rem;color:var(--tl);margin-top:5px;font-weight:600">&#128161; You can also paste an image URL below instead of uploading:</p>
+              <input type="text" id="f-photo-url" placeholder="Or paste image URL: https://i.ibb.co/..." style="margin-top:5px;width:100%;padding:8px 11px;border:2px solid var(--pl);border-radius:9px;font-family:Nunito,sans-serif;font-size:.82rem" oninput="previewUrl(this.value,'prod-preview')">
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:6px">
+            <button class="btn-save" onclick="saveProduct()"><i class="fas fa-save"></i> Save Product</button>
+            <button class="btn-cancel" onclick="hideForm()"><i class="fas fa-times"></i> Cancel</button>
+          </div>
+        </div>
+        <!-- LIST -->
+        <button class="btn-new" onclick="showAddForm()"><i class="fas fa-plus"></i> Add New Product</button>
+        <div id="prod-list"></div>
+      </div>
+
+      <!-- PACKAGES -->
+      <div class="pane" id="p-packages">
+        <div class="alert" id="pkg-alert"></div>
+        <p style="font-size:.85rem;color:var(--tl);font-weight:600;margin-bottom:16px">Edit each package below. Add or remove items, change prices and photos.</p>
+        <div class="pkg-tabs">
+          <div class="pkg-tab active" onclick="showPkgPane(0)">&#127800; Package 01</div>
+          <div class="pkg-tab" onclick="showPkgPane(1)">&#129419; Package 03 (Most Popular)</div>
+          <div class="pkg-tab" onclick="showPkgPane(2)">&#128081; Package 02</div>
+        </div>
+        <div id="pkg-panes"></div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="pane" id="p-settings">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-key"></i> Change Password</div>
+          <div class="alert" id="pwd-alert"></div>
+          <div class="fcol"><label>Current Password</label><input class="inp" type="password" id="p-cur" placeholder="Current password" style="margin-bottom:0"></div>
+          <div class="fcol" style="margin-top:12px"><label>New Password (min 8 chars)</label><input class="inp" type="password" id="p-new" placeholder="New password" style="margin-bottom:0"></div>
+          <div class="fcol" style="margin-top:12px"><label>Confirm New Password</label><input class="inp" type="password" id="p-con" placeholder="Confirm new password" style="margin-bottom:0"></div>
+          <button class="btn-save" style="margin-top:16px" onclick="changePwd()"><i class="fas fa-key"></i> Update Password</button>
+        </div>
+        <div class="card">
+          <div class="card-title"><i class="fas fa-database"></i> Data Reset</div>
+          <p style="font-size:.85rem;color:var(--tl);font-weight:600;margin-bottom:14px">Reset all products back to the original sample defaults. This cannot be undone.</p>
+          <button class="btn-del" style="padding:10px 20px" onclick="resetProds()"><i class="fas fa-redo"></i> Reset Products to Defaults</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── SECURITY ────────────────────────────────────────────────────
+var HASH_KEY = "lc_admin_hash";
+var SESSION  = "lc_admin_sess";
+var DEFAULT_HASH = "5190ca19660bb1f1ec899433b2f68bb4ba99d100f96e22a692440b5dd2a6cbbb";
+var failedAttempts = 0;
+var lockUntil = 0;
+
+async function sha256(txt) {
+  var buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(txt));
+  return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,"0"); }).join("");
+}
+function getHash(){ return localStorage.getItem(HASH_KEY) || DEFAULT_HASH; }
+
+async function doLogin() {
+  var now = Date.now();
+  if (now < lockUntil) return;
+  var pwd = document.getElementById("lpwd").value;
+  if (!pwd) return;
+  var h = await sha256(pwd);
+  if (h === getHash()) {
+    failedAttempts = 0;
+    sessionStorage.setItem(SESSION, "1");
+    document.getElementById("login-screen").style.display = "none";
+    document.getElementById("admin-screen").style.display = "flex";
+    initAdmin();
+  } else {
+    failedAttempts++;
+    var rem = 5 - failedAttempts;
+    var e = document.getElementById("lerr");
+    e.style.display = "block";
+    e.textContent = rem > 0 ? "Wrong password. " + rem + " attempt(s) left." : "Too many attempts.";
+    if (failedAttempts >= 5) {
+      lockUntil = Date.now() + 60000;
+      document.getElementById("lock-msg").style.display = "block";
+      var t = setInterval(function(){
+        var s = Math.ceil((lockUntil - Date.now()) / 1000);
+        if (s <= 0) { clearInterval(t); failedAttempts = 0; document.getElementById("lock-msg").style.display = "none"; e.style.display = "none"; }
+        else document.getElementById("cd").textContent = s;
+      }, 1000);
+    }
+    document.getElementById("lpwd").value = "";
+  }
+}
+
+function doLogout() { sessionStorage.removeItem(SESSION); location.reload(); }
+
+document.getElementById("lpwd").addEventListener("keydown", function(e){ if(e.key==="Enter") doLogin(); });
+
+window.addEventListener("load", function(){
+  if (sessionStorage.getItem(SESSION)) {
+    document.getElementById("login-screen").style.display = "none";
+    document.getElementById("admin-screen").style.display = "flex";
+    initAdmin();
+  }
+});
+
+// ── DEFAULT DATA ─────────────────────────────────────────────────
+var DEFAULT_PRODUCTS = [
+  {id:1,  name:"Newborn Gift Set",        cat:"newborn",  desc:"Complete starter set: onesie, hat, mittens and booties.",             price:2800, disc:10, emo:"&#128118;", badge:"NEW",  photo:""},
+  {id:2,  name:"Baby Swaddle Blanket",    cat:"newborn",  desc:"Ultra-soft muslin swaddle blanket, breathable and gentle on skin.",   price:1200, disc:0,  emo:"&#129528;", badge:"",     photo:""},
+  {id:3,  name:"Baby Onesie Set (5 pcs)", cat:"clothing", desc:"Pack of 5 soft cotton onesies in mixed colours, 0-3 months.",        price:2500, disc:15, emo:"&#128085;", badge:"HOT",  photo:""},
+  {id:4,  name:"Newborn Sleepsuit",       cat:"clothing", desc:"Warm cosy all-in-one sleepsuit perfect for nighttime comfort.",       price:1500, disc:0,  emo:"&#127769;", badge:"",     photo:""},
+  {id:5,  name:"Baby Feeding Bottle Set", cat:"feeding",  desc:"Anti-colic BPA-free feeding bottles, 3 sizes included.",             price:1800, disc:10, emo:"&#127868;", badge:"",     photo:""},
+  {id:6,  name:"Breast Pump (Manual)",    cat:"feeding",  desc:"Ergonomic manual breast pump, soft silicone, easy to clean.",        price:3500, disc:20, emo:"&#129329;", badge:"SALE", photo:""},
+  {id:7,  name:"Baby Bath Kit",           cat:"bath",     desc:"Complete bath set: shampoo, lotion, wash and soft brush.",           price:2200, disc:0,  emo:"&#128705;", badge:"",     photo:""},
+  {id:8,  name:"Baby Skincare Set",       cat:"bath",     desc:"Gentle dermatologist-tested moisturiser and powder for baby skin.",  price:1600, disc:5,  emo:"&#129396;", badge:"",     photo:""},
+  {id:9,  name:"Maternity Pillow",        cat:"mother",   desc:"Full-body U-shaped pillow for pregnancy support and comfort.",       price:4500, disc:10, emo:"&#127800;", badge:"NEW",  photo:""},
+  {id:10, name:"Nursing Cover",           cat:"mother",   desc:"Breathable nursing cover for discreet breastfeeding on the go.",     price:1200, disc:0,  emo:"&#128155;", badge:"",     photo:""},
+  {id:11, name:"Diaper Bag Backpack",     cat:"newborn",  desc:"Large capacity waterproof organiser bag with USB charging port.",    price:3800, disc:15, emo:"&#127890;", badge:"HOT",  photo:""},
+  {id:12, name:"Baby Monitor",            cat:"newborn",  desc:"Digital audio baby monitor with long range and clear sound.",        price:5500, disc:0,  emo:"&#128251;", badge:"",     photo:""}
+];
+
+// PACKAGES: order [pkg1, pkg3(featured), pkg2] to match index.html display
+var DEFAULT_PACKAGES = [
+  {
+    id:"pkg1", name:"Package 01", label:"Starter Package", icon:"&#127800;",
+    price:"Rs. 17,500", featured:false, photo:"",
+    babyItems:[
+      "18x18 Printed Nappi Single - 06 Nos","18x18 Plain Nappi Single - 06 Nos",
+      "22x22 Plain Nappi Double - 06 Nos","22x22 Printed Nappi Double - 06 Nos",
+      "Baby Printed Gown - 06 Nos","Baby Flannel Blanket - 03 Nos",
+      "Baby Printed Towel (Single/Double) - 02 Nos","Soft Blanket - 01 Nos",
+      "Baby Wool Suit - 01 Nos","Baby Rubber Sheet - 01 Nos",
+      "Baby Wet Wipes - 01 Pack","Newborn Diaper (04 Nos) - 01 Pack",
+      "Cotton Balls - 01 Pack","Nipon Baby Bath Basin - 01 Nos",
+      "Rainco Baby Mosquito Net - 01 Nos","Baby Hospital Bag - 01 Nos",
+      "Hospital Basket - 01 Nos","Baby Care Kit (Small) - 01 Nos",
+      "Safety Pin - 01 Nos","Nappy Pins - 01 Nos",
+      "Baby Pillow - 01 Nos","Baby Pillow Cover - 01 Nos"
+    ],
+    motherItems:[
+      "Bed Jacket - 02 Nos","Cotton Cheeta - 02 Nos",
+      "White Bed Jacket - 01 Nos","White Cheeta - 01 Nos",
+      "Loop Pad - 01 Nos","Wasti Bottle - 01 Nos"
+    ]
+  },
+  {
+    id:"pkg3", name:"Package 03", label:"Most Popular", icon:"&#129419;",
+    price:"Rs. 29,000", featured:true, photo:"",
+    babyItems:[
+      "18x18 Printed Nappi Single - 12 Nos","18x18 Plain Nappi Single - 06 Nos",
+      "22x22 Printed Nappi Double - 06 Nos","22x22 Plain Nappi Double - 06 Nos",
+      "Baby Printed Gown - 06 Nos","Baby Muslin Gown - 06 Nos",
+      "Baby Flannel Blanket (Kolko) - 04 Nos","Baby Soft Blanket - 01 Nos",
+      "Baby Printed Towel Set (Single/Double) - 01 Set","Baby Wool Suit - 01 Nos",
+      "Baby Rubber Sheet - 01 Nos","Nipon Baby Bath Basin - 01 Nos",
+      "Rainco Baby Mosquito Net - 01 Nos","Baby Hospital Bag - 01 Nos",
+      "Hospital Basket - 01 Nos","Baby Care Kit (10 pcs) - 01 Nos",
+      "Safety Pin - 01 Nos","Nappy Pins - 01 Nos",
+      "Quality Baby Pillow Set with Mattress - 01 Nos","Baby Sleeping Bag - 01 Nos",
+      "Mawal Baby Wet Wipes - 01 Pack","Mawal Newborn Diaper (04 Nos) - 01 Pack",
+      "Cotton Balls - 01 Pack","Panda Baby Set (Powder/Body Wash/Cologne) - 01 Nos",
+      "Powder Puff - 01 Nos","Soap Case - 01 Nos"
+    ],
+    motherItems:[
+      "Bed Jacket - 03 Nos","Cotton Cheeta - 03 Nos",
+      "White Bed Jacket - 01 Nos","White Cheeta - 01 Nos",
+      "Towel - 01 Nos","Loop Pad - 01 Nos",
+      "Bic Lady Razor - 01 Nos","Loop Belt - 01 Nos",
+      "Wasti Bottle - 01 Nos","Cloth Rack - 01 Nos",
+      "Cloth Hanger - 01 Nos","Cloth Clips - 01 Nos"
+    ]
+  },
+  {
+    id:"pkg2", name:"Package 02", label:"Standard Package", icon:"&#128081;",
+    price:"Rs. 24,000", featured:false, photo:"",
+    babyItems:[
+      "18x18 Printed Nappi Single - 12 Nos","18x18 Plain Nappi Single - 06 Nos",
+      "22x22 Printed Nappi Double - 06 Nos","22x22 Plain Nappi Double - 06 Nos",
+      "Baby Printed Gown - 06 Nos","Baby Muslin Gown - 06 Nos",
+      "Baby Flannel Blanket (Kolko) - 04 Nos","Baby Soft Blanket - 01 Nos",
+      "Baby Printed Towel (Single/Double) - 01 Nos","Baby Wool Suit - 01 Nos",
+      "Baby Rubber Sheet - 01 Nos","Mawal Baby Wet Wipes - 01 Pack",
+      "Mawal Newborn Diaper (04 Nos) - 01 Pack","Nipon Baby Bath Basin - 01 Nos",
+      "Rainco Baby Mosquito Net - 01 Nos","Baby Hospital Bag - 01 Nos",
+      "Nipon Hospital Basket - 01 Nos","Baby Care Kit (10 pcs) - 01 Nos",
+      "Safety Pin - 01 Nos","Nappy Pins - 01 Nos",
+      "Cotton Balls - 01 Pack","Baby Pillow - 01 Nos",
+      "Baby Pillow Cover - 01 Nos","Panda Baby Set (Powder/Body Wash/Cologne) - 01 Nos",
+      "Powder Puff - 01 Nos","Soap Case - 01 Nos"
+    ],
+    motherItems:[
+      "Bed Jacket - 03 Nos","Cotton Cheeta - 03 Nos",
+      "White Bed Jacket - 01 Nos","White Cheeta - 01 Nos",
+      "White Towel - 01 Nos","Loop Pad - 01 Nos",
+      "Bic Lady Razor - 01 Nos","Loop Belt - 01 Nos",
+      "Wasti Bottle - 01 Nos"
+    ]
+  }
+];
+
+function getProds(){ try{ var s=localStorage.getItem("lc_products"); return s?JSON.parse(s):DEFAULT_PRODUCTS; }catch(e){ return DEFAULT_PRODUCTS; } }
+function getPkgs(){  try{ var s=localStorage.getItem("lc_packages"); return s?JSON.parse(s):DEFAULT_PACKAGES; }catch(e){ return DEFAULT_PACKAGES; } }
+function saveProds(p){ localStorage.setItem("lc_products", JSON.stringify(p)); }
+function savePkgs(p){  localStorage.setItem("lc_packages", JSON.stringify(p)); }
+
+// ── INIT ─────────────────────────────────────────────────────────
+function initAdmin(){
+  renderStats();
+  renderProdList();
+  buildPkgPanes();
+}
+
+// ── TABS ─────────────────────────────────────────────────────────
+function showPane(id){
+  document.querySelectorAll(".pane").forEach(function(p){ p.classList.remove("active"); });
+  document.querySelectorAll(".stab").forEach(function(s){ s.classList.remove("active"); });
+  document.getElementById(id).classList.add("active");
+  var map = {"p-dash":0,"p-products":1,"p-packages":2,"p-settings":3};
+  document.querySelectorAll(".stab")[map[id]].classList.add("active");
+  if (id === "p-packages") buildPkgPanes();
+  if (id === "p-dash") renderStats();
+}
+
+// ── STATS ─────────────────────────────────────────────────────────
+function renderStats(){
+  var prods = getProds(); var pkgs = getPkgs();
+  var cats = {};
+  prods.forEach(function(p){ cats[p.cat] = 1; });
+  document.getElementById("stats").innerHTML =
+    '<div class="stat"><div class="num">'+prods.length+'</div><div class="lbl">Products</div></div>'
+   +'<div class="stat"><div class="num">'+Object.keys(cats).length+'</div><div class="lbl">Categories</div></div>'
+   +'<div class="stat"><div class="num">'+prods.filter(function(p){return p.disc>0;}).length+'</div><div class="lbl">On Sale</div></div>'
+   +'<div class="stat"><div class="num">'+pkgs.length+'</div><div class="lbl">Packages</div></div>';
+}
+
+// ── PHOTO HELPERS ─────────────────────────────────────────────────
+function previewPhoto(inputId, previewId, areaId){
+  var file = document.getElementById(inputId).files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var img = document.getElementById(previewId);
+    img.src = e.target.result; img.classList.add("show");
+    document.getElementById(inputId.replace("f-photo","f-photo-url")) && (document.getElementById("f-photo-url").value = "");
+  };
+  reader.readAsDataURL(file);
+}
+function previewUrl(url, previewId){
+  if (!url) return;
+  var img = document.getElementById(previewId);
+  img.src = url; img.classList.add("show");
+}
+function getPhotoData(previewId, urlInputId){
+  var preview = document.getElementById(previewId);
+  if (preview.classList.contains("show") && preview.src && !preview.src.includes("about:blank")) return preview.src;
+  var urlInput = document.getElementById(urlInputId);
+  if (urlInput && urlInput.value.trim()) return urlInput.value.trim();
+  return "";
+}
+
+// ── PRODUCTS ─────────────────────────────────────────────────────
+function renderProdList(){
+  var prods = getProds();
+  var el = document.getElementById("prod-list");
+  if (!prods.length){ el.innerHTML = '<p style="color:var(--tl);font-weight:700;text-align:center;padding:30px">No products yet.</p>'; return; }
+  var html = "";
+  prods.forEach(function(p){
+    var dp = p.disc > 0 ? Math.round(p.price*(1-p.disc/100)) : p.price;
+    var thumbHtml = p.photo
+      ? '<img src="'+p.photo+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;border-radius:8px">'
+      : '<span>'+p.emo+'</span>';
+    html += '<div class="prod-row">'
+      +'<div class="prod-thumb">'+thumbHtml+'</div>'
+      +'<div class="prod-info">'
+      +'<strong>'+p.name+'</strong>'
+      +'<span>Rs. '+dp.toLocaleString()+(p.disc>0?' (-'+p.disc+'%)':'')+' &nbsp;&middot;&nbsp; '+p.cat+(p.badge?' &nbsp;&middot;&nbsp; '+p.badge:'')+'</span>'
+      +'</div>'
+      +'<div class="prod-actions">'
+      +'<button class="btn-edit" onclick="editProd('+p.id+')"><i class="fas fa-edit"></i> Edit</button>'
+      +'<button class="btn-del" onclick="delProd('+p.id+')"><i class="fas fa-trash"></i></button>'
+      +'</div></div>';
+  });
+  el.innerHTML = html;
+}
+
+function showAddForm(){
+  document.getElementById("edit-id").value = "";
+  document.getElementById("f-name").value = "";
+  document.getElementById("f-cat").value = "newborn";
+  document.getElementById("f-desc").value = "";
+  document.getElementById("f-price").value = "";
+  document.getElementById("f-disc").value = "";
+  document.getElementById("f-emo").value = "";
+  document.getElementById("f-badge").value = "";
+  document.getElementById("f-photo-url").value = "";
+  var pv = document.getElementById("prod-preview");
+  pv.src = ""; pv.classList.remove("show");
+  document.getElementById("form-title").textContent = "Add New Product";
+  document.getElementById("prod-form").style.display = "block";
+  document.getElementById("prod-form").scrollIntoView({behavior:"smooth"});
+}
+
+function hideForm(){
+  document.getElementById("prod-form").style.display = "none";
+}
+
+function editProd(id){
+  var prods = getProds();
+  var p = null; prods.forEach(function(x){ if(x.id===id) p=x; });
+  if (!p) return;
+  document.getElementById("edit-id").value = id;
+  document.getElementById("f-name").value = p.name;
+  document.getElementById("f-cat").value = p.cat;
+  document.getElementById("f-desc").value = p.desc;
+  document.getElementById("f-price").value = p.price;
+  document.getElementById("f-disc").value = p.disc;
+  document.getElementById("f-emo").value = p.emo;
+  document.getElementById("f-badge").value = p.badge||"";
+  document.getElementById("f-photo-url").value = p.photo && !p.photo.startsWith("data:") ? p.photo : "";
+  var pv = document.getElementById("prod-preview");
+  if (p.photo){ pv.src = p.photo; pv.classList.add("show"); } else { pv.src=""; pv.classList.remove("show"); }
+  document.getElementById("form-title").textContent = "Edit: " + p.name;
+  document.getElementById("prod-form").style.display = "block";
+  document.getElementById("prod-form").scrollIntoView({behavior:"smooth"});
+}
+
+function saveProduct(){
+  var name = document.getElementById("f-name").value.trim();
+  var price = parseFloat(document.getElementById("f-price").value);
+  var al = document.getElementById("prod-alert");
+  if (!name || !price){ al.style.display="block"; al.className="alert err"; al.textContent="Name and Price are required."; return; }
+  al.style.display="none";
+  var photo = getPhotoData("prod-preview","f-photo-url");
+  var data = {
+    name:name, price:price,
+    cat:   document.getElementById("f-cat").value,
+    desc:  document.getElementById("f-desc").value || "Quality baby care product.",
+    disc:  parseFloat(document.getElementById("f-disc").value)||0,
+    emo:   document.getElementById("f-emo").value||"&#128117;",
+    badge: document.getElementById("f-badge").value||"",
+    photo: photo
+  };
+  var prods = getProds();
+  var editId = document.getElementById("edit-id").value;
+  if (editId){
+    for(var i=0;i<prods.length;i++){ if(prods[i].id===parseInt(editId)){ prods[i]=Object.assign({},prods[i],data); break; } }
+    toast("Product updated!");
+  } else {
+    data.id = Date.now();
+    prods.push(data);
+    toast("Product added!");
+  }
+  saveProds(prods); renderProdList(); renderStats(); hideForm();
+}
+
+function delProd(id){
+  if(!confirm("Delete this product?")) return;
+  var prods = getProds().filter(function(x){ return x.id!==id; });
+  saveProds(prods); renderProdList(); renderStats();
+  toast("Product deleted.");
+}
+
+function resetProds(){
+  if(!confirm("Reset all products to defaults? Cannot be undone.")) return;
+  localStorage.removeItem("lc_products");
+  renderProdList(); renderStats();
+  toast("Products reset.");
+}
+
+// ── PACKAGES ─────────────────────────────────────────────────────
+function buildPkgPanes(){
+  var pkgs = getPkgs();
+  var labels = ["Package 01","Package 03 (Most Popular)","Package 02"];
+  var container = document.getElementById("pkg-panes");
+  var html = "";
+  for (var pi=0; pi<pkgs.length; pi++){
+    var pkg = pkgs[pi];
+    var isActive = pi===0 ? " active" : "";
+    html += '<div class="pkg-pane'+isActive+'" id="pkp-'+pi+'">';
+    html += '<div class="card">';
+    html += '<div class="card-title"><i class="fas fa-gift"></i> '+labels[pi]+' Details</div>';
+
+    // Top fields
+    html += '<div class="frow">';
+    html += '<div class="fcol"><label>Package Name</label><input type="text" id="pk'+pi+'-name" value="'+pkg.name+'" placeholder="Package name"></div>';
+    html += '<div class="fcol"><label>Top Label (e.g. Most Popular)</label><input type="text" id="pk'+pi+'-label" value="'+pkg.label+'" placeholder="e.g. Most Popular"></div>';
+    html += '<div class="fcol"><label>Price (e.g. Rs. 17,500)</label><input type="text" id="pk'+pi+'-price" value="'+pkg.price+'" placeholder="Rs. 17,500"></div>';
+    html += '<div class="fcol"><label>Icon / Emoji</label><input type="text" id="pk'+pi+'-icon" value="'+pkg.icon+'" placeholder="e.g. &#127800;"></div>';
+    html += '</div>';
+
+    // Photo upload
+    html += '<div class="fcol full" style="margin-bottom:14px">';
+    html += '<label>Package Photo (optional)</label>';
+    html += '<div class="photo-upload-area" style="position:relative">';
+    html += '<input type="file" accept="image/*" id="pk'+pi+'-file" onchange="pkgPhotoFile('+pi+')">';
+    html += '<div class="photo-upload-text"><i class="fas fa-image"></i> Click to upload package photo</div>';
+    html += '</div>';
+    html += '<img class="pkg-preview'+(pkg.photo?' show':'')+'" id="pk'+pi+'-preview" src="'+(pkg.photo||'')+'" alt="Package photo">';
+    html += '<input type="text" id="pk'+pi+'-photourl" placeholder="Or paste image URL: https://i.ibb.co/..." style="margin-top:6px;width:100%;padding:8px 11px;border:2px solid var(--pl);border-radius:9px;font-family:Nunito,sans-serif;font-size:.82rem" value="'+(pkg.photo&&!pkg.photo.startsWith('data:')?pkg.photo:'')+'" oninput="pkgPhotoUrl('+pi+',this.value)">';
+    html += '</div>';
+
+    html += '<div class="section-divider"></div>';
+
+    // Baby items
+    html += '<div class="card-title" style="font-size:.88rem"><i class="fas fa-baby"></i> Baby Items</div>';
+    html += '<div class="items-list" id="pk'+pi+'-baby">';
+    for (var ii=0; ii<pkg.babyItems.length; ii++){
+      html += '<div class="item-row" id="pk'+pi+'-bi-'+ii+'">'
+        +'<input type="text" value="'+pkg.babyItems[ii]+'" id="pk'+pi+'-bv-'+ii+'" placeholder="Item description">'
+        +'<button class="btn-rem-item" onclick="removeItem('+pi+','baby','+ii+')"><i class="fas fa-times"></i></button>'
+        +'</div>';
+    }
+    html += '</div>';
+    html += '<button class="btn-add-item" onclick="addItem('+pi+','baby')"><i class="fas fa-plus"></i> Add Baby Item</button>';
+
+    html += '<div class="section-divider"></div>';
+
+    // Mother items
+    html += '<div class="card-title" style="font-size:.88rem"><i class="fas fa-female"></i> Mother Items</div>';
+    html += '<div class="items-list" id="pk'+pi+'-mother">';
+    for (var ii=0; ii<pkg.motherItems.length; ii++){
+      html += '<div class="item-row" id="pk'+pi+'-mi-'+ii+'">'
+        +'<input type="text" value="'+pkg.motherItems[ii]+'" id="pk'+pi+'-mv-'+ii+'" placeholder="Item description">'
+        +'<button class="btn-rem-item" onclick="removeItem('+pi+','mother','+ii+')"><i class="fas fa-times"></i></button>'
+        +'</div>';
+    }
+    html += '</div>';
+    html += '<button class="btn-add-item" onclick="addItem('+pi+','mother')"><i class="fas fa-plus"></i> Add Mother Item</button>';
+
+    html += '<div class="section-divider"></div>';
+    html += '<button class="btn-save" onclick="savePkg('+pi+')"><i class="fas fa-save"></i> Save Package '+labels[pi]+'</button>';
+    html += '</div></div>';
+  }
+  container.innerHTML = html;
+}
+
+function showPkgPane(pi){
+  document.querySelectorAll(".pkg-pane").forEach(function(p){ p.classList.remove("active"); });
+  document.querySelectorAll(".pkg-tab").forEach(function(t){ t.classList.remove("active"); });
+  document.getElementById("pkp-"+pi).classList.add("active");
+  document.querySelectorAll(".pkg-tab")[pi].classList.add("active");
+}
+
+function pkgPhotoFile(pi){
+  var file = document.getElementById("pk"+pi+"-file").files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var img = document.getElementById("pk"+pi+"-preview");
+    img.src = e.target.result; img.classList.add("show");
+    document.getElementById("pk"+pi+"-photourl").value = "";
+  };
+  reader.readAsDataURL(file);
+}
+
+function pkgPhotoUrl(pi, url){
+  if (!url) return;
+  var img = document.getElementById("pk"+pi+"-preview");
+  img.src = url; img.classList.add("show");
+}
+
+function addItem(pi, type){
+  var pkgs = getPkgs();
+  if (type === "baby") pkgs[pi].babyItems.push("New item");
+  else pkgs[pi].motherItems.push("New item");
+  savePkgs(pkgs); buildPkgPanes(); showPkgPane(pi);
+}
+
+function removeItem(pi, type, ii){
+  var pkgs = getPkgs();
+  if (type === "baby") pkgs[pi].babyItems.splice(ii,1);
+  else pkgs[pi].motherItems.splice(ii,1);
+  savePkgs(pkgs); buildPkgPanes(); showPkgPane(pi);
+}
+
+function savePkg(pi){
+  var pkgs = getPkgs();
+  pkgs[pi].name  = document.getElementById("pk"+pi+"-name").value.trim()  || pkgs[pi].name;
+  pkgs[pi].label = document.getElementById("pk"+pi+"-label").value.trim() || pkgs[pi].label;
+  pkgs[pi].price = document.getElementById("pk"+pi+"-price").value.trim() || pkgs[pi].price;
+  pkgs[pi].icon  = document.getElementById("pk"+pi+"-icon").value.trim()  || pkgs[pi].icon;
+
+  // photo
+  var pv = document.getElementById("pk"+pi+"-preview");
+  var urlV = document.getElementById("pk"+pi+"-photourl").value.trim();
+  if (pv.classList.contains("show") && pv.src && !pv.src.includes("about:blank")) pkgs[pi].photo = pv.src;
+  else if (urlV) pkgs[pi].photo = urlV;
+
+  // baby items
+  var babyInputs = document.querySelectorAll('[id^="pk'+pi+'-bv-"]');
+  var babyItems = [];
+  babyInputs.forEach(function(inp){ var v=inp.value.trim(); if(v) babyItems.push(v); });
+  pkgs[pi].babyItems = babyItems;
+
+  // mother items
+  var motherInputs = document.querySelectorAll('[id^="pk'+pi+'-mv-"]');
+  var motherItems = [];
+  motherInputs.forEach(function(inp){ var v=inp.value.trim(); if(v) motherItems.push(v); });
+  pkgs[pi].motherItems = motherItems;
+
+  savePkgs(pkgs);
+
+  var al = document.getElementById("pkg-alert");
+  al.style.display="block"; al.className="alert ok";
+  al.textContent = pkgs[pi].name + " saved! Reload the shop page to see changes.";
+  setTimeout(function(){ al.style.display="none"; },4000);
+  toast("Package saved!");
+  buildPkgPanes(); showPkgPane(pi);
+}
+
+// ── PASSWORD ─────────────────────────────────────────────────────
+async function changePwd(){
+  var cur = document.getElementById("p-cur").value;
+  var nw  = document.getElementById("p-new").value;
+  var cf  = document.getElementById("p-con").value;
+  var al  = document.getElementById("pwd-alert");
+  var ch  = await sha256(cur);
+  if (ch !== getHash()){ al.style.display="block"; al.className="alert err"; al.textContent="Current password is wrong."; return; }
+  if (nw.length < 8){ al.style.display="block"; al.className="alert err"; al.textContent="New password must be at least 8 characters."; return; }
+  if (nw !== cf){ al.style.display="block"; al.className="alert err"; al.textContent="Passwords do not match."; return; }
+  localStorage.setItem(HASH_KEY, await sha256(nw));
+  al.style.display="block"; al.className="alert ok"; al.textContent="Password changed!";
+  document.getElementById("p-cur").value=""; document.getElementById("p-new").value=""; document.getElementById("p-con").value="";
+  toast("Password updated!");
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────
+function toast(msg){
+  var t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(function(){ t.classList.remove("show"); }, 2600);
+}
+</script>
+</body>
+</html>
