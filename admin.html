@@ -123,14 +123,17 @@ body{font-family:"Nunito",sans-serif;background:#f5f0f8;color:var(--text);min-he
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
-    <img id="login-logo" src="logo.png" alt="Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2286%22 height=%2286%22%3E%3Ccircle cx=%2243%22 cy=%2243%22 r=%2243%22 fill=%22%23fce4ec%22/%3E%3Ctext y=%2265%22 x=%2243%22 text-anchor=%22middle%22 font-size=%2256%22%3E&#128118;%3C/text%3E%3C/svg%3E'">
-    <h2>Admin Login</h2>
+    <img id="login-logo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><circle cx='45' cy='45' r='45' fill='%23fce4ec'/><text y='65' x='45' text-anchor='middle' font-size='55'>👶</text></svg>" alt="Logo">
+    <h2>Admin Panel</h2>
     <p>Little Cuddle Shop Management</p>
-    <div class="lerr" id="lerr"></div>
-    <input class="inp" type="password" id="lpwd" placeholder="Enter admin password">
-    <button class="btn-login" onclick="doLogin()"><i class="fas fa-unlock"></i> Login</button>
-    <p class="lock-msg" id="lock-msg">&#128274; Too many attempts. Wait <span id="cd">60</span>s</p>
-    <p style="color:var(--tl);font-size:.75rem;margin-top:12px;font-weight:600">Default password: LittleCuddle@2024</p>
+    <div class="login-error" id="login-error"></div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="Enter admin password" autocomplete="current-password">
+    </div>
+    <button class="btn-login" onclick="attemptLogin()"><i class="fas fa-unlock"></i> Login</button>
+    <p class="login-attempts" id="attempts-msg"></p>
+    <p class="locked-msg" id="locked-msg">🔒 Too many failed attempts. Try again in <span id="countdown">60</span>s</p>
   </div>
 </div>
 
