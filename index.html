@@ -692,7 +692,8 @@ document.addEventListener("visibilitychange", function(){
 function trackOrder(){
   var num = document.getElementById("track-num").value.trim();
   if(!num){ alert("Please enter a tracking number!"); return; }
-  window.open("https://www.domex.lk/tracking.php?wbno=" + encodeURIComponent(num), "_blank");
+  window.open("https://www.domex.lk/Order-Details.php?wbno=" + encodeURIComponent(num), "_blank");
+
 }
 // ── INIT ─────────────────────────────────────────────────────────
 renderProducts();
