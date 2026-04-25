@@ -356,7 +356,7 @@ footer{background:linear-gradient(135deg,#0d2b6b,#1565c0);color:#fff;padding:48p
     </div>
     <div class="wgrid">
       <div class="wcard"><div class="wico">&#128737;</div><h4>100% Quality</h4><p>All products carefully selected and checked for your baby's safety</p></div>
-      <div class="wcard"><div class="wico">&#128666;</div><h4>Island-wide Delivery</h4><p>We deliver to all areas in Sri Lanka, fast and securely packaged</p></div>
+      <div class="wcard"><div class="wico">&#128666;</div><h4>Island-wide Delivery with Tracking</h4><p>We deliver to all areas in Sri Lanka, fast and securely packaged</p></div>
       <div class="wcard"><div class="wico">&#128176;</div><h4>Best Prices</h4><p>Affordable prices without compromising on quality for your family</p></div>
       <div class="wcard"><div class="wico">&#128172;</div><h4>WhatsApp Support</h4><p>Chat with us any time &mdash; always here to help you</p></div>
     </div>
@@ -692,7 +692,7 @@ document.addEventListener("visibilitychange", function(){
 function trackOrder(){
   var num = document.getElementById("track-num").value.trim();
   if(!num){ alert("Please enter a tracking number!"); return; }
-  window.open("https://www.domex.lk/tracking.php?tracking=+"track-num"" + encodeURIComponent(num), "_blank");
+  window.open("https://www.domex.lk/tracking.php?tracking=" + encodeURIComponent(num), "_blank");
 }
 // ── INIT ─────────────────────────────────────────────────────────
 renderProducts();
