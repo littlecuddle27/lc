@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Cuddle &ndash; Shop All Products</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--pk:#e91e8c;--pkl:#fce4ec;--pkm:#f48fb1;--bl:#1565c0;--bll:#e3f2fd;--blm:#90caf9;--grad:linear-gradient(135deg,#1565c0,#e91e8c);--cream:#f5f8ff;--text:#1a2340;--tl:#6677aa;--sh:0 4px 24px rgba(21,101,192,.12);--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bll)}::-webkit-scrollbar-thumb{background:var(--pkm);border-radius:6px}
+/* NOTICE */
+.notice-bar{background:linear-gradient(135deg,var(--pk),#f06292);color:#fff;text-align:center;padding:7px 20px;font-size:.82rem;font-weight:700}
+.notice-bar a{color:#fff;font-weight:900;text-decoration:underline}
+/* NAV */
+nav{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:2px solid var(--bll);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 16px rgba(21,101,192,.1)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--pkm)}
+.nav-brand{font-family:"Pacifico",cursive;color:var(--pk);font-size:1.15rem;line-height:1.1}
+.nav-brand small{display:block;font-family:"Nunito",sans-serif;font-size:.58rem;color:var(--tl);font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{text-decoration:none;color:var(--text);font-weight:700;font-size:.85rem;padding:7px 13px;border-radius:50px;transition:all .2s}
+.nav-links a:hover{background:var(--bll);color:var(--bl)}
+.nav-links a.active{background:var(--bll);color:var(--bl);font-weight:800}
+.btn-cart{background:var(--grad);color:#fff;border:none;padding:9px 18px;border-radius:50px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:800;font-size:.85rem;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(233,30,140,.3);transition:all .2s}
+.btn-cart:hover{transform:translateY(-2px)}
+.cart-badge{background:#fff;color:var(--pk);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900}
+.btn-wa-nav{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;text-decoration:none;padding:9px 18px;border-radius:50px;font-family:"Nunito",sans-serif;font-weight:800;font-size:.85rem;display:inline-flex;align-items:center;gap:6px;transition:all .2s;box-shadow:0 4px 14px rgba(37,211,102,.28)}
+.btn-wa-nav:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,.42)}
+/* PAGE HEADER */
+.page-header{background:var(--grad);color:#fff;padding:36px 28px;text-align:center}
+.page-header h1{font-family:"Pacifico",cursive;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:6px}
+.page-header p{font-size:.92rem;opacity:.88;font-weight:600}
+.breadcrumb{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;font-size:.8rem;opacity:.8;font-weight:600}
+.breadcrumb a{color:#fff;text-decoration:none}.breadcrumb a:hover{text-decoration:underline}
+/* SHOP LAYOUT */
+.shop-wrap{max-width:1400px;margin:0 auto;padding:28px 20px;display:flex;gap:24px;align-items:flex-start}
+/* FILTER SIDEBAR */
+.filter-sidebar{width:240px;flex-shrink:0;position:sticky;top:70px}
+.filter-card{background:#fff;border-radius:var(--r);padding:18px;box-shadow:var(--sh);margin-bottom:14px}
+.filter-card h3{font-weight:800;color:var(--text);font-size:.9rem;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.filter-card h3 i{color:var(--pk)}
+.search-box{display:flex;gap:6px}
+.search-box input{flex:1;padding:9px 12px;border:2px solid var(--bll);border-radius:10px;font-family:"Nunito",sans-serif;font-size:.85rem;color:var(--text);outline:none;transition:border-color .2s}
+.search-box input:focus{border-color:var(--pkm)}
+.search-box button{background:var(--grad);color:#fff;border:none;width:38px;border-radius:10px;cursor:pointer;font-size:.9rem}
+.cat-filter{display:flex;flex-direction:column;gap:4px}
+.cat-btn{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:10px;cursor:pointer;font-weight:700;font-size:.85rem;color:var(--tl);border:none;background:transparent;width:100%;text-align:left;transition:all .2s}
+.cat-btn:hover{background:var(--bll);color:var(--bl)}
+.cat-btn.active{background:var(--bll);color:var(--bl);font-weight:800}
+.cat-count{margin-left:auto;background:var(--bll);color:var(--bl);font-size:.7rem;font-weight:800;padding:1px 7px;border-radius:50px}
+.cat-btn.active .cat-count{background:var(--bl);color:#fff}
+.sort-sel{width:100%;padding:9px 12px;border:2px solid var(--bll);border-radius:10px;font-family:"Nunito",sans-serif;font-size:.85rem;color:var(--text);outline:none;cursor:pointer;background:#fff}
+.sort-sel:focus{border-color:var(--pkm)}
+.btn-clear-filters{width:100%;background:var(--pkl);color:var(--pk);border:none;padding:9px;border-radius:10px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:700;font-size:.84rem;transition:all .2s;margin-top:2px;display:flex;align-items:center;justify-content:center;gap:7px}
+.btn-clear-filters:hover{background:var(--pk);color:#fff}
+/* PRODUCTS AREA */
+.products-area{flex:1;min-width:0}
+.products-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.toolbar-left{font-weight:700;font-size:.88rem;color:var(--tl)}
+.toolbar-left span{color:var(--pk);font-weight:800}
+.view-btn{background:#fff;border:2px solid var(--bll);color:var(--tl);width:34px;height:34px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s}
+.view-btn.active{background:var(--bl);border-color:var(--bl);color:#fff}
+/* PRODUCT CARDS */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+.pgrid.list-view{grid-template-columns:1fr}
+.pc{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 2px 16px rgba(21,101,192,.08);transition:all .3s;position:relative;cursor:pointer}
+.pc:hover{transform:translateY(-6px);box-shadow:var(--sh)}
+.pc-badge{position:absolute;top:10px;left:10px;z-index:2;display:flex;flex-direction:column;gap:4px}
+.badge{display:inline-block;font-size:.65rem;font-weight:800;padding:3px 9px;border-radius:50px;letter-spacing:.5px}
+.badge-new{background:var(--bl);color:#fff}.badge-hot{background:#ff6f00;color:#fff}.badge-sale{background:var(--pk);color:#fff}.badge-disc{background:#2e7d32;color:#fff}
+.pc-img{width:100%;height:190px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,var(--bll),var(--pkl));overflow:hidden;position:relative;transition:transform .3s}
+.pc:hover .pc-img{transform:scale(1.04)}
+.pc-img img{width:100%;height:100%;object-fit:cover}
+.pc-overlay{position:absolute;inset:0;background:rgba(21,101,192,.08);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
+.pc:hover .pc-overlay{opacity:1}
+.btn-quick{background:#fff;color:var(--bl);border:none;padding:9px 18px;border-radius:50px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:800;font-size:.82rem;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.14);transition:all .2s}
+.btn-quick:hover{background:var(--bl);color:#fff}
+.pc-body{padding:14px}
+.pc-cat{font-size:.68rem;font-weight:800;color:var(--bl);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+.pc-name{font-weight:800;font-size:.95rem;color:var(--text);margin-bottom:4px;line-height:1.3}
+.pc-desc{font-size:.79rem;color:var(--tl);font-weight:600;margin-bottom:10px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-pricing{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap}
+.pc-price{font-family:"Quicksand",sans-serif;font-size:1.15rem;font-weight:700;color:var(--pk)}
+.pc-orig{font-size:.82rem;color:var(--tl);text-decoration:line-through;font-weight:600}
+.pc-disc{background:var(--pkl);color:var(--pk);font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:50px}
+.btn-add{width:100%;background:var(--grad);color:#fff;border:none;padding:10px;border-radius:11px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:800;font-size:.86rem;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
+.btn-add:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 5px 16px rgba(233,30,140,.3)}
+.btn-add.added{background:linear-gradient(135deg,#2e7d32,#43a047)}
+.pgrid.list-view .pc{display:flex;align-items:center}
+.pgrid.list-view .pc-img{width:130px;height:130px;flex-shrink:0;font-size:3.5rem}
+.pgrid.list-view .pc-body{flex:1;padding:14px 18px}
+.pgrid.list-view .pc-desc{-webkit-line-clamp:3}
+.pgrid.list-view .btn-add{width:auto;padding:9px 20px}
+/* CART SIDEBAR */
+.cart-overlay{position:fixed;inset:0;background:rgba(26,35,64,.45);z-index:700;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-side{position:fixed;right:-420px;top:0;width:420px;max-width:100vw;height:100vh;background:#fff;z-index:800;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-6px 0 32px rgba(21,101,192,.15)}
+.cart-side.open{right:0}
+.cart-hd{background:var(--grad);padding:18px 22px;display:flex;align-items:center;justify-content:space-between}
+.cart-hd h3{font-family:"Pacifico",cursive;color:#fff;font-size:1.2rem}
+.btn-x{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.btn-x:hover{background:rgba(255,255,255,.35)}
+.cart-body{flex:1;overflow-y:auto;padding:16px}
+.cart-empty{text-align:center;padding:56px 20px;color:var(--tl)}
+.cart-empty i{font-size:3rem;margin-bottom:10px;opacity:.3;display:block}
+.citem{display:flex;gap:11px;padding:11px;border-radius:13px;background:var(--bll);margin-bottom:9px;position:relative}
+.cemo{font-size:2rem;background:var(--pkl);width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:11px;flex-shrink:0;overflow:hidden}
+.cemo img{width:100%;height:100%;object-fit:cover;border-radius:9px}
+.cinfo{flex:1}
+.cname{font-weight:800;font-size:.86rem;color:var(--text);margin-bottom:2px}
+.cprice{color:var(--pk);font-weight:700;font-size:.9rem}
+.cqty{display:flex;align-items:center;gap:7px;margin-top:4px}
+.qbtn{background:#fff;border:none;width:26px;height:26px;border-radius:7px;cursor:pointer;font-weight:900;color:var(--bl);font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.qbtn:hover{background:var(--bl);color:#fff}
+.qval{font-weight:800;font-size:.86rem;min-width:18px;text-align:center}
+.cdel{position:absolute;top:7px;right:7px;background:none;border:none;color:var(--tl);cursor:pointer;font-size:.82rem;transition:color .2s}
+.cdel:hover{color:#e53935}
+.cart-ft{padding:18px 22px;border-top:2px solid var(--bll);background:#fff}
+.crow{display:flex;justify-content:space-between;margin-bottom:5px;font-weight:700;font-size:.88rem}
+.crow.grand{font-family:"Quicksand",sans-serif;font-size:1.25rem;color:var(--pk);margin-top:9px;padding-top:9px;border-top:1px dashed var(--pkl)}
+.btn-clear-cart{width:100%;background:var(--bll);color:var(--bl);border:none;padding:10px;border-radius:11px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:700;font-size:.84rem;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:8px;transition:all .2s}
+.btn-clear-cart:hover{background:var(--blm);color:#fff}
+.btn-co{width:100%;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:14px;border-radius:13px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:800;font-size:.97rem;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 5px 18px rgba(37,211,102,.3);transition:all .2s}
+.btn-co:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(37,211,102,.4)}
+/* QUICK VIEW MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(26,35,64,.6);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.qv-modal{background:#fff;border-radius:22px;width:100%;max-width:680px;position:relative;box-shadow:0 20px 60px rgba(21,101,192,.2);max-height:90vh;overflow-y:auto;display:flex;flex-wrap:wrap}
+.qv-img{width:280px;min-height:300px;background:linear-gradient(135deg,var(--bll),var(--pkl));display:flex;align-items:center;justify-content:center;font-size:7rem;border-radius:22px 0 0 22px;flex-shrink:0;overflow:hidden}
+.qv-img img{width:100%;height:100%;object-fit:cover;border-radius:22px 0 0 22px}
+.qv-body{flex:1;padding:28px;min-width:260px}
+.qv-cat{font-size:.72rem;font-weight:800;color:var(--bl);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.qv-name{font-family:"Pacifico",cursive;font-size:1.5rem;color:var(--text);margin-bottom:8px;line-height:1.3}
+.qv-desc{font-size:.88rem;color:var(--tl);font-weight:600;line-height:1.7;margin-bottom:16px}
+.qv-price{font-family:"Quicksand",sans-serif;font-size:2rem;font-weight:700;color:var(--pk)}
+.qv-qty-btn{background:var(--bll);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;font-weight:900;color:var(--bl);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.qv-qty-btn:hover{background:var(--bl);color:#fff}
+.btn-qv-add{width:100%;background:var(--grad);color:#fff;border:none;padding:14px;border-radius:13px;cursor:pointer;font-family:"Nunito",sans-serif;font-weight:800;font-size:1rem;display:flex;align-items:center;justify-content:center;gap:9px;transition:all .2s;box-shadow:0 5px 18px rgba(233,30,140,.3)}
+.btn-qv-add:hover{transform:translateY(-2px)}
+.qv-close{position:absolute;top:14px;right:14px;background:var(--bll);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:.95rem;color:var(--bl);display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
+.qv-close:hover{background:var(--bl);color:#fff}
+/* SCROLL BUTTONS */
+.scroll-btns{position:fixed;right:24px;bottom:24px;z-index:399;display:flex;flex-direction:column;gap:8px}
+.scroll-btn{background:#fff;border:2px solid var(--bll);color:var(--bl);width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 4px 14px rgba(21,101,192,.14);transition:all .2s}
+.scroll-btn:hover{background:var(--bl);color:#fff;border-color:var(--bl);transform:translateY(-2px)}
+/* FOOTER */
+footer{background:linear-gradient(135deg,#0d2b6b,#1565c0);color:#fff;padding:48px 24px 22px;margin-top:40px}
+.ft-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:34px}
+.ft-brand img{width:72px;height:72px;border-radius:50%;border:3px solid var(--pkm);margin-bottom:10px;object-fit:cover;display:block}
+.ft-brand h3{font-family:"Pacifico",cursive;color:var(--pkm);font-size:1.25rem;margin-bottom:7px}
+.ft-brand p{font-size:.82rem;opacity:.75;line-height:1.7;font-weight:600}
+.socials{display:flex;gap:9px;margin-top:13px}
+.socials a{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.95rem;transition:all .2s}
+.socials a:hover{background:var(--pkm);transform:translateY(-2px)}
+.ft-col h4{font-weight:800;color:var(--pkm);margin-bottom:13px;font-size:.9rem}
+.ft-col ul{list-style:none}
+.ft-col li{margin-bottom:7px}
+.ft-col a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.82rem;font-weight:600;transition:color .2s;display:flex;align-items:center;gap:7px}
+.ft-col a:hover{color:var(--pkm)}
+.ft-contact p{font-size:.82rem;opacity:.72;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.ft-contact i{color:var(--blm)}
+.ft-bottom{max-width:1200px;margin:24px auto 0;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;font-size:.79rem;opacity:.58;flex-wrap:wrap;gap:8px}
+/* TOAST */
+.toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--grad);color:#fff;padding:10px 22px;border-radius:50px;font-weight:700;font-size:.86rem;z-index:2000;opacity:0;transition:all .32s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:900px){.filter-sidebar{display:none}.shop-wrap{padding:16px}}
+@media(max-width:768px){.nav-links{display:none}.cart-side{width:100vw}.qv-modal{flex-direction:column}.qv-img{width:100%;min-height:200px;border-radius:22px 22px 0 0;font-size:5rem}.qv-img img{border-radius:22px 22px 0 0}.pgrid.list-view .pc{flex-direction:column}.pgrid.list-view .pc-img{width:100%;height:180px}.ft-bottom{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+
+<!-- NOTICE BAR -->
+<div class="notice-bar">
+  &#127881; FREE DELIVERY on all packages &nbsp;|&nbsp; &#128230; Island-wide Delivery &nbsp;|&nbsp;
+  <a href="https://wa.me/94766787992" target="_blank">Chat on WhatsApp</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.png" alt="Little Cuddle" onerror="this.style.display='none'">
+    <div class="nav-brand">Little Cuddle <small>Baby &amp; Mother Care</small></div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#packages">Packages</a>
+    <a href="products.html" class="active">&#128717; Shop</a>
+    <a href="https://wa.me/94766787992" target="_blank" class="btn-wa-nav"><i class="fab fa-whatsapp"></i> Order Now</a>
+  </div>
+  <button class="btn-cart" onclick="toggleCart()">
+    <i class="fas fa-shopping-bag"></i> Cart
+    <span class="cart-badge" id="cart-count">0</span>
+  </button>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>&#128717; Our Shop</h1>
+  <p>Premium baby &amp; mother care products for your little one</p>
+  <div class="breadcrumb">
+    <a href="index.html">Home</a><span>&#8250;</span><span>Shop All Products</span>
+  </div>
+</div>
+
+<!-- SHOP -->
+<div class="shop-wrap">
+  <!-- SIDEBAR -->
+  <div class="filter-sidebar">
+    <div class="filter-card">
+      <h3><i class="fas fa-search"></i> Search</h3>
+      <div class="search-box">
+        <input type="text" id="search-inp" placeholder="Search products..." oninput="applyFilters()">
+        <button onclick="applyFilters()"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+    <div class="filter-card">
+      <h3><i class="fas fa-tags"></i> Categories</h3>
+      <div class="cat-filter">
+        <button class="cat-btn active" onclick="setCat('all',this)"><i class="fas fa-border-all"></i> All Products <span class="cat-count" id="cnt-all">0</span></button>
+        <button class="cat-btn" onclick="setCat('newborn',this)"><i class="fas fa-baby"></i> Newborn <span class="cat-count" id="cnt-newborn">0</span></button>
+        <button class="cat-btn" onclick="setCat('clothing',this)"><i class="fas fa-tshirt"></i> Clothing <span class="cat-count" id="cnt-clothing">0</span></button>
+        <button class="cat-btn" onclick="setCat('feeding',this)"><i class="fas fa-baby-carriage"></i> Feeding <span class="cat-count" id="cnt-feeding">0</span></button>
+        <button class="cat-btn" onclick="setCat('bath',this)"><i class="fas fa-pump-soap"></i> Bath &amp; Care <span class="cat-count" id="cnt-bath">0</span></button>
+        <button class="cat-btn" onclick="setCat('mother',this)"><i class="fas fa-heart"></i> Mother Care <span class="cat-count" id="cnt-mother">0</span></button>
+      </div>
+    </div>
+    <div class="filter-card">
+      <h3><i class="fas fa-sort"></i> Sort By</h3>
+      <select class="sort-sel" id="sort-sel" onchange="applyFilters()">
+        <option value="default">Default</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="discount">Biggest Discount</option>
+        <option value="name">Name A-Z</option>
+      </select>
+    </div>
+    <div class="filter-card">
+      <h3><i class="fas fa-rupee-sign"></i> Price Range</h3>
+      <div style="display:flex;gap:8px">
+        <input type="number" id="price-min" placeholder="Min" oninput="applyFilters()" style="flex:1;padding:8px;border:2px solid var(--bll);border-radius:9px;font-family:Nunito,sans-serif;font-size:.82rem;outline:none">
+        <input type="number" id="price-max" placeholder="Max" oninput="applyFilters()" style="flex:1;padding:8px;border:2px solid var(--bll);border-radius:9px;font-family:Nunito,sans-serif;font-size:.82rem;outline:none">
+      </div>
+    </div>
+    <button class="btn-clear-filters" onclick="clearFilters()"><i class="fas fa-times"></i> Clear All Filters</button>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="products-area">
+    <div class="products-toolbar">
+      <div class="toolbar-left">Showing <span id="prod-count">0</span> products</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <select class="sort-sel" id="sort-mob" onchange="document.getElementById('sort-sel').value=this.value;applyFilters()" style="width:auto;padding:7px 11px;font-size:.82rem;display:none">
+          <option value="default">Sort</option>
+          <option value="price-low">Price &#9650;</option>
+          <option value="price-high">Price &#9660;</option>
+          <option value="discount">Discount</option>
+          <option value="name">A-Z</option>
+        </select>
+        <div style="display:flex;gap:4px">
+          <button class="view-btn active" id="grid-btn" onclick="setView('grid')" title="Grid View"><i class="fas fa-th"></i></button>
+          <button class="view-btn" id="list-btn" onclick="setView('list')" title="List View"><i class="fas fa-list"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-brand">
+      <img src="logo.png" alt="Little Cuddle" onerror="this.style.display='none'">
+      <h3>Little Cuddle</h3>
+      <p>Bringing joy, comfort and care to every little one and their mama. Sri Lanka's trusted baby &amp; mother care store.</p>
+      <div class="socials">
+        <a href="https://web.facebook.com/profile.php?id=100032848256093" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://wa.me/94766787992" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html#packages"><i class="fas fa-gift"></i> Hospital Packages</a></li>
+        <li><a href="products.html"><i class="fas fa-shopping-bag"></i> All Products</a></li>
+        <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About Us</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Courier Tracking</h4>
+      <ul>
+        <li><a href="https://www.domex.lk/tracking.php" target="_blank"><i class="fas fa-truck"></i> Domex Courier</a></li>
+      </ul>
+    </div>
+    <div class="ft-col ft-contact">
+      <h4>Contact Us</h4>
+      <p><i class="fab fa-whatsapp"></i> +94 76 678 7992</p>
+      <p><i class="fas fa-map-marker-alt"></i> Sri Lanka</p>
+      <p><i class="fas fa-clock"></i> Open 7 Days a Week</p>
+      <a href="https://wa.me/94766787992?text=Hello%20Little%20Cuddle!" target="_blank"
+        style="display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:9px 17px;border-radius:50px;font-weight:800;font-size:.83rem;text-decoration:none;margin-top:10px">
+        <i class="fab fa-whatsapp"></i> Chat Now
+      </a>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>&copy; 2025 Little Cuddle. All rights reserved.</span>
+    <span>Made with &#128149; for Sri Lankan Mamas</span>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-side" id="cart-side">
+  <div class="cart-hd">
+    <h3>&#128717; Your Cart</h3>
+    <button class="btn-x" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-ft" id="cart-ft" style="display:none">
+    <div class="crow"><span>Subtotal</span><span id="cs">Rs. 0</span></div>
+    <div class="crow"><span>Delivery</span><span style="color:#2e7d32;font-weight:800">FREE &#127881;</span></div>
+    <div class="crow grand"><span>Total</span><span id="ct">Rs. 0</span></div>
+    <button class="btn-clear-cart" onclick="clearCart()"><i class="fas fa-trash-alt"></i> Clear Cart</button>
+    <button class="btn-co" onclick="checkout()"><i class="fab fa-whatsapp" style="font-size:1.15rem"></i> Order via WhatsApp</button>
+  </div>
+</div>
+
+<!-- QUICK VIEW MODAL -->
+<div class="modal-overlay" id="qv-modal">
+  <div class="qv-modal">
+    <button class="qv-close" onclick="closeQV()"><i class="fas fa-times"></i></button>
+    <div class="qv-img" id="qv-img"></div>
+    <div class="qv-body" id="qv-body"></div>
+  </div>
+</div>
+
+<!-- SCROLL BUTTONS -->
+<div class="scroll-btns">
+  <button class="scroll-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Top"><i class="fas fa-chevron-up"></i></button>
+  <button class="scroll-btn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})" title="Bottom"><i class="fas fa-chevron-down"></i></button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var DEFAULTS = [
+  {id:1,  name:"Newborn Gift Set",        cat:"newborn",  desc:"Complete starter set: onesie, hat, mittens and booties.",            price:2800, disc:10, emo:"&#128118;", badge:"NEW",  photo:""},
+  {id:2,  name:"Baby Swaddle Blanket",    cat:"newborn",  desc:"Ultra-soft muslin swaddle blanket, breathable and gentle.",          price:1200, disc:0,  emo:"&#129528;", badge:"",     photo:""},
+  {id:3,  name:"Baby Onesie Set (5pcs)",  cat:"clothing", desc:"5 soft cotton onesies in mixed colours, 0-3 months.",               price:2500, disc:15, emo:"&#128085;", badge:"HOT",  photo:""},
+  {id:4,  name:"Newborn Sleepsuit",       cat:"clothing", desc:"Warm cosy all-in-one sleepsuit for nighttime comfort.",              price:1500, disc:0,  emo:"&#127769;", badge:"",     photo:""},
+  {id:5,  name:"Baby Feeding Bottle Set", cat:"feeding",  desc:"Anti-colic BPA-free feeding bottles, 3 sizes included.",            price:1800, disc:10, emo:"&#127868;", badge:"",     photo:""},
+  {id:6,  name:"Breast Pump (Manual)",    cat:"feeding",  desc:"Ergonomic manual breast pump, soft silicone, easy to clean.",       price:3500, disc:20, emo:"&#129329;", badge:"SALE", photo:""},
+  {id:7,  name:"Baby Bath Kit",           cat:"bath",     desc:"Complete bath set: shampoo, lotion, wash and soft brush.",          price:2200, disc:0,  emo:"&#128705;", badge:"",     photo:""},
+  {id:8,  name:"Baby Skincare Set",       cat:"bath",     desc:"Gentle moisturiser and powder for sensitive baby skin.",            price:1600, disc:5,  emo:"&#129396;", badge:"",     photo:""},
+  {id:9,  name:"Maternity Pillow",        cat:"mother",   desc:"Full-body U-shaped pillow for pregnancy support and comfort.",      price:4500, disc:10, emo:"&#127800;", badge:"NEW",  photo:""},
+  {id:10, name:"Nursing Cover",           cat:"mother",   desc:"Breathable nursing cover for discreet breastfeeding on the go.",    price:1200, disc:0,  emo:"&#128155;", badge:"",     photo:""},
+  {id:11, name:"Diaper Bag Backpack",     cat:"newborn",  desc:"Large capacity waterproof organiser bag with USB charging port.",   price:3800, disc:15, emo:"&#127890;", badge:"HOT",  photo:""},
+  {id:12, name:"Baby Monitor",            cat:"newborn",  desc:"Digital audio baby monitor with long range and clear sound.",       price:5500, disc:0,  emo:"&#128251;", badge:"",     photo:""}
+];
+
+var products = (function(){ try{ var s=localStorage.getItem("lc_products"); return s?JSON.parse(s):DEFAULTS; }catch(e){ return DEFAULTS; }})();
+var cart     = (function(){ try{ var s=localStorage.getItem("lc_cart");     return s?JSON.parse(s):[]; }catch(e){ return []; }})();
+var curCat   = "all";
+var curView  = "grid";
+var qvCurrent = null;
+var qvQty     = 1;
+
+function dp(p){ return p.disc>0 ? Math.round(p.price*(1-p.disc/100)) : p.price; }
+function saveCart(){ try{ localStorage.setItem("lc_cart",JSON.stringify(cart)); }catch(e){} }
+
+// ── COUNTS ─────────────────────────────────────────────────────────
+function updateCounts(){
+  var cats = ["all","newborn","clothing","feeding","bath","mother"];
+  cats.forEach(function(c){
+    var el = document.getElementById("cnt-"+c);
+    if(el) el.textContent = c==="all" ? products.length : products.filter(function(p){return p.cat===c;}).length;
+  });
+}
+
+// ── FILTERS ────────────────────────────────────────────────────────
+function setCat(cat, btn){
+  curCat = cat;
+  document.querySelectorAll(".cat-btn").forEach(function(b){ b.classList.remove("active"); });
+  if(btn) btn.classList.add("active");
+  applyFilters();
+}
+
+function applyFilters(){
+  var search = (document.getElementById("search-inp")||{value:""}).value.toLowerCase().trim();
+  var sort   = (document.getElementById("sort-sel")||{value:"default"}).value;
+  var minP   = parseFloat((document.getElementById("price-min")||{value:""}).value)||0;
+  var maxP   = parseFloat((document.getElementById("price-max")||{value:""}).value)||Infinity;
+
+  var list = products.filter(function(p){
+    var price = dp(p);
+    return (curCat==="all"||p.cat===curCat)
+      && (!search||p.name.toLowerCase().includes(search)||p.desc.toLowerCase().includes(search))
+      && price>=minP && price<=maxP;
+  });
+
+  if(sort==="price-low")  list.sort(function(a,b){ return dp(a)-dp(b); });
+  else if(sort==="price-high") list.sort(function(a,b){ return dp(b)-dp(a); });
+  else if(sort==="discount")   list.sort(function(a,b){ return b.disc-a.disc; });
+  else if(sort==="name")       list.sort(function(a,b){ return a.name.localeCompare(b.name); });
+
+  var el = document.getElementById("prod-count"); if(el) el.textContent = list.length;
+  renderProducts(list);
+}
+
+function clearFilters(){
+  curCat = "all";
+  ["search-inp","price-min","price-max"].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=""; });
+  var so = document.getElementById("sort-sel"); if(so) so.value="default";
+  document.querySelectorAll(".cat-btn").forEach(function(b){ b.classList.remove("active"); });
+  var ab = document.querySelector(".cat-btn"); if(ab) ab.classList.add("active");
+  applyFilters();
+}
+
+function setView(v){
+  curView = v;
+  var g = document.getElementById("pgrid"); if(g) g.classList.toggle("list-view", v==="list");
+  var gb=document.getElementById("grid-btn"), lb=document.getElementById("list-btn");
+  if(gb) gb.classList.toggle("active", v==="grid");
+  if(lb) lb.classList.toggle("active", v==="list");
+}
+
+// ── RENDER PRODUCTS ─────────────────────────────────────────────────
+function renderProducts(list){
+  var g = document.getElementById("pgrid"); if(!g) return;
+  if(!list.length){
+    g.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--tl)"><i class="fas fa-search" style="font-size:3rem;opacity:.3;display:block;margin-bottom:14px"></i><h3 style="font-weight:800;margin-bottom:6px">No products found</h3><p style="font-size:.88rem;font-weight:600">Try adjusting your filters.</p></div>';
+    return;
+  }
+  var html = "";
+  list.forEach(function(p){
+    var price = dp(p);
+    var badges = "";
+    if(p.badge==="NEW")  badges += '<span class="badge badge-new">NEW</span>';
+    else if(p.badge==="HOT")  badges += '<span class="badge badge-hot">&#128293; HOT</span>';
+    else if(p.badge==="SALE") badges += '<span class="badge badge-sale">SALE</span>';
+    if(p.disc>0) badges += '<span class="badge badge-disc">-'+p.disc+'%</span>';
+    var imgHtml = p.photo ? '<img src="'+p.photo+'" alt="'+p.name+'">' : '<span style="font-size:5rem">'+p.emo+'</span>';
+    var dHtml   = p.disc>0 ? '<span class="pc-orig">Rs. '+p.price.toLocaleString()+'</span><span class="pc-disc">-'+p.disc+'%</span>' : "";
+    html += '<div class="pc">'
+      +'<div class="pc-badge">'+badges+'</div>'
+      +'<div class="pc-img" onclick="openQV('+p.id+')">'+imgHtml
+        +'<div class="pc-overlay"><button class="btn-quick" onclick="event.stopPropagation();openQV('+p.id+')"><i class="fas fa-eye"></i> Quick View</button></div>'
+      +'</div>'
+      +'<div class="pc-body">'
+      +'<div class="pc-cat">'+p.cat+'</div>'
+      +'<div class="pc-name">'+p.name+'</div>'
+      +'<div class="pc-desc">'+p.desc+'</div>'
+      +'<div class="pc-pricing"><span class="pc-price">Rs. '+price.toLocaleString()+'</span>'+dHtml+'</div>'
+      +'<button class="btn-add" id="ba-'+p.id+'" onclick="event.stopPropagation();addToCart('+p.id+',1)"><i class="fas fa-cart-plus"></i> Add to Cart</button>'
+      +'</div></div>';
+  });
+  g.innerHTML = html;
+}
+
+// ── QUICK VIEW ──────────────────────────────────────────────────────
+function openQV(id){
+  var p = null; for(var i=0;i<products.length;i++){ if(products[i].id===id){p=products[i];break;} }
+  if(!p) return;
+  qvCurrent = p; qvQty = 1;
+  var price = dp(p);
+  var imgHtml = p.photo ? '<img src="'+p.photo+'" alt="'+p.name+'">' : p.emo;
+  document.getElementById("qv-img").innerHTML = imgHtml;
+  var dHtml = p.disc>0
+    ? '<span style="font-size:.88rem;color:var(--tl);text-decoration:line-through;font-weight:600">Rs. '+p.price.toLocaleString()+'</span>'
+      +'<span style="background:var(--pkl);color:var(--pk);padding:3px 9px;border-radius:50px;font-weight:800;font-size:.74rem">Save '+p.disc+'%</span>'
+    : "";
+  document.getElementById("qv-body").innerHTML =
+    '<div class="qv-cat">'+p.cat+'</div>'
+    +'<div class="qv-name">'+p.name+'</div>'
+    +'<div class="qv-desc">'+p.desc+'</div>'
+    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap">'
+      +'<span class="qv-price">Rs. '+price.toLocaleString()+'</span>'+dHtml
+    +'</div>'
+    +'<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">'
+      +'<span style="font-weight:700;font-size:.86rem">Quantity:</span>'
+      +'<div style="display:flex;align-items:center;gap:8px;background:var(--bll);border-radius:50px;padding:4px 8px">'
+        +'<button class="qv-qty-btn" onclick="changeQVQty(-1)">-</button>'
+        +'<span id="qv-qty" style="font-weight:800;font-size:.95rem;min-width:24px;text-align:center">1</span>'
+        +'<button class="qv-qty-btn" onclick="changeQVQty(1)">+</button>'
+      +'</div>'
+    +'</div>'
+    +'<button class="btn-qv-add" id="qv-add-btn" onclick="addToCart('+p.id+',qvQty);closeQV()">'
+      +'<i class="fas fa-cart-plus"></i> Add to Cart &mdash; Rs. '+price.toLocaleString()
+    +'</button>';
+  document.getElementById("qv-modal").classList.add("open");
+}
+
+function changeQVQty(d){
+  qvQty = Math.max(1, qvQty+d);
+  var el = document.getElementById("qv-qty"); if(el) el.textContent = qvQty;
+}
+function closeQV(){ document.getElementById("qv-modal").classList.remove("open"); qvCurrent=null; qvQty=1; }
+
+// ── CART ────────────────────────────────────────────────────────────
+function addToCart(id, qty){
+  qty = qty||1;
+  var p = null; for(var i=0;i<products.length;i++){ if(products[i].id===id){p=products[i];break;} }
+  if(!p) return;
+  var price = dp(p);
+  var ex = null; for(var i=0;i<cart.length;i++){ if(cart[i].id===id){ex=cart[i];break;} }
+  if(ex) ex.qty += qty;
+  else cart.push({id:id, name:p.name, price:price, emo:p.emo, photo:p.photo||"", qty:qty});
+  saveCart(); renderCart(); updBadge();
+  showToast(p.name+" added to cart!");
+  var btn = document.getElementById("ba-"+id);
+  if(btn){
+    btn.classList.add("added"); btn.innerHTML='<i class="fas fa-check"></i> Added!';
+    setTimeout(function(){ btn.classList.remove("added"); btn.innerHTML='<i class="fas fa-cart-plus"></i> Add to Cart'; },1500);
+  }
+}
+
+function remFromCart(id){ cart=cart.filter(function(x){return x.id!==id;}); saveCart(); renderCart(); updBadge(); }
+
+function changeQty(id,d){
+  for(var i=0;i<cart.length;i++){
+    if(cart[i].id===id){ cart[i].qty+=d; if(cart[i].qty<=0){remFromCart(id);return;} break; }
+  }
+  saveCart(); renderCart(); updBadge();
+}
+
+function clearCart(){
+  if(!cart.length) return;
+  if(confirm("Remove all items from cart?")){ cart=[]; saveCart(); renderCart(); updBadge(); showToast("Cart cleared!"); }
+}
+
+function renderCart(){
+  var el=document.getElementById("cart-body"), ft=document.getElementById("cart-ft");
+  if(!cart.length){
+    el.innerHTML='<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p style="font-weight:700;margin-top:9px">Cart is empty</p><p style="font-size:.8rem;margin-top:3px">Browse and add items!</p></div>';
+    ft.style.display="none"; return;
+  }
+  var html="", total=0;
+  cart.forEach(function(it){
+    total += it.price*it.qty;
+    var thumb = it.photo ? '<img src="'+it.photo+'" alt="">' : it.emo;
+    html += '<div class="citem">'
+      +'<div class="cemo">'+thumb+'</div>'
+      +'<div class="cinfo"><div class="cname">'+it.name+'</div>'
+        +'<div class="cprice">Rs. '+(it.price*it.qty).toLocaleString()+'</div>'
+        +'<div class="cqty">'
+          +'<button class="qbtn" onclick="changeQty('+it.id+',-1)">-</button>'
+          +'<span class="qval">'+it.qty+'</span>'
+          +'<button class="qbtn" onclick="changeQty('+it.id+',1)">+</button>'
+        +'</div></div>'
+      +'<button class="cdel" onclick="remFromCart('+it.id+')"><i class="fas fa-trash"></i></button>'
+      +'</div>';
+  });
+  el.innerHTML = html;
+  document.getElementById("cs").textContent = "Rs. "+total.toLocaleString();
+  document.getElementById("ct").textContent = "Rs. "+total.toLocaleString();
+  ft.style.display = "block";
+}
+
+function updBadge(){ var n=0; cart.forEach(function(i){n+=i.qty;}); document.getElementById("cart-count").textContent=n; }
+function toggleCart(){ document.getElementById("cart-side").classList.toggle("open"); document.getElementById("cart-overlay").classList.toggle("open"); }
+
+function checkout(){
+  if(!cart.length){ showToast("Cart is empty!"); return; }
+  var total=0, msg="Hello Little Cuddle!\n\nOrder Request:\n\n";
+  cart.forEach(function(i){ total+=i.price*i.qty; msg+="- "+i.name+" x"+i.qty+" = Rs. "+(i.price*i.qty).toLocaleString()+"\n"; });
+  msg+="\nTotal: Rs. "+total.toLocaleString()+"\n\nPlease confirm. Thank you!";
+  window.open("https://wa.me/94766787992?text="+encodeURIComponent(msg),"_blank");
+}
+
+// ── TOAST ────────────────────────────────────────────────────────────
+function showToast(msg){ var t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(function(){t.classList.remove("show");},2600); }
+
+// ── INIT (safe — runs after DOM ready) ───────────────────────────────
+window.addEventListener("load", function(){
+  // Read URL params for category
+  var params = new URLSearchParams(window.location.search);
+  var cat = params.get("cat");
+  if(cat){
+    curCat = cat;
+    document.querySelectorAll(".cat-btn").forEach(function(b){ b.classList.remove("active"); });
+    var btn = document.querySelector(".cat-btn[onclick*=\"'"+cat+"'\"]");
+    if(btn) btn.classList.add("active");
+  }
+  updateCounts();
+  applyFilters();
+  renderCart();
+  updBadge();
+
+  // Event listeners AFTER DOM loaded — safe, no null errors
+  document.getElementById("qv-modal").addEventListener("click", function(e){ if(e.target===this) closeQV(); });
+  document.addEventListener("keydown", function(e){
+    if(e.key==="Escape"){
+      closeQV();
+      document.getElementById("cart-side").classList.remove("open");
+      document.getElementById("cart-overlay").classList.remove("open");
+    }
+  });
+  // Show mobile sort on small screens
+  if(window.innerWidth<=900) document.getElementById("sort-mob").style.display="block";
+});
+</script>
+</body>
+</html>
