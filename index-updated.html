@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Little Cuddle – Baby & Mother Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --pink: #f48fb1;
+  --pink-light: #fce4ec;
+  --pink-dark: #e91e8c;
+  --blue: #81d4fa;
+  --blue-light: #e1f5fe;
+  --blue-mid: #90caf9;
+  --lavender: #d1c4e9;
+  --mint: #b2dfdb;
+  --cream: #fff8f0;
+  --white: #ffffff;
+  --text: #4a3040;
+  --text-light: #9e7e8e;
+  --shadow: 0 8px 32px rgba(244,143,177,0.18);
+  --shadow-blue: 0 8px 32px rgba(129,212,250,0.25);
+  --radius: 20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--pink-light)}
+::-webkit-scrollbar-thumb{background:var(--pink);border-radius:10px}
+
+/* ─── LOADER ─── */
+#loader{position:fixed;inset:0;background:linear-gradient(135deg,var(--pink-light),var(--blue-light));display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s}
+#loader img{width:120px;animation:float 2s ease-in-out infinite}
+#loader p{margin-top:16px;font-family:'Pacifico',cursive;color:var(--pink-dark);font-size:1.3rem}
+.loader-dots span{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--pink-dark);margin:0 3px;animation:bounce 1.2s infinite}
+.loader-dots span:nth-child(2){animation-delay:.2s}
+.loader-dots span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-12px)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:2px solid var(--pink-light);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 20px rgba(244,143,177,.15)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--pink)}
+.nav-brand{font-family:'Pacifico',cursive;color:var(--pink-dark);font-size:1.3rem;line-height:1}
+.nav-brand small{display:block;font-family:'Nunito',sans-serif;font-size:.6rem;color:var(--text-light);font-weight:600;letter-spacing:1px}
+.nav-links{display:flex;align-items:center;gap:8px}
+.nav-links a{text-decoration:none;color:var(--text);font-weight:700;font-size:.85rem;padding:6px 14px;border-radius:50px;transition:all .2s}
+.nav-links a:hover{background:var(--pink-light);color:var(--pink-dark)}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.btn-cart{background:linear-gradient(135deg,var(--pink),#f06292);color:#fff;border:none;padding:9px 18px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.85rem;display:flex;align-items:center;gap:6px;box-shadow:0 4px 15px rgba(244,143,177,.4);transition:all .2s}
+.btn-cart:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(244,143,177,.5)}
+.cart-badge{background:#fff;color:var(--pink-dark);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;background:linear-gradient(160deg,var(--pink-light) 0%,var(--blue-light) 50%,var(--lavender) 100%);display:flex;align-items:center;padding:100px 24px 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(244,143,177,.25),transparent 70%);border-radius:50%;animation:pulsate 4s ease-in-out infinite}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(129,212,250,.2),transparent 70%);border-radius:50%;animation:pulsate 5s ease-in-out infinite reverse}
+@keyframes pulsate{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.hero-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;position:relative;z-index:1}
+.hero-text{flex:1;min-width:280px}
+.hero-tag{display:inline-block;background:var(--pink);color:#fff;padding:6px 16px;border-radius:50px;font-size:.8rem;font-weight:800;letter-spacing:1px;margin-bottom:16px;animation:fadeInUp .8s ease both}
+.hero-title{font-family:'Pacifico',cursive;font-size:clamp(2.2rem,5vw,3.8rem);color:var(--text);line-height:1.2;margin-bottom:16px;animation:fadeInUp .8s .1s ease both}
+.hero-title span{color:var(--pink-dark)}
+.hero-subtitle{font-size:1.05rem;color:var(--text-light);font-weight:600;line-height:1.7;margin-bottom:32px;animation:fadeInUp .8s .2s ease both}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeInUp .8s .3s ease both}
+.btn-primary{background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;border:none;padding:14px 28px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;box-shadow:0 6px 20px rgba(233,30,140,.35);transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(233,30,140,.45)}
+.btn-secondary{background:rgba(255,255,255,.8);color:var(--pink-dark);border:2px solid var(--pink);padding:12px 26px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-secondary:hover{background:var(--pink);color:#fff;transform:translateY(-3px)}
+.hero-img{flex:1;min-width:280px;max-width:420px;display:flex;align-items:center;justify-content:center;animation:float 3s ease-in-out infinite}
+.hero-img img{width:300px;height:300px;border-radius:50%;object-fit:cover;border:6px solid #fff;box-shadow:0 20px 60px rgba(244,143,177,.35)}
+.hero-features{display:flex;gap:20px;flex-wrap:wrap;margin-top:32px;animation:fadeInUp .8s .4s ease both}
+.hero-feat{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.7);padding:8px 16px;border-radius:50px;font-size:.82rem;font-weight:700;color:var(--text)}
+.hero-feat i{color:var(--pink-dark)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─── FLOATING SHAPES ─── */
+.shape{position:absolute;border-radius:50%;opacity:.12;pointer-events:none}
+.shape1{width:80px;height:80px;background:var(--pink-dark);top:15%;right:20%;animation:float 6s ease-in-out infinite}
+.shape2{width:50px;height:50px;background:var(--blue);top:40%;right:8%;animation:float 5s ease-in-out infinite reverse}
+.shape3{width:60px;height:60px;background:var(--lavender);bottom:20%;right:25%;animation:float 7s ease-in-out infinite}
+
+/* ─── SECTION TITLES ─── */
+.section{padding:70px 24px;max-width:1300px;margin:0 auto}
+.section-title{text-align:center;margin-bottom:48px}
+.section-title h2{font-family:'Pacifico',cursive;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--text);margin-bottom:8px}
+.section-title h2 span{color:var(--pink-dark)}
+.section-title p{color:var(--text-light);font-size:1rem;font-weight:600}
+.title-divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0}
+.title-divider span{width:40px;height:3px;background:linear-gradient(to right,var(--pink),var(--blue));border-radius:2px}
+.title-divider i{color:var(--pink)}
+
+/* ─── CATEGORIES ─── */
+.categories{background:linear-gradient(135deg,var(--pink-light),var(--blue-light));padding:50px 24px}
+.cat-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px}
+.cat-card{background:#fff;border-radius:var(--radius);padding:24px 16px;text-align:center;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(244,143,177,.12)}
+.cat-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.cat-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.8rem}
+.cat-card:nth-child(1) .cat-icon{background:var(--pink-light)}
+.cat-card:nth-child(2) .cat-icon{background:var(--blue-light)}
+.cat-card:nth-child(3) .cat-icon{background:#f3e5f5}
+.cat-card:nth-child(4) .cat-icon{background:#e8f5e9}
+.cat-card:nth-child(5) .cat-icon{background:#fff9c4}
+.cat-card:nth-child(6) .cat-icon{background:#fce4ec}
+.cat-name{font-weight:800;font-size:.9rem;color:var(--text)}
+
+/* ─── PRODUCTS ─── */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px;justify-content:center}
+.filter-btn{background:#fff;border:2px solid var(--pink-light);color:var(--text-light);padding:8px 20px;border-radius:50px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:700;font-size:.85rem;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{background:var(--pink);border-color:var(--pink);color:#fff}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
+.product-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 20px rgba(244,143,177,.1);transition:all .3s;position:relative}
+.product-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.product-badge{position:absolute;top:12px;left:12px;background:var(--pink-dark);color:#fff;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:50px;z-index:2}
+.product-badge.blue{background:var(--blue-mid)}
+.product-badge.green{background:#66bb6a}
+.product-img{width:100%;height:200px;object-fit:cover;background:linear-gradient(135deg,var(--pink-light),var(--blue-light));display:flex;align-items:center;justify-content:center;font-size:5rem;cursor:pointer;transition:transform .3s}
+.product-card:hover .product-img{transform:scale(1.03)}
+.product-body{padding:16px}
+.product-category{font-size:.72rem;font-weight:700;color:var(--pink-dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.product-name{font-weight:800;font-size:1rem;color:var(--text);margin-bottom:6px;line-height:1.3}
+.product-desc{font-size:.82rem;color:var(--text-light);font-weight:600;margin-bottom:12px;line-height:1.5}
+.product-pricing{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.product-price{font-family:'Quicksand',sans-serif;font-size:1.2rem;font-weight:700;color:var(--pink-dark)}
+.product-original{font-size:.9rem;color:var(--text-light);text-decoration:line-through;font-weight:600}
+.product-discount{background:var(--pink-light);color:var(--pink-dark);font-size:.72rem;font-weight:800;padding:2px 8px;border-radius:50px}
+.btn-add{width:100%;background:linear-gradient(135deg,var(--pink),#f06292);color:#fff;border:none;padding:10px;border-radius:12px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.9rem;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-add:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(244,143,177,.4)}
+.btn-add.added{background:linear-gradient(135deg,#66bb6a,#43a047)}
+
+/* ─── CART SIDEBAR ─── */
+.cart-overlay{position:fixed;inset:0;background:rgba(74,48,64,.5);z-index:700;opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-sidebar{position:fixed;right:-420px;top:0;width:420px;max-width:100vw;height:100vh;background:#fff;z-index:800;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-8px 0 40px rgba(244,143,177,.2)}
+.cart-sidebar.open{right:0}
+.cart-header{background:linear-gradient(135deg,var(--pink-light),var(--blue-light));padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--pink-light)}
+.cart-header h3{font-family:'Pacifico',cursive;color:var(--pink-dark);font-size:1.3rem}
+.btn-close{background:none;border:none;font-size:1.4rem;color:var(--text-light);cursor:pointer;padding:4px;border-radius:8px;transition:all .2s}
+.btn-close:hover{background:var(--pink-light);color:var(--pink-dark)}
+.cart-items{flex:1;overflow-y:auto;padding:16px}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--text-light)}
+.cart-empty i{font-size:3rem;margin-bottom:12px;opacity:.5}
+.cart-item{display:flex;gap:12px;padding:12px;border-radius:14px;background:var(--cream);margin-bottom:10px;position:relative}
+.cart-item-emoji{font-size:2.5rem;background:var(--pink-light);width:60px;height:60px;display:flex;align-items:center;justify-content:center;border-radius:12px;flex-shrink:0}
+.cart-item-info{flex:1}
+.cart-item-name{font-weight:800;font-size:.9rem;color:var(--text);margin-bottom:2px}
+.cart-item-price{color:var(--pink-dark);font-weight:700;font-size:.95rem}
+.cart-qty{display:flex;align-items:center;gap:8px;margin-top:6px}
+.qty-btn{background:var(--pink-light);border:none;width:26px;height:26px;border-radius:8px;cursor:pointer;font-weight:900;color:var(--pink-dark);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.qty-btn:hover{background:var(--pink);color:#fff}
+.qty-val{font-weight:800;font-size:.9rem;min-width:20px;text-align:center}
+.cart-item-del{position:absolute;top:8px;right:8px;background:none;border:none;color:var(--text-light);cursor:pointer;font-size:.9rem;transition:color .2s}
+.cart-item-del:hover{color:#e53935}
+.cart-footer{padding:20px 24px;border-top:2px solid var(--pink-light);background:#fff}
+.cart-total-row{display:flex;justify-content:space-between;margin-bottom:6px;font-weight:700}
+.cart-total-row.grand{font-family:'Quicksand',sans-serif;font-size:1.3rem;color:var(--pink-dark);margin-top:10px;padding-top:10px;border-top:1px dashed var(--pink-light)}
+.btn-checkout{width:100%;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:16px;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 6px 20px rgba(37,211,102,.3);transition:all .2s}
+.btn-checkout:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(37,211,102,.4)}
+
+/* ─── NEWBORN PACKAGES ─── */
+.packages{background:linear-gradient(160deg,var(--blue-light),var(--pink-light),var(--lavender));padding:70px 24px}
+.packages-inner{max-width:1200px;margin:0 auto}
+.package-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-top:40px}
+.package-card{background:#fff;border-radius:24px;padding:32px 28px;text-align:center;position:relative;overflow:hidden;box-shadow:0 8px 30px rgba(244,143,177,.15);transition:all .3s}
+.package-card::before{content:'';position:absolute;top:-60px;right:-60px;width:160px;height:160px;border-radius:50%;opacity:.08}
+.package-card:nth-child(1)::before{background:var(--pink-dark)}
+.package-card:nth-child(2)::before{background:var(--blue);width:200px;height:200px}
+.package-card:nth-child(3)::before{background:var(--lavender)}
+.package-card:hover{transform:translateY(-10px);box-shadow:0 20px 50px rgba(244,143,177,.25)}
+.package-card.featured{border:3px solid var(--pink);transform:scale(1.04)}
+.package-top{font-size:.8rem;font-weight:800;color:var(--pink-dark);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.package-icon{font-size:3.5rem;margin-bottom:12px}
+.package-name{font-family:'Pacifico',cursive;font-size:1.5rem;color:var(--text);margin-bottom:6px}
+.package-price{font-family:'Quicksand',sans-serif;font-size:2rem;font-weight:700;color:var(--pink-dark);margin-bottom:16px}
+.package-price small{font-size:1rem;color:var(--text-light)}
+.package-items{list-style:none;margin-bottom:24px;text-align:left}
+.package-items li{padding:7px 0;font-size:.88rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:10px;border-bottom:1px dashed var(--pink-light)}
+.package-items li i{color:var(--pink-dark);font-size:.8rem}
+.btn-package{width:100%;background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;border:none;padding:14px;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;transition:all .2s}
+.btn-package:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(233,30,140,.35)}
+
+/* ─── VIDEO SECTION ─── */
+.videos{padding:70px 24px;background:var(--cream)}
+.video-grid{max-width:1200px;margin:30px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.video-card{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#fff}
+.video-card iframe{width:100%;height:220px;border:none;display:block}
+.video-info{padding:16px}
+.video-info h4{font-weight:800;color:var(--text);margin-bottom:4px;font-size:.95rem}
+.video-info p{font-size:.82rem;color:var(--text-light);font-weight:600}
+
+/* ─── WHY US ─── */
+.why-us{background:linear-gradient(135deg,var(--pink-light),var(--blue-light));padding:70px 24px}
+.why-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.why-card{background:#fff;border-radius:var(--radius);padding:28px 20px;text-align:center;box-shadow:0 4px 16px rgba(244,143,177,.1);transition:all .3s}
+.why-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.why-icon{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.8rem}
+.why-card:nth-child(1) .why-icon{background:var(--pink-light)}
+.why-card:nth-child(2) .why-icon{background:var(--blue-light)}
+.why-card:nth-child(3) .why-icon{background:#f3e5f5}
+.why-card:nth-child(4) .why-icon{background:#e8f5e9}
+.why-card h4{font-weight:800;margin-bottom:6px;color:var(--text)}
+.why-card p{font-size:.85rem;color:var(--text-light);font-weight:600;line-height:1.6}
+
+/* ─── WHATSAPP FLOAT ─── */
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:400;background:#25D366;color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;text-decoration:none;box-shadow:0 6px 20px rgba(37,211,102,.5);transition:all .3s;animation:waPulse 2s infinite}
+.wa-float:hover{transform:scale(1.12);box-shadow:0 10px 30px rgba(37,211,102,.6)}
+@keyframes waPulse{0%,100%{box-shadow:0 6px 20px rgba(37,211,102,.5)}50%{box-shadow:0 6px 30px rgba(37,211,102,.8),0 0 0 10px rgba(37,211,102,.1)}}
+
+/* ─── FOOTER ─── */
+footer{background:linear-gradient(135deg,#3a2040,#4a3050);color:#fff;padding:50px 24px 24px}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px}
+.footer-brand img{width:80px;height:80px;border-radius:50%;border:3px solid var(--pink);margin-bottom:12px}
+.footer-brand h3{font-family:'Pacifico',cursive;color:var(--pink);font-size:1.4rem;margin-bottom:8px}
+.footer-brand p{font-size:.85rem;opacity:.75;line-height:1.7;font-weight:600}
+.social-links{display:flex;gap:10px;margin-top:16px}
+.social-links a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:1rem;transition:all .2s}
+.social-links a:hover{background:var(--pink);transform:translateY(-3px)}
+.footer-col h4{font-weight:800;color:var(--pink);margin-bottom:16px;font-size:1rem;letter-spacing:.5px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:8px}
+.footer-col a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.88rem;font-weight:600;transition:color .2s}
+.footer-col a:hover{color:var(--pink)}
+.footer-contact p{font-size:.88rem;opacity:.75;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.footer-contact i{color:var(--pink)}
+.footer-bottom{max-width:1200px;margin:30px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:gap;font-size:.82rem;opacity:.6;gap:12px;flex-wrap:wrap}
+
+/* ─── MODALS ─── */
+.modal-overlay{position:fixed;inset:0;background:rgba(74,48,64,.6);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:24px;padding:36px;width:100%;max-width:480px;position:relative;box-shadow:0 20px 60px rgba(244,143,177,.3);max-height:90vh;overflow-y:auto}
+.modal h3{font-family:'Pacifico',cursive;color:var(--pink-dark);font-size:1.5rem;margin-bottom:20px;text-align:center}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-weight:700;font-size:.88rem;color:var(--text);margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:11px 14px;border:2px solid var(--pink-light);border-radius:12px;font-family:'Nunito',sans-serif;font-size:.9rem;color:var(--text);transition:border-color .2s;background:#fff}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{outline:none;border-color:var(--pink)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn-modal{width:100%;background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;border:none;padding:14px;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;margin-top:6px;transition:all .2s}
+.btn-modal:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(233,30,140,.35)}
+.btn-modal.danger{background:linear-gradient(135deg,#e53935,#ef5350)}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--pink-light);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;color:var(--pink-dark);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{background:var(--pink);color:#fff}
+.alert{padding:12px 16px;border-radius:12px;font-weight:700;font-size:.9rem;margin-bottom:16px;display:none}
+.alert.success{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.alert.error{background:#fce4ec;color:#c62828;border:1px solid #ef9a9a}
+
+
+
+/* ─── NOTICE BANNER ─── */
+.notice-bar{background:linear-gradient(135deg,var(--pink-dark),#f06292);color:#fff;text-align:center;padding:8px 24px;font-size:.83rem;font-weight:700;letter-spacing:.5px}
+.notice-bar a{color:#fff;font-weight:800}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:#333;color:#fff;padding:12px 24px;border-radius:50px;font-weight:700;font-size:.9rem;z-index:2000;opacity:0;transition:all .35s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hero-inner{flex-direction:column;text-align:center}
+  .hero-img{order:-1}
+  .hero-img img{width:200px;height:200px}
+  .hero-btns{justify-content:center}
+  .hero-features{justify-content:center}
+  .cart-sidebar{width:100vw}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <img src="https://i.imgur.com/placeholder.png" id="loader-logo" alt="">
+  <p>Little Cuddle</p>
+  <div class="loader-dots" style="margin-top:12px"><span></span><span></span><span></span></div>
+</div>
+
+<!-- NOTICE BAR -->
+<div class="notice-bar">
+  🎁 FREE DELIVERY on orders over Rs. 5000 | 📦 COD Available | 
+  <a href="https://wa.me/94766787992" target="_blank">Chat with us on WhatsApp</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img id="nav-logo-img" src="" alt="Little Cuddle">
+    <div class="nav-brand">Little Cuddle <small>Baby & Mother Care</small></div>
+  </a>
+  <div class="nav-links">
+    <a href="#products">Products</a>
+    <a href="#packages">Packages</a>
+    <a href="#videos">Videos</a>
+    <a href="#about">About</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-cart" onclick="toggleCart()">
+      <i class="fas fa-shopping-bag"></i>
+      Cart <span class="cart-badge" id="cart-count">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="shape shape1"></div>
+  <div class="shape shape2"></div>
+  <div class="shape shape3"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-tag">✨ Sri Lanka's Trusted Baby Store</span>
+      <h1 class="hero-title">Cuddle Your Little <span>Bundle of Joy</span> 🍼</h1>
+      <p class="hero-subtitle">Premium baby & mother care products delivered to your doorstep. From newborn essentials to complete care packages — we have everything your little one needs.</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-primary"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+        <a href="#packages" class="btn-secondary"><i class="fas fa-gift"></i> View Packages</a>
+      </div>
+      <div class="hero-features">
+        <div class="hero-feat"><i class="fas fa-truck"></i> Fast Delivery</div>
+        <div class="hero-feat"><i class="fas fa-shield-alt"></i> Safe & Certified</div>
+        <div class="hero-feat"><i class="fas fa-heart"></i> Mom Approved</div>
+        <div class="hero-feat"><i class="fas fa-phone"></i> 24/7 Support</div>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img id="hero-logo-img" src="" alt="Little Cuddle">
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<div class="categories">
+  <div class="cat-grid" style="text-align:center">
+    <div style="grid-column:1/-1;margin-bottom:10px">
+      <h2 style="font-family:'Pacifico',cursive;color:var(--text);font-size:1.8rem">Shop by <span style="color:var(--pink-dark)">Category</span></h2>
+    </div>
+    <div class="cat-card" onclick="filterProducts('newborn')">
+      <div class="cat-icon">👶</div>
+      <div class="cat-name">Newborn</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('clothing')">
+      <div class="cat-icon">👚</div>
+      <div class="cat-name">Clothing</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('feeding')">
+      <div class="cat-icon">🍼</div>
+      <div class="cat-name">Feeding</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('bath')">
+      <div class="cat-icon">🛁</div>
+      <div class="cat-name">Bath & Care</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('mother')">
+      <div class="cat-icon">👩</div>
+      <div class="cat-name">Mother Care</div>
+    </div>
+    <div class="cat-card" onclick="filterProducts('all')">
+      <div class="cat-icon">🛍️</div>
+      <div class="cat-name">All Items</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <div class="section-title">
+    <h2>Our <span>Products</span></h2>
+    <div class="title-divider"><span></span><i class="fas fa-baby"></i><span></span></div>
+    <p>Carefully selected products for your precious little one</p>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProducts('all',this)">All</button>
+    <button class="filter-btn" onclick="filterProducts('newborn',this)">Newborn</button>
+    <button class="filter-btn" onclick="filterProducts('clothing',this)">Clothing</button>
+    <button class="filter-btn" onclick="filterProducts('feeding',this)">Feeding</button>
+    <button class="filter-btn" onclick="filterProducts('bath',this)">Bath & Care</button>
+    <button class="filter-btn" onclick="filterProducts('mother',this)">Mother Care</button>
+  </div>
+  <div class="product-grid" id="product-grid"></div>
+</section>
+
+<!-- PACKAGES -->
+<div class="packages" id="packages">
+  <div class="packages-inner">
+    <div class="section-title">
+      <h2>Newborn <span>Care Packages</span> 🎁</h2>
+      <div class="title-divider"><span></span><i class="fas fa-gift"></i><span></span></div>
+      <p>Complete bundles for your new arrival — everything in one box!</p>
+    </div>
+    <div class="package-grid">
+      <div class="package-card">
+        <div class="package-top">⭐ Starter</div>
+        <div class="package-icon">🌸</div>
+        <div class="package-name">Baby Starter</div>
+        <div class="package-price">Rs. 3,500 <small>/ pack</small></div>
+        <ul class="package-items">
+          <li><i class="fas fa-check-circle"></i> 2 Newborn Onesies</li>
+          <li><i class="fas fa-check-circle"></i> Baby Hat & Mittens</li>
+          <li><i class="fas fa-check-circle"></i> Baby Wash & Lotion</li>
+          <li><i class="fas fa-check-circle"></i> Soft Muslin Cloth x2</li>
+          <li><i class="fas fa-check-circle"></i> Gift Wrapped Box</li>
+        </ul>
+        <button class="btn-package" onclick="orderPackage('Baby Starter Pack','Rs. 3,500')">
+          <i class="fab fa-whatsapp"></i> Order via WhatsApp
+        </button>
+      </div>
+      <div class="package-card featured">
+        <div class="package-top">🏆 Most Popular</div>
+        <div class="package-icon">👑</div>
+        <div class="package-name">Royal Bundle</div>
+        <div class="package-price">Rs. 7,500 <small>/ pack</small></div>
+        <ul class="package-items">
+          <li><i class="fas fa-check-circle"></i> 4 Newborn Outfits</li>
+          <li><i class="fas fa-check-circle"></i> Baby Bath Kit (5 items)</li>
+          <li><i class="fas fa-check-circle"></i> Feeding Bottle Set</li>
+          <li><i class="fas fa-check-circle"></i> Muslin Swaddle x3</li>
+          <li><i class="fas fa-check-circle"></i> Baby Monitor</li>
+          <li><i class="fas fa-check-circle"></i> Diaper Bag</li>
+          <li><i class="fas fa-check-circle"></i> Luxury Gift Box</li>
+        </ul>
+        <button class="btn-package" onclick="orderPackage('Royal Bundle','Rs. 7,500')">
+          <i class="fab fa-whatsapp"></i> Order via WhatsApp
+        </button>
+      </div>
+      <div class="package-card">
+        <div class="package-top">💎 Premium</div>
+        <div class="package-icon">🦋</div>
+        <div class="package-name">Mama & Baby</div>
+        <div class="package-price">Rs. 12,000 <small>/ pack</small></div>
+        <ul class="package-items">
+          <li><i class="fas fa-check-circle"></i> Full Newborn Kit</li>
+          <li><i class="fas fa-check-circle"></i> Maternity Pillow</li>
+          <li><i class="fas fa-check-circle"></i> Nursing Cover</li>
+          <li><i class="fas fa-check-circle"></i> Mom Care Essentials</li>
+          <li><i class="fas fa-check-circle"></i> Baby Sleeping Bag</li>
+          <li><i class="fas fa-check-circle"></i> Postpartum Recovery Kit</li>
+          <li><i class="fas fa-check-circle"></i> Premium Gift Hamper</li>
+        </ul>
+        <button class="btn-package" onclick="orderPackage('Mama & Baby Premium Pack','Rs. 12,000')">
+          <i class="fab fa-whatsapp"></i> Order via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEOS -->
+<section class="videos" id="videos">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-title">
+      <h2>Baby Care <span>Tips & Guides</span> 🎬</h2>
+      <div class="title-divider"><span></span><i class="fas fa-play-circle"></i><span></span></div>
+      <p>Watch helpful videos for new parents and mothers</p>
+    </div>
+    <div class="video-grid">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/Md6UaSaVkMI" title="Newborn Baby Care Tips" allowfullscreen loading="lazy"></iframe>
+        <div class="video-info"><h4>Newborn Baby Care Basics</h4><p>Essential tips for first-time parents on caring for your newborn</p></div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/1oUPt3VfB34" title="Breastfeeding Tips" allowfullscreen loading="lazy"></iframe>
+        <div class="video-info"><h4>Breastfeeding Guide for New Moms</h4><p>Everything you need to know about breastfeeding your baby</p></div>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/8oMRtgWhfAM" title="Baby Bath Guide" allowfullscreen loading="lazy"></iframe>
+        <div class="video-info"><h4>How to Bathe a Newborn Safely</h4><p>Step-by-step guide to bathing your newborn baby</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<div class="why-us" id="about">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-title">
+      <h2>Why Choose <span>Little Cuddle?</span></h2>
+      <div class="title-divider"><span></span><i class="fas fa-heart"></i><span></span></div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🛡️</div>
+        <h4>100% Safe Products</h4>
+        <p>All products are tested and certified safe for newborns and mothers</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🚚</div>
+        <h4>Island-wide Delivery</h4>
+        <p>We deliver to all areas in Sri Lanka, fast and securely packaged</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💰</div>
+        <h4>Best Prices</h4>
+        <p>Affordable prices without compromising on quality for your family</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💬</div>
+        <h4>24/7 Support</h4>
+        <p>Always available on WhatsApp to answer your questions and orders</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img id="footer-logo-img" src="" alt="Little Cuddle">
+      <h3>Little Cuddle</h3>
+      <p>Bringing joy, comfort, and care to every little one and their mama. Sri Lanka's most trusted baby & mother care store.</p>
+      <div class="social-links">
+        <a href="https://web.facebook.com/profile.php?id=100032848256093" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://wa.me/94766787992" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:littlecuddle@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#products">All Products</a></li>
+        <li><a href="#packages">Baby Packages</a></li>
+        <li><a href="#videos">Care Tips Videos</a></li>
+        <li><a href="#about">About Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="#" onclick="filterProducts('newborn')">Newborn Essentials</a></li>
+        <li><a href="#" onclick="filterProducts('clothing')">Baby Clothing</a></li>
+        <li><a href="#" onclick="filterProducts('feeding')">Feeding & Nursing</a></li>
+        <li><a href="#" onclick="filterProducts('bath')">Bath & Skin Care</a></li>
+        <li><a href="#" onclick="filterProducts('mother')">Mother Care</a></li>
+      </ul>
+    </div>
+    <div class="footer-col footer-contact">
+      <h4>Contact Us</h4>
+      <p><i class="fab fa-whatsapp"></i> +94 76 678 7992</p>
+      <p><i class="fas fa-map-marker-alt"></i> Sri Lanka</p>
+      <p><i class="fas fa-clock"></i> Open 7 Days a Week</p>
+      <a href="https://wa.me/94766787992?text=Hello%20Little%20Cuddle!%20I%20need%20help." target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:10px 18px;border-radius:50px;font-weight:800;font-size:.85rem;text-decoration:none;margin-top:10px">
+        <i class="fab fa-whatsapp"></i> Chat Now
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Little Cuddle. All rights reserved.</span>
+    <span>Made with 💕 for Sri Lankan Mamas</span>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a class="wa-float" href="https://wa.me/94766787992?text=Hello%20Little%20Cuddle!%20I'd%20like%20to%20order." target="_blank" title="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h3>🛍️ Your Cart</h3>
+    <button class="btn-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-total-row"><span>Subtotal</span><span id="cart-subtotal">Rs. 0</span></div>
+    <div class="cart-total-row"><span>Delivery</span><span style="color:#66bb6a">FREE</span></div>
+    <div class="cart-total-row grand"><span>Total</span><span id="cart-total">Rs. 0</span></div>
+    <button class="btn-checkout" onclick="checkout()">
+      <i class="fab fa-whatsapp" style="font-size:1.3rem"></i>
+      Order via WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-overlay" id="product-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('product-modal')"><i class="fas fa-times"></i></button>
+    <div id="product-modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ─────────────────────────────────────────────────────────
+const LOGO_URL = '/mnt/user-data/uploads/618502847_1581045493000377_1623071738877251233_n.jpg';
+
+const DEFAULT_PRODUCTS = [
+  {id:1,name:"Newborn Gift Set",category:"newborn",desc:"Complete starter set: onesie, hat, mittens & booties for your little one.",price:2800,discount:10,emoji:"👶",badge:"NEW"},
+  {id:2,name:"Baby Swaddle Blanket",category:"newborn",desc:"Ultra-soft muslin swaddle blanket, breathable and gentle on baby skin.",price:1200,discount:0,emoji:"🧸",badge:""},
+  {id:3,name:"Baby Onesie Set (5pcs)",category:"clothing",desc:"Pack of 5 soft cotton onesies in mixed colours, 0–3 months.",price:2500,discount:15,emoji:"👚",badge:"HOT"},
+  {id:4,name:"Newborn Sleepsuit",category:"clothing",desc:"Warm, cosy all-in-one sleepsuit perfect for nighttime comfort.",price:1500,discount:0,emoji:"🌙",badge:""},
+  {id:5,name:"Baby Feeding Bottle Set",category:"feeding",desc:"Anti-colic feeding bottles, BPA-free, 3 sizes included.",price:1800,discount:10,emoji:"🍼",badge:""},
+  {id:6,name:"Breast Pump (Manual)",category:"feeding",desc:"Ergonomic manual breast pump, soft silicone, easy to clean.",price:3500,discount:20,emoji:"🤱",badge:"SALE"},
+  {id:7,name:"Baby Bath Kit",category:"bath",desc:"Complete bath set: baby shampoo, lotion, wash, and soft brush.",price:2200,discount:0,emoji:"🛁",badge:""},
+  {id:8,name:"Baby Skincare Set",category:"bath",desc:"Gentle, dermatologist-tested moisturiser and powder for sensitive skin.",price:1600,discount:5,emoji:"🧴",badge:""},
+  {id:9,name:"Maternity Pillow",category:"mother",desc:"Full-body U-shaped pillow for pregnancy support and comfort.",price:4500,discount:10,emoji:"🌸",badge:"NEW"},
+  {id:10,name:"Nursing Cover",category:"mother",desc:"Breathable, stylish nursing cover for discreet breastfeeding on the go.",price:1200,discount:0,emoji:"🤍",badge:""},
+  {id:11,name:"Diaper Bag Backpack",category:"newborn",desc:"Large capacity, waterproof organiser bag with USB port and many pockets.",price:3800,discount:15,emoji:"🎒",badge:"HOT"},
+  {id:12,name:"Baby Monitor",category:"newborn",desc:"Digital audio baby monitor with long range and clear sound quality.",price:5500,discount:0,emoji:"📻",badge:""},
+];
+
+// ─── STATE ─────────────────────────────────────────────────────────
+let products = JSON.parse(localStorage.getItem('lc_products')) || DEFAULT_PRODUCTS;
+let cart = JSON.parse(localStorage.getItem('lc_cart')) || [];
+let currentFilter = 'all';
+
+function saveProducts() { localStorage.setItem('lc_products', JSON.stringify(products)); }
+function saveCart()     { localStorage.setItem('lc_cart', JSON.stringify(cart)); }
+
+// ─── LOGO SETUP ────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  const logoB64 = getLogoBase64();
+  if(logoB64) {
+    document.getElementById('nav-logo-img').src = logoB64;
+    document.getElementById('hero-logo-img').src = logoB64;
+    document.getElementById('footer-logo-img').src = logoB64;
+    document.getElementById('loader').querySelector('img').src = logoB64;
+  } else {
+    // Fallback: use emoji placeholder
+    ['nav-logo-img','hero-logo-img','footer-logo-img'].forEach(id=>{
+      document.getElementById(id).style.display='none';
+    });
+  }
+  setTimeout(()=>{
+    const l = document.getElementById('loader');
+    l.style.opacity='0';
+    setTimeout(()=>l.style.display='none',500);
+  },1500);
+  renderProducts();
+  renderCart();
+  updateCartBadge();
+});
+
+function getLogoBase64() {
+  // Try to read the uploaded logo file using fetch
+  return null; // Will be replaced by file reading
+}
+
+// Read logo from uploaded file
+fetch(LOGO_URL).then(r=>r.blob()).then(blob=>{
+  const reader = new FileReader();
+  reader.onload = e=>{
+    const src = e.target.result;
+    ['nav-logo-img','hero-logo-img','footer-logo-img'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el){el.src=src;el.style.display='';}
+    });
+    const li = document.getElementById('loader').querySelector('img');
+    if(li) li.src=src;
+  };
+  reader.readAsDataURL(blob);
+}).catch(()=>{
+  // Use CSS placeholder
+  ['nav-logo-img','hero-logo-img','footer-logo-img'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><circle cx="60" cy="60" r="60" fill="%23fce4ec"/><text y="75" x="60" text-anchor="middle" font-size="60">👶</text></svg>';
+  });
+});
+
+// ─── PRODUCTS ──────────────────────────────────────────────────────
+function renderProducts(filter) {
+  filter = filter || currentFilter;
+  const grid = document.getElementById('product-grid');
+  const list = filter === 'all' ? products : products.filter(p=>p.category===filter);
+  if(!list.length){grid.innerHTML='<p style="text-align:center;color:var(--text-light);grid-column:1/-1;padding:40px">No products found in this category.</p>';return;}
+  grid.innerHTML = list.map(p=>{
+    const discPrice = p.discount > 0 ? Math.round(p.price * (1 - p.discount/100)) : p.price;
+    const badgeHTML = p.badge ? `<span class="product-badge${p.badge==='NEW'?' blue':p.badge==='HOT'?'':' green'}">${p.badge}</span>` : '';
+    return `
+    <div class="product-card" data-id="${p.id}">
+      ${badgeHTML}
+      <div class="product-img" onclick="showProductDetail(${p.id})" style="cursor:pointer;font-size:5rem;display:flex;align-items:center;justify-content:center;height:180px;background:linear-gradient(135deg,var(--pink-light),var(--blue-light))">${p.emoji}</div>
+      <div class="product-body">
+        <div class="product-category">${p.category}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-pricing">
+          <span class="product-price">Rs. ${discPrice.toLocaleString()}</span>
+          ${p.discount>0?`<span class="product-original">Rs. ${p.price.toLocaleString()}</span><span class="product-discount">-${p.discount}%</span>`:''}
+        </div>
+        <button class="btn-add" id="btn-${p.id}" onclick="addToCart(${p.id})">
+          <i class="fas fa-cart-plus"></i> Add to Cart
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterProducts(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderProducts(cat);
+  if(cat!=='all') document.getElementById('products').scrollIntoView({behavior:'smooth'});
+}
+
+function showProductDetail(id) {
+  const p = products.find(x=>x.id===id);
+  if(!p) return;
+  const discPrice = p.discount>0 ? Math.round(p.price*(1-p.discount/100)) : p.price;
+  document.getElementById('product-modal-body').innerHTML = `
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-size:6rem;margin-bottom:12px">${p.emoji}</div>
+      <h3 style="font-family:'Pacifico',cursive;color:var(--pink-dark);font-size:1.5rem;margin-bottom:4px">${p.name}</h3>
+      <span style="background:var(--pink-light);color:var(--pink-dark);padding:4px 12px;border-radius:50px;font-size:.8rem;font-weight:700">${p.category}</span>
+    </div>
+    <p style="color:var(--text-light);font-weight:600;margin-bottom:16px;line-height:1.7">${p.desc}</p>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+      <span style="font-family:'Quicksand',sans-serif;font-size:1.8rem;font-weight:700;color:var(--pink-dark)">Rs. ${discPrice.toLocaleString()}</span>
+      ${p.discount>0?`<span style="font-size:1rem;color:var(--text-light);text-decoration:line-through">Rs. ${p.price.toLocaleString()}</span><span style="background:var(--pink-light);color:var(--pink-dark);padding:4px 10px;border-radius:50px;font-weight:800;font-size:.8rem">SAVE ${p.discount}%</span>`:''}
+    </div>
+    <button class="btn-modal" onclick="addToCart(${p.id});closeModal('product-modal')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+  `;
+  openModal('product-modal');
+}
+
+// ─── CART ──────────────────────────────────────────────────────────
+function addToCart(id) {
+  const p = products.find(x=>x.id===id);
+  if(!p) return;
+  const existing = cart.find(x=>x.id===id);
+  if(existing) existing.qty++;
+  else cart.push({id,name:p.name,price:p.discount>0?Math.round(p.price*(1-p.discount/100)):p.price,emoji:p.emoji,qty:1});
+  saveCart();
+  renderCart();
+  updateCartBadge();
+  showToast(`${p.emoji} ${p.name} added to cart!`);
+  const btn = document.getElementById(`btn-${id}`);
+  if(btn){btn.classList.add('added');btn.innerHTML='<i class="fas fa-check"></i> Added!';setTimeout(()=>{btn.classList.remove('added');btn.innerHTML='<i class="fas fa-cart-plus"></i> Add to Cart';},1500);}
+}
+
+function removeFromCart(id) { cart = cart.filter(x=>x.id!==id); saveCart(); renderCart(); updateCartBadge(); }
+function changeQty(id,d) {
+  const item = cart.find(x=>x.id===id);
+  if(!item) return;
+  item.qty += d;
+  if(item.qty<=0) removeFromCart(id);
+  else { saveCart(); renderCart(); updateCartBadge(); }
+}
+
+function renderCart() {
+  const el = document.getElementById('cart-items');
+  const footer = document.getElementById('cart-footer');
+  if(!cart.length){
+    el.innerHTML=`<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p style="font-weight:700;margin-top:10px">Your cart is empty</p><p style="font-size:.85rem;margin-top:4px">Add some items to get started!</p></div>`;
+    footer.style.display='none';return;
+  }
+  el.innerHTML = cart.map(item=>`
+    <div class="cart-item">
+      <div class="cart-item-emoji">${item.emoji}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">Rs. ${(item.price*item.qty).toLocaleString()}</div>
+        <div class="cart-qty">
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+          <span class="qty-val">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+        </div>
+      </div>
+      <button class="cart-item-del" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button>
+    </div>`).join('');
+  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  document.getElementById('cart-subtotal').textContent = `Rs. ${total.toLocaleString()}`;
+  document.getElementById('cart-total').textContent = `Rs. ${total.toLocaleString()}`;
+  footer.style.display='block';
+}
+
+function updateCartBadge() {
+  const count = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cart-count').textContent = count;
+}
+
+function toggleCart() {
+  document.getElementById('cart-sidebar').classList.toggle('open');
+  document.getElementById('cart-overlay').classList.toggle('open');
+}
+
+function checkout() {
+  if(!cart.length){showToast('Cart is empty!');return;}
+  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  let msg = `Hello Little Cuddle! 🍼\n\nI'd like to place an order:\n\n`;
+  cart.forEach(i=>{msg+=`• ${i.emoji} ${i.name} x${i.qty} = Rs. ${(i.price*i.qty).toLocaleString()}\n`;});
+  msg += `\n💰 Total: Rs. ${total.toLocaleString()}\n\nPlease confirm my order. Thank you! 😊`;
+  window.open(`https://wa.me/94766787992?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function orderPackage(name, price) {
+  const msg = `Hello Little Cuddle! 🎁\n\nI'd like to order the *${name}* – ${price}.\n\nPlease confirm availability and delivery details. Thank you!`;
+  window.open(`https://wa.me/94766787992?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+
+
+// ─── TOAST ─────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ─── NAV SCROLL ─────────────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  const nav=document.querySelector('nav');
+  if(window.scrollY>60) nav.style.boxShadow='0 4px 30px rgba(244,143,177,.25)';
+  else nav.style.boxShadow='0 2px 20px rgba(244,143,177,.15)';
+});
+</script>
+</body>
+</html>
