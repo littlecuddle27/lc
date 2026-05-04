@@ -8,11 +8,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{
-  --pk:#e91e8c;--pkl:#fce4ec;--pkm:#f48fb1;
-  --bl:#1565c0;--bll:#e3f2fd;--blm:#90caf9;
+  --pk:#e91e8c; --pkl:#fce4ec; --pkm:#f48fb1;
+  --bl:#1565c0; --bll:#e3f2fd; --blm:#90caf9;
   --grad:linear-gradient(135deg,#1565c0,#e91e8c);
-  --cream:#f5f8ff;--text:#1a2340;--tl:#6677aa;
-  --shadow:0 4px 24px rgba(21,101,192,.12);--radius:16px;
+  --cream:#f5f8ff; --text:#1a2340; --tl:#6677aa;
+  --shadow:0 4px 24px rgba(21,101,192,.12); --radius:16px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -20,126 +20,106 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bll)}::-webkit-scrollbar-thumb{background:var(--pkm);border-radius:6px}
 .track-bar{background:var(--grad);color:#fff;padding:7px 20px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:.8rem;font-weight:700}
 .track-bar a{color:#fff;text-decoration:none;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:50px;transition:all .2s;display:inline-flex;align-items:center;gap:5px;font-size:.78rem;white-space:nowrap}
-.track-bar a:hover{background:rgba(255,255,255,.35)}
-.track-form{display:flex;gap:6px;align-items:center}
+.track-bar a:hover{background:rgba(255,255,255,.35)}.track-form{display:flex;gap:6px;align-items:center}
 .track-form input{padding:5px 12px;border-radius:50px;border:none;font-family:"Nunito",sans-serif;font-size:.78rem;font-weight:700;color:var(--text);outline:none;width:170px}
 .track-form button{background:rgba(255,255,255,.25);color:#fff;border:none;padding:5px 14px;border-radius:50px;cursor:pointer;font-weight:800;font-size:.77rem}
-.track-form button:hover{background:rgba(255,255,255,.4)}
-.notice-bar{background:linear-gradient(135deg,var(--pk),#f06292);color:#fff;text-align:center;padding:7px 20px;font-size:.82rem;font-weight:700}
-.notice-bar a{color:#fff;font-weight:900;text-decoration:underline}
-nav{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:2px solid var(--bll);padding:10px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 18px rgba(21,101,192,.1)}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--pkm)}
-.nav-brand{font-family:"Pacifico",cursive;color:var(--pk);font-size:1.18rem;line-height:1.1}
-.nav-brand small{display:block;font-family:"Nunito",sans-serif;font-size:.58rem;color:var(--tl);font-weight:700;letter-spacing:1px;text-transform:uppercase}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-links a{text-decoration:none;color:var(--text);font-weight:700;font-size:.85rem;padding:7px 13px;border-radius:50px}
-.nav-links a:hover,.nav-links a.active{background:var(--bll);color:var(--bl)}
-.btn-cart{background:var(--grad);color:#fff;border:none;padding:9px 18px;border-radius:50px;cursor:pointer;font-weight:800;font-size:.85rem;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(233,30,140,.3)}
-.btn-cart:hover{transform:translateY(-2px)}
-.cart-badge{background:#fff;color:var(--pk);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900}
-.page-header{background:var(--grad);color:#fff;padding:36px 28px;text-align:center}
-.page-header h1{font-family:"Pacifico",cursive;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:6px}
-.page-header p{font-size:.92rem;opacity:.88;font-weight:600}
-.breadcrumb{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;font-size:.8rem;opacity:.8;font-weight:600}
-.breadcrumb a{color:#fff;text-decoration:none}
-.shop-wrap{max-width:1400px;margin:0 auto;padding:28px 20px;display:flex;gap:24px;align-items:flex-start}
-.filter-sidebar{width:240px;flex-shrink:0;position:sticky;top:80px}
-.filter-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+.track-form button:hover{background:rgba(255,255,255,.4)}.notice-bar{background:linear-gradient(135deg,var(--pk),#f06292);color:#fff;text-align:center;padding:7px 20px;font-size:.82rem;font-weight:700}
+.notice-bar a{color:#fff;font-weight:900;text-decoration:underline}nav{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:2px solid var(--bll);padding:10px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 18px rgba(21,101,192,.1)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}.nav-logo img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--pkm)}
+.nav-brand{font-family:"Pacifico",cursive;color:var(--pk);font-size:1.18rem;line-height:1.1}.nav-brand small{display:block;font-family:"Nunito",sans-serif;font-size:.58rem;color:var(--tl);font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:4px}.nav-links a{text-decoration:none;color:var(--text);font-weight:700;font-size:.85rem;padding:7px 13px;border-radius:50px}
+.nav-links a:hover,.nav-links a.active{background:var(--bll);color:var(--bl)}.btn-cart{background:var(--grad);color:#fff;border:none;padding:9px 18px;border-radius:50px;cursor:pointer;font-weight:800;font-size:.85rem;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(233,30,140,.3)}
+.btn-cart:hover{transform:translateY(-2px)}.cart-badge{background:#fff;color:var(--pk);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900}
+.page-header{background:var(--grad);color:#fff;padding:36px 28px;text-align:center}.page-header h1{font-family:"Pacifico",cursive;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:6px}
+.page-header p{font-size:.92rem;opacity:.88;font-weight:600}.breadcrumb{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;font-size:.8rem;opacity:.8;font-weight:600}
+.breadcrumb a{color:#fff;text-decoration:none}.shop-wrap{max-width:1400px;margin:0 auto;padding:28px 20px;display:flex;gap:24px;align-items:flex-start}
+.filter-sidebar{width:240px;flex-shrink:0;position:sticky;top:80px}.filter-card{background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
 .filter-card h3{font-weight:800;color:var(--text);font-size:.92rem;margin-bottom:14px;display:flex;align-items:center;gap:7px}
-.search-box{display:flex;gap:6px}
-.search-box input{flex:1;padding:9px 12px;border:2px solid var(--bll);border-radius:10px;font-size:.85rem;outline:none}
+.search-box{display:flex;gap:6px}.search-box input{flex:1;padding:9px 12px;border:2px solid var(--bll);border-radius:10px;font-size:.85rem;outline:none}
 .search-box button{background:var(--grad);color:#fff;border:none;width:38px;border-radius:10px;cursor:pointer}
-.cat-filter{display:flex;flex-direction:column;gap:4px}
-.cat-btn{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:10px;cursor:pointer;font-weight:700;font-size:.85rem;color:var(--tl);background:transparent;width:100%;text-align:left}
-.cat-btn:hover{background:var(--bll);color:var(--bl)}
-.cat-btn.active{background:var(--bll);color:var(--bl);font-weight:800}
+.cat-filter{display:flex;flex-direction:column;gap:4px}.cat-btn{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:10px;cursor:pointer;font-weight:700;font-size:.85rem;color:var(--tl);background:transparent;width:100%;text-align:left}
+.cat-btn:hover{background:var(--bll);color:var(--bl)}.cat-btn.active{background:var(--bll);color:var(--bl);font-weight:800}
 .cat-btn .cat-count{margin-left:auto;background:var(--bll);color:var(--bl);font-size:.7rem;font-weight:800;padding:1px 7px;border-radius:50px}
-.price-filter .price-range{display:flex;gap:8px;margin-bottom:8px}
-.price-filter input{flex:1;padding:7px 9px;border:2px solid var(--bll);border-radius:9px;outline:none}
-.sort-sel{width:100%;padding:9px 12px;border:2px solid var(--bll);border-radius:10px;background:#fff;cursor:pointer}
-.btn-clear{width:100%;background:var(--pkl);color:var(--pk);border:none;padding:9px;border-radius:10px;font-weight:700;cursor:pointer;margin-top:8px}
-.products-area{flex:1}
-.products-toolbar{display:flex;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.price-filter .price-range{display:flex;gap:8px;margin-bottom:8px}.price-filter input{flex:1;padding:7px 9px;border:2px solid var(--bll);border-radius:9px;outline:none}
+.sort-sel{width:100%;padding:9px 12px;border:2px solid var(--bll);border-radius:10px;background:#fff;cursor:pointer}.btn-clear{width:100%;background:var(--pkl);color:var(--pk);border:none;padding:9px;border-radius:10px;font-weight:700;cursor:pointer;margin-top:8px}
+.products-area{flex:1}.products-toolbar{display:flex;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;align-items:center}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
-.pgrid.list-view{grid-template-columns:1fr}
 .pc{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 16px rgba(21,101,192,.08);transition:all .3s;position:relative;cursor:pointer}
-.pc:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-.pc-badge{position:absolute;top:10px;left:10px;z-index:2;display:flex;flex-direction:column;gap:4px}
-.badge{font-size:.65rem;font-weight:800;padding:3px 9px;border-radius:50px}
-.badge-new{background:var(--bl);color:#fff}
-.badge-hot{background:#ff6f00;color:#fff}
-.badge-sale{background:var(--pk);color:#fff}
-.badge-disc{background:#2e7d32;color:#fff}
-.pc-wishlist{position:absolute;top:10px;right:10px;z-index:2;background:#fff;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--tl);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.pc:hover{transform:translateY(-6px);box-shadow:var(--shadow)}.pc-badge{position:absolute;top:10px;left:10px;z-index:2;display:flex;flex-direction:column;gap:4px}
+.badge{font-size:.65rem;font-weight:800;padding:3px 9px;border-radius:50px}.badge-new{background:var(--bl);color:#fff}.badge-hot{background:#ff6f00;color:#fff}
+.badge-sale{background:var(--pk);color:#fff}.badge-disc{background:#2e7d32;color:#fff}.pc-wishlist{position:absolute;top:10px;right:10px;z-index:2;background:#fff;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--tl);box-shadow:0 2px 8px rgba(0,0,0,.12)}
 .pc-img{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,var(--bll),var(--pkl));overflow:hidden;position:relative}
-.pc-img img{width:100%;height:100%;object-fit:cover}
-.pc-overlay{position:absolute;inset:0;background:rgba(21,101,192,.08);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
-.pc:hover .pc-overlay{opacity:1}
-.btn-quick{background:#fff;color:var(--bl);border:none;padding:9px 18px;border-radius:50px;font-weight:800;font-size:.82rem;display:flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.15)}
-.btn-quick:hover{background:var(--bl);color:#fff}
-.pc-body{padding:14px}
-.pc-cat{font-size:.68rem;font-weight:800;color:var(--bl);text-transform:uppercase;margin-bottom:3px}
-.pc-name{font-weight:800;font-size:.95rem;margin-bottom:4px}
-.pc-desc{font-size:.79rem;color:var(--tl);margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.pc-pricing{display:flex;align-items:center;gap:7px;margin-bottom:10px}
-.pc-price{font-family:"Quicksand",sans-serif;font-size:1.15rem;font-weight:700;color:var(--pk)}
-.pc-orig{font-size:.82rem;color:var(--tl);text-decoration:line-through}
-.pc-disc{background:var(--pkl);color:var(--pk);font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:50px}
+.pc-img img{width:100%;height:100%;object-fit:cover}.pc-overlay{position:absolute;inset:0;background:rgba(21,101,192,.08);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s}
+.pc:hover .pc-overlay{opacity:1}.pc-body{padding:14px}.pc-cat{font-size:.68rem;font-weight:800;color:var(--bl);text-transform:uppercase;margin-bottom:3px}
+.pc-name{font-weight:800;font-size:.95rem;margin-bottom:4px}.pc-desc{font-size:.79rem;color:var(--tl);margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-pricing{display:flex;align-items:center;gap:7px;margin-bottom:10px}.pc-price{font-family:"Quicksand",sans-serif;font-size:1.15rem;font-weight:700;color:var(--pk)}
+.pc-orig{font-size:.82rem;color:var(--tl);text-decoration:line-through}.pc-disc{background:var(--pkl);color:var(--pk);font-size:.68rem;font-weight:800;padding:2px 7px;border-radius:50px}
 .btn-add{width:100%;background:var(--grad);color:#fff;border:none;padding:10px;border-radius:11px;font-weight:800;font-size:.86rem;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer}
 .btn-add:hover{opacity:.9;transform:translateY(-1px)}
+/* Oval Quick View button - blue to pink gradient */
+.btn-quick{background:linear-gradient(135deg, #1565c0, #e91e8c);color:#fff;border:none;padding:8px 20px;border-radius:60px;font-weight:800;font-size:.8rem;display:inline-flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 2px 8px rgba(21,101,192,.2);transition:all .2s}
+.btn-quick:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(233,30,140,.3)}
+/* Remove view toggle buttons - we hide them */
+.view-toggle{display:none}
 .cart-overlay{position:fixed;inset:0;background:rgba(26,35,64,.45);z-index:700;opacity:0;pointer-events:none;transition:opacity .3s}
-.cart-overlay.open{opacity:1;pointer-events:all}
-.cart-side{position:fixed;right:-420px;top:0;width:420px;max-width:100vw;height:100vh;background:#fff;z-index:800;transition:right .35s;display:flex;flex-direction:column;box-shadow:-6px 0 32px rgba(21,101,192,.15)}
-.cart-side.open{right:0}
-.cart-hd{background:var(--grad);padding:18px 22px;display:flex;justify-content:space-between;color:#fff}
-.cart-hd h3{font-family:"Pacifico",cursive}
-.btn-x{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer}
-.cart-body{flex:1;overflow-y:auto;padding:16px}
-.cart-empty{text-align:center;padding:56px 20px;color:var(--tl)}
-.citem{display:flex;gap:12px;padding:12px;border-radius:14px;background:var(--cream);margin-bottom:9px;position:relative}
+.cart-overlay.open{opacity:1;pointer-events:all}.cart-side{position:fixed;right:-420px;top:0;width:420px;max-width:100vw;height:100vh;background:#fff;z-index:800;transition:right .35s;display:flex;flex-direction:column;box-shadow:-6px 0 32px rgba(21,101,192,.15)}
+.cart-side.open{right:0}.cart-hd{background:var(--grad);padding:18px 22px;display:flex;justify-content:space-between;color:#fff}.cart-hd h3{font-family:"Pacifico",cursive}
+.btn-x{background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer}.cart-body{flex:1;overflow-y:auto;padding:16px}
+.cart-empty{text-align:center;padding:56px 20px;color:var(--tl)}.citem{display:flex;gap:12px;padding:12px;border-radius:14px;background:var(--cream);margin-bottom:9px;position:relative}
 .cemo{font-size:2rem;background:var(--pkl);width:54px;height:54px;display:flex;align-items:center;justify-content:center;border-radius:11px}
-.cinfo{flex:1}
-.cname{font-weight:800;font-size:.86rem}
-.cprice{color:var(--pk);font-weight:700;font-size:.9rem}
-.cqty{display:flex;align-items:center;gap:8px;margin-top:5px}
-.qbtn{background:var(--bll);border:none;width:26px;height:26px;border-radius:7px;cursor:pointer;font-weight:900;color:var(--bl)}
-.qbtn:hover{background:var(--bl);color:#fff}
-.qval{font-weight:800;font-size:.86rem;min-width:18px;text-align:center}
-.cdel{position:absolute;top:7px;right:7px;background:none;border:none;color:var(--tl);cursor:pointer}
-.cdel:hover{color:#e53935}
-.cart-ft{padding:18px 22px;border-top:2px solid var(--bll);background:#fff}
-.crow{display:flex;justify-content:space-between;margin-bottom:5px;font-weight:700}
-.crow.grand{font-size:1.25rem;color:var(--pk);margin-top:9px;padding-top:9px;border-top:1px dashed var(--pkl)}
+.cinfo{flex:1}.cname{font-weight:800;font-size:.86rem}.cprice{color:var(--pk);font-weight:700;font-size:.9rem}
+.cqty{display:flex;align-items:center;gap:8px;margin-top:5px}.qbtn{background:var(--bll);border:none;width:26px;height:26px;border-radius:7px;cursor:pointer;font-weight:900;color:var(--bl)}
+.qbtn:hover{background:var(--bl);color:#fff}.qval{font-weight:800;font-size:.86rem;min-width:18px;text-align:center}.cdel{position:absolute;top:7px;right:7px;background:none;border:none;color:var(--tl);cursor:pointer}
+.cdel:hover{color:#e53935}.cart-ft{padding:18px 22px;border-top:2px solid var(--bll);background:#fff}.crow{display:flex;justify-content:space-between;margin-bottom:5px;font-weight:700}
+.crow.grand{font-size:1.25rem;color:var(--pk);margin-top:9px;padding-top:9px;border-top:1px dashed var(--pkl)}.delivery-note{font-size:.7rem;color:var(--tl);text-align:center;margin-top:8px;font-weight:600}
 .btn-co{width:100%;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:14px;border-radius:13px;font-weight:800;font-size:.97rem;margin-top:11px;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer}
-.btn-co:hover{transform:translateY(-2px)}
-.wa{position:fixed;bottom:24px;right:24px;z-index:400;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.55rem;text-decoration:none;box-shadow:0 6px 20px rgba(37,211,102,.5)}
-.page-footer{background:linear-gradient(135deg,#0d2b6b,#1565c0);color:#fff;padding:28px;text-align:center;margin-top:40px}
-.toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--grad);color:#fff;padding:10px 22px;border-radius:50px;font-weight:700;z-index:2000;opacity:0;transition:all .32s;white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.admin-edit-btn, .admin-del-btn{position:absolute;bottom:10px;right:10px;background:#fff;border:none;border-radius:30px;width:30px;height:30px;font-size:.8rem;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.1);z-index:5;display:flex;align-items:center;justify-content:center;transition:0.2s}
-.admin-edit-btn{right:50px;background:var(--bl);color:#fff}
-.admin-del-btn{background:#e53935;color:#fff}
-.add-product-btn{background:var(--pk);color:#fff;border:none;padding:8px 20px;border-radius:40px;font-weight:800;margin-right:15px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-co:hover{transform:translateY(-2px)}.page-footer{background:linear-gradient(135deg,#0d2b6b,#1565c0);color:#fff;padding:28px;text-align:center;margin-top:40px}.toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--grad);color:#fff;padding:10px 22px;border-radius:50px;font-weight:700;z-index:2000;opacity:0;transition:all .32s;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.admin-edit-btn,.admin-del-btn{position:absolute;bottom:10px;right:10px;background:#fff;border:none;border-radius:30px;width:30px;height:30px;font-size:.8rem;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.1);z-index:5;display:none;align-items:center;justify-content:center;transition:0.2s}
+.admin-edit-btn{right:50px;background:var(--bl);color:#fff}.admin-del-btn{background:#e53935;color:#fff}.add-product-btn{background:var(--pk);color:#fff;border:none;padding:8px 20px;border-radius:40px;font-weight:800;margin-right:15px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .admin-mode-badge{position:fixed;top:80px;right:20px;background:var(--pk);color:#fff;padding:6px 12px;border-radius:40px;font-weight:800;font-size:.7rem;z-index:400;box-shadow:0 2px 8px rgba(0,0,0,.2);display:none}
 .admin-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:1200;display:none;align-items:center;justify-content:center;padding:20px}
 .admin-modal-content{background:#fff;border-radius:28px;max-width:650px;width:100%;max-height:90vh;overflow-y:auto;padding:28px;position:relative}
-.modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--tl)}
-.modal-close:hover{color:var(--pk)}
-.admin-form-group{margin-bottom:16px}
-.admin-form-group label{display:block;font-weight:800;font-size:.8rem;margin-bottom:5px;color:var(--text)}
-.admin-form-group input, .admin-form-group select, .admin-form-group textarea{width:100%;padding:10px 12px;border:2px solid var(--bll);border-radius:14px;font-family:"Nunito",sans-serif;font-size:.85rem;outline:none}
-.admin-form-group input:focus, .admin-form-group select:focus, .admin-form-group textarea:focus{border-color:var(--pkm)}
-.image-preview{width:100%;max-height:140px;object-fit:contain;margin-top:8px;border-radius:12px;background:#f0f2f5;padding:8px}
-.admin-buttons{display:flex;gap:12px;justify-content:flex-end;margin-top:20px}
-.admin-buttons button{padding:10px 24px;border-radius:40px;font-weight:800;cursor:pointer;border:none}
-.btn-save{background:var(--grad);color:#fff}
-.btn-save:hover{opacity:.85}
-.btn-cancel{background:#e2e6ea;color:var(--text)}
-.export-import{display:flex;gap:10px;margin-top:20px}
+.modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--tl)}.modal-close:hover{color:var(--pk)}
+.admin-form-group{margin-bottom:16px}.admin-form-group label{display:block;font-weight:800;font-size:.8rem;margin-bottom:5px;color:var(--text)}
+.admin-form-group input,.admin-form-group select,.admin-form-group textarea{width:100%;padding:10px 12px;border:2px solid var(--bll);border-radius:14px;font-family:"Nunito",sans-serif;font-size:.85rem;outline:none}
+.admin-form-group input:focus,.admin-form-group select:focus,.admin-form-group textarea:focus{border-color:var(--pkm)}.image-preview{width:100%;max-height:140px;object-fit:contain;margin-top:8px;border-radius:12px;background:#f0f2f5;padding:8px}
+.admin-buttons{display:flex;gap:12px;justify-content:flex-end;margin-top:20px}.admin-buttons button{padding:10px 24px;border-radius:40px;font-weight:800;cursor:pointer;border:none}
+.btn-save{background:var(--grad);color:#fff}.btn-save:hover{opacity:.85}.btn-cancel{background:#e2e6ea;color:var(--text)}.export-import{display:flex;gap:10px;margin-top:20px}
 .export-import button{background:var(--bll);color:var(--bl);border:none;padding:6px 12px;border-radius:30px;font-size:.7rem;font-weight:800;cursor:pointer}
-@media(max-width:900px){.filter-sidebar{display:none}}
-@media(max-width:768px){.nav-links{display:none}.cart-side{width:100vw}}
+.scroll-btns{position:fixed;right:26px;bottom:24px;z-index:399;display:flex;flex-direction:column;gap:8px}
+.scroll-btn{background:#fff;border:2px solid var(--bll);color:var(--bl);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;box-shadow:0 4px 14px rgba(21,101,192,.14);transition:all .2s}
+.scroll-btn:hover{background:var(--bl);color:#fff;border-color:var(--bl);transform:translateY(-2px)}
+/* Quick View Modal - Blue/Pink Theme */
+.qv-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:1100;display:none;align-items:center;justify-content:center;padding:20px}
+.qv-modal{background:#fff;border-radius:28px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 40px rgba(0,0,0,.2);position:relative;animation:fadeInUp 0.3s ease}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.qv-close-btn{position:absolute;top:15px;right:18px;background:var(--pkl);border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem;color:var(--pk);display:flex;align-items:center;justify-content:center;transition:all 0.2s;z-index:10}
+.qv-close-btn:hover{background:var(--pk);color:#fff}
+.qv-inner{display:flex;flex-direction:row;flex-wrap:wrap}
+.qv-img-area{width:240px;background:linear-gradient(145deg,var(--bll),var(--pkl));display:flex;align-items:center;justify-content:center;padding:28px;border-radius:28px 0 0 28px}
+.qv-img-area span{font-size:6rem}
+.qv-img-area img{max-width:100%;max-height:200px;object-fit:contain;border-radius:16px}
+.qv-details{flex:1;padding:28px;background:#fff;border-radius:0 28px 28px 0}
+.qv-cat{font-size:.7rem;font-weight:800;color:var(--bl);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.qv-name{font-family:"Pacifico",cursive;font-size:1.5rem;color:var(--text);margin-bottom:8px;line-height:1.3}
+.qv-desc{font-size:.9rem;color:var(--tl);font-weight:600;line-height:1.6;margin-bottom:16px}
+.qv-pricing{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.qv-price{font-family:"Quicksand",sans-serif;font-size:2rem;font-weight:800;color:var(--pk)}
+.qv-orig{font-size:1rem;color:var(--tl);text-decoration:line-through;font-weight:600}
+.qv-save{background:var(--pkl);color:var(--pk);font-size:.75rem;font-weight:800;padding:4px 12px;border-radius:50px}
+.qv-qty-row{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.qv-qty-label{font-weight:800;font-size:.9rem;color:var(--text)}
+.qv-qty-ctrl{display:flex;align-items:center;gap:10px;background:var(--bll);border-radius:60px;padding:4px 8px}
+.qv-qty-btn{background:#fff;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-weight:900;color:var(--bl);font-size:1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.qv-qty-btn:hover{background:var(--bl);color:#fff}
+.qv-qty-val{font-weight:800;font-size:1rem;min-width:30px;text-align:center;color:var(--text)}
+.qv-buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.btn-qv-add{flex:2;background:var(--grad);color:#fff;border:none;padding:12px 18px;border-radius:60px;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:0.2s}
+.btn-qv-add:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(233,30,140,.3)}
+.btn-qv-chat{flex:1;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:12px 18px;border-radius:60px;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:0.2s}
+.btn-qv-chat:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(37,211,102,.3)}
+@media(max-width:640px){.qv-img-area{width:100%;border-radius:28px 28px 0 0;padding:20px}.qv-details{border-radius:0 0 28px 28px}.qv-buttons{flex-direction:column}}
+@media(max-width:900px){.filter-sidebar{display:none}}@media(max-width:768px){.nav-links{display:none}.cart-side{width:100vw}}
 </style>
 </head>
 <body>
@@ -148,14 +128,12 @@ nav{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.97);backdrop-
   <span>&#128230; Track Your Order:</span>
   <div class="track-form"><input type="text" id="track-num" placeholder="Enter tracking number..."><button onclick="trackOrder()"><i class="fas fa-search"></i> Track</button></div>
   <a href="https://www.domex.lk/tracking.php" target="_blank"><i class="fas fa-truck"></i> Domex</a>
-  <a href="https://www.kapruka.com/delivery/tracking.jsp" target="_blank"><i class="fas fa-box"></i> Kapruka</a>
-  <a href="https://www.pronto.lk" target="_blank"><i class="fas fa-motorcycle"></i> Pronto</a>
 </div>
 <div class="notice-bar">&#127881; FREE DELIVERY on all packages &nbsp;|&nbsp; &#128230; Island-wide Delivery &nbsp;|&nbsp;<a href="https://wa.me/94766787992" target="_blank">Chat on WhatsApp</a></div>
 
 <nav>
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="Little Cuddle" onerror="this.style.display='none'"><div class="nav-brand">Little Cuddle <small>Baby &amp; Mother Care</small></div></a>
-  <div class="nav-links"><a href="index.html">Home</a><a href="index.html#packages">Packages</a><a href="products.html" class="active">&#128717; Shop</a><a href="index.html#videos">Videos</a><a href="index.html#about">About</a></div>
+  <div class="nav-links"><a href="index.html">Home</a><a href="index.html#packages">Packages</a><a href="products.html" class="active">&#128717; Shop</a><a href="index.html#about">About</a></div>
   <button class="btn-cart" onclick="toggleCart()"><i class="fas fa-shopping-bag"></i> Cart <span class="cart-badge" id="cart-count">0</span></button>
 </nav>
 
@@ -169,30 +147,53 @@ nav{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.97);backdrop-
     <div class="filter-card"><h3><i class="fas fa-rupee-sign"></i> Price Range</h3><div class="price-filter"><div class="price-range"><input type="number" id="price-min" placeholder="Min Rs." oninput="applyFilters()"><input type="number" id="price-max" placeholder="Max Rs." oninput="applyFilters()"></div></div></div>
     <button class="btn-clear" onclick="clearFilters()"><i class="fas fa-times"></i> Clear All Filters</button>
   </div>
-  <div class="products-area"><div class="products-toolbar"><div class="toolbar-left">Showing <span id="prod-count">0</span> products</div><div><div class="view-toggle"><button class="view-btn active" id="grid-btn" onclick="setView('grid')"><i class="fas fa-th"></i></button><button class="view-btn" id="list-btn" onclick="setView('list')"><i class="fas fa-list"></i></button></div></div></div><div class="pgrid" id="pgrid"></div></div>
+  <div class="products-area"><div class="products-toolbar"><div class="toolbar-left">Showing <span id="prod-count">0</span> products</div><div style="visibility:hidden"></div></div><div class="pgrid" id="pgrid"></div></div>
 </div>
 
 <div class="page-footer"><a href="index.html"><i class="fas fa-home"></i> Back to Home</a> &nbsp;|&nbsp;<a href="https://wa.me/94766787992" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Us</a><p>&copy; 2025 Little Cuddle. All rights reserved.</p></div>
-<a class="wa" href="https://wa.me/94766787992?text=Hello%20Little%20Cuddle!%20I'd%20like%20to%20order." target="_blank"><i class="fab fa-whatsapp"></i></a>
 
+<!-- Scroll buttons (Up / Down) -->
+<div class="scroll-btns">
+  <button class="scroll-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top"><i class="fas fa-chevron-up"></i></button>
+  <button class="scroll-btn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})" title="Go to Bottom"><i class="fas fa-chevron-down"></i></button>
+</div>
+
+<!-- Cart Sidebar -->
 <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
-<div class="cart-side" id="cart-side"><div class="cart-hd"><h3>&#128717; Your Cart</h3><button class="btn-x" onclick="toggleCart()"><i class="fas fa-times"></i></button></div><div class="cart-body" id="cart-body"></div><div class="cart-ft" id="cart-ft" style="display:none"><div class="crow"><span>Subtotal</span><span id="cs">Rs. 0</span></div><div class="crow"><span>Delivery</span><span style="color:#2e7d32;font-weight:800">FREE &#127881;</span></div><div class="crow grand"><span>Total</span><span id="ct">Rs. 0</span></div><button class="btn-co" onclick="checkout()"><i class="fab fa-whatsapp"></i> Order via WhatsApp</button></div></div>
+<div class="cart-side" id="cart-side">
+  <div class="cart-hd"><h3>&#128717; Your Cart</h3><button class="btn-x" onclick="toggleCart()"><i class="fas fa-times"></i></button></div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-ft" id="cart-ft" style="display:none">
+    <div class="crow"><span>Subtotal</span><span id="cs">Rs. 0</span></div>
+    <div class="delivery-note"><i class="fas fa-truck"></i> Delivery cost depends on weight – calculated at checkout</div>
+    <div class="crow grand"><span>Total (excl. delivery)</span><span id="ct">Rs. 0</span></div>
+    <button class="btn-co" onclick="checkout()"><i class="fab fa-whatsapp"></i> Order via WhatsApp</button>
+    <button class="btn-co" onclick="clearCart()" style="background:#e53935; margin-top:8px; box-shadow:none;"><i class="fas fa-trash-alt"></i> Clear Cart</button>
+  </div>
+</div>
 
-<div class="modal-overlay" id="qv-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);align-items:center;justify-content:center;z-index:1000"><div class="qv-modal" style="background:#fff;border-radius:28px;max-width:680px;width:100%;position:relative"><button class="qv-close" onclick="closeQV()"><i class="fas fa-times"></i></button><div class="qv-img" id="qv-img"></div><div class="qv-body" id="qv-body"></div></div></div>
+<!-- Quick View Modal -->
+<div id="qvOverlay" class="qv-modal-overlay" onclick="closeQuickView(event)">
+  <div class="qv-modal" onclick="event.stopPropagation()">
+    <button class="qv-close-btn" onclick="closeQuickView()"><i class="fas fa-times"></i></button>
+    <div class="qv-inner">
+      <div class="qv-img-area" id="qvImgArea"></div>
+      <div class="qv-details" id="qvDetails"></div>
+    </div>
+  </div>
+</div>
 
-<!-- ADMIN MODAL (only appears in secret mode) -->
-<div id="adminModal" class="admin-modal"><div class="admin-modal-content"><button class="modal-close" onclick="closeAdminModal()">&times;</button><h3 id="adminModalTitle">Edit Product</h3><form id="adminForm"><div class="admin-form-group"><label>Name</label><input type="text" id="prodName" required></div><div class="admin-form-group"><label>Category</label><select id="prodCat"><option value="newborn">Newborn</option><option value="clothing">Clothing</option><option value="feeding">Feeding</option><option value="bath">Bath & Care</option><option value="mother">Mother Care</option></select></div><div class="admin-form-group"><label>Description</label><textarea id="prodDesc" rows="2"></textarea></div><div class="admin-form-group"><label>Price (Rs.)</label><input type="number" id="prodPrice" required></div><div class="admin-form-group"><label>Discount (%)</label><input type="number" id="prodDisc" value="0"></div><div class="admin-form-group"><label>Badge (NEW, HOT, SALE or empty)</label><input type="text" id="prodBadge" placeholder="NEW / HOT / SALE"></div><div class="admin-form-group"><label>Emoji (default icon)</label><input type="text" id="prodEmo" placeholder="e.g., &#128118;"></div><div class="admin-form-group"><label>Product Photo (click to upload)</label><input type="file" id="prodPhotoFile" accept="image/jpeg,image/png,image/webp"><img id="prodPhotoPreview" class="image-preview" style="display:none"></div><div class="admin-buttons"><button type="button" class="btn-cancel" onclick="closeAdminModal()">Cancel</button><button type="submit" class="btn-save">Save Product</button></div></form><div class="export-import"><button onclick="exportData()"><i class="fas fa-download"></i> Export Products</button><button onclick="importData()"><i class="fas fa-upload"></i> Import Products</button><input type="file" id="importFile" style="display:none" accept="application/json"></div></div></div>
+<!-- Admin Modal (unchanged) -->
+<div id="adminModal" class="admin-modal"><div class="admin-modal-content"><button class="modal-close" onclick="closeAdminModal()">&times;</button><h3 id="adminModalTitle">Edit Product</h3><form id="adminForm"><div class="admin-form-group"><label>Name</label><input type="text" id="prodName" required></div><div class="admin-form-group"><label>Category</label><select id="prodCat"><option value="newborn">Newborn</option><option value="clothing">Clothing</option><option value="feeding">Feeding</option><option value="bath">Bath & Care</option><option value="mother">Mother Care</option></select></div><div class="admin-form-group"><label>Description</label><textarea id="prodDesc" rows="2"></textarea></div><div class="admin-form-group"><label>Price (Rs.)</label><input type="number" id="prodPrice" required></div><div class="admin-form-group"><label>Discount (%)</label><input type="number" id="prodDisc" value="0"></div><div class="admin-form-group"><label>Badge (NEW, HOT, SALE or empty)</label><input type="text" id="prodBadge" placeholder="NEW / HOT / SALE"></div><div class="admin-form-group"><label>Emoji (default icon)</label><input type="text" id="prodEmo" placeholder="e.g., &#128118;"></div><div class="admin-form-group"><label>Product Photo (click to upload)</label><input type="file" id="prodPhotoFile" accept="image/jpeg,image/png,image/webp"><img id="prodPhotoPreview" class="image-preview" style="display:none"></div><div class="admin-buttons"><button type="button" class="btn-cancel" onclick="closeAdminModal()">Cancel</button><button type="submit" class="btn-save">Save Product</button></div></form><div class="export-import"><button onclick="exportData()"><i class="fas fa-download"></i> Export Products</button><button onclick="importData()"><i class="fas fa-upload"></i> Import Products</button><input type="file" id="importFile" style="display:none" accept="application/json"></div><button id="resetShopBtn" style="margin-top:15px;background:#e53935;color:#fff;border:none;padding:8px;border-radius:40px;font-weight:800;cursor:pointer;width:100%">🔄 Reset to Default Products</button></div></div>
 
 <div class="toast" id="toast"></div>
 <div id="adminModeBadge" class="admin-mode-badge">🔧 Admin Mode Active</div>
 
 <script>
 // ========== CONFIGURATION ==========
-// CHANGE THIS SECRET KEY TO YOUR OWN CUSTOM STRING
-// Then access admin mode via:  products.html?admin=YOUR_SECRET_KEY
-const ADMIN_SECRET = "littlecuddle2025";   // <-- replace with your own secret
+const ADMIN_SECRET = "littlecuddle2025";
 
-// ========== DATA MANAGEMENT ==========
+// ========== DEFAULT PRODUCTS (138 items from Package 03) ==========
 const DEFAULT_PRODUCTS = [
   {id:1,  name:"Newborn Gift Set",        cat:"newborn",  desc:"Complete starter set: onesie, hat, mittens and booties.",            price:2800, disc:10, emo:"&#128118;", badge:"NEW",  photo:""},
   {id:2,  name:"Baby Swaddle Blanket",    cat:"newborn",  desc:"Ultra-soft muslin swaddle blanket, breathable and gentle on skin.",  price:1200, disc:0,  emo:"&#129528;", badge:"",     photo:""},
@@ -205,7 +206,45 @@ const DEFAULT_PRODUCTS = [
   {id:9,  name:"Maternity Pillow",        cat:"mother",   desc:"Full-body U-shaped pillow for pregnancy support and comfort.",      price:4500, disc:10, emo:"&#127800;", badge:"NEW",  photo:""},
   {id:10, name:"Nursing Cover",           cat:"mother",   desc:"Breathable nursing cover for discreet breastfeeding on the go.",    price:1200, disc:0,  emo:"&#128155;", badge:"",     photo:""},
   {id:11, name:"Diaper Bag Backpack",     cat:"newborn",  desc:"Large capacity waterproof organiser bag with USB charging port.",   price:3800, disc:15, emo:"&#127890;", badge:"HOT",  photo:""},
-  {id:12, name:"Baby Monitor",            cat:"newborn",  desc:"Digital audio baby monitor with long range and clear sound.",       price:5500, disc:0,  emo:"&#128251;", badge:"",     photo:""}
+  {id:12, name:"Baby Monitor",            cat:"newborn",  desc:"Digital audio baby monitor with long range and clear sound.",       price:5500, disc:0,  emo:"&#128251;", badge:"",     photo:""},
+  {id:101, name:"18x18 Printed Nappi Single (12pcs)", cat:"newborn", desc:"Pack of 12 printed nappies, soft cotton.", price:500, disc:0, emo:"&#128118;", badge:"", photo:""},
+  {id:102, name:"18x18 Plain Nappi Single (6pcs)",   cat:"newborn", desc:"Pack of 6 plain white nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photo:""},
+  {id:103, name:"22x22 Printed Nappi Double (6pcs)", cat:"newborn", desc:"6 double-layered printed nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photo:""},
+  {id:104, name:"22x22 Plain Nappi Double (6pcs)",   cat:"newborn", desc:"6 double-layered plain nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photo:""},
+  {id:105, name:"Baby Printed Gown (6pcs)",          cat:"clothing",desc:"Set of 6 printed baby gowns, soft and breathable.", price:500, disc:0, emo:"&#128090;", badge:"", photo:""},
+  {id:106, name:"Baby Muslin Gown (6pcs)",           cat:"clothing",desc:"6 muslin gowns, gentle on newborn skin.", price:500, disc:0, emo:"&#128090;", badge:"", photo:""},
+  {id:107, name:"Flannel Blanket (Kolko) (4pcs)",    cat:"newborn", desc:"4 soft flannel blankets, ideal for swaddling.", price:500, disc:0, emo:"&#129528;", badge:"", photo:""},
+  {id:108, name:"Baby Soft Blanket (1pc)",           cat:"newborn", desc:"Extra soft blanket for warmth and comfort.", price:500, disc:0, emo:"&#129528;", badge:"", photo:""},
+  {id:109, name:"Printed Towel Set (S/D) (1 Set)",   cat:"bath",    desc:"Set of small and large printed baby towels.", price:500, disc:0, emo:"&#128705;", badge:"", photo:""},
+  {id:110, name:"Baby Wool Suit (1pc)",              cat:"clothing",desc:"Warm wool suit for cold weather.", price:500, disc:0, emo:"&#128090;", badge:"", photo:""},
+  {id:111, name:"Baby Rubber Sheet (1pc)",           cat:"newborn", desc:"Waterproof rubber sheet for crib protection.", price:500, disc:0, emo:"&#128118;", badge:"", photo:""},
+  {id:112, name:"Nipon Baby Bath Basin (1pc)",       cat:"bath",    desc:"Plastic baby bath basin with comfortable shape.", price:500, disc:0, emo:"&#128705;", badge:"", photo:""},
+  {id:113, name:"Rainco Mosquito Net (1pc)",         cat:"newborn", desc:"Protective mosquito net for baby crib.", price:500, disc:0, emo:"&#128118;", badge:"", photo:""},
+  {id:114, name:"Baby Hospital Bag (1pc)",           cat:"newborn", desc:"Spacious bag to carry hospital essentials.", price:500, disc:0, emo:"&#127890;", badge:"", photo:""},
+  {id:115, name:"Hospital Basket (1pc)",             cat:"newborn", desc:"Woven basket for organising baby items.", price:500, disc:0, emo:"&#128118;", badge:"", photo:""},
+  {id:116, name:"Baby Care Kit (10 pcs)",            cat:"newborn", desc:"Complete care kit with nail clipper, comb, etc.", price:500, disc:0, emo:"&#129516;", badge:"", photo:""},
+  {id:117, name:"Safety Pin (1pc)",                  cat:"newborn", desc:"Large safety pin for nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photo:""},
+  {id:118, name:"Nappy Pins (1pc)",                  cat:"newborn", desc:"Durable nappy pins with safety cover.", price:500, disc:0, emo:"&#128118;", badge:"", photo:""},
+  {id:119, name:"Baby Pillow Set & Mattress (1pc)",  cat:"newborn", desc:"Small pillow with mattress for head support.", price:500, disc:0, emo:"&#127912;", badge:"", photo:""},
+  {id:120, name:"Baby Sleeping Bag (1pc)",           cat:"clothing",desc:"Wearable blanket, keeps baby warm at night.", price:500, disc:0, emo:"&#128164;", badge:"", photo:""},
+  {id:121, name:"Mawal Baby Wet Wipes (1 Pack)",     cat:"bath",    desc:"100% biodegradable wet wipes, hypoallergenic.", price:500, disc:0, emo:"&#128705;", badge:"", photo:""},
+  {id:122, name:"Mawal Newborn Diaper (04) (1 Pack)",cat:"newborn", desc:"Pack of 4 newborn diapers, soft and absorbent.", price:500, disc:0, emo:"&#128118;", badge:"", photo:""},
+  {id:123, name:"Cotton Balls (1 Pack)",             cat:"bath",    desc:"100% pure cotton balls for cleaning.", price:500, disc:0, emo:"&#128705;", badge:"", photo:""},
+  {id:124, name:"Panda Baby Set (Powder/Wash/Cologne)", cat:"bath",desc:"3-piece baby care set: powder, wash, cologne.", price:500, disc:0, emo:"&#128705;", badge:"", photo:""},
+  {id:125, name:"Powder Puff (1pc)",                 cat:"bath",    desc:"Soft powder puff for even application.", price:500, disc:0, emo:"&#128705;", badge:"", photo:""},
+  {id:126, name:"Soap Case (1pc)",                   cat:"bath",    desc:"Travel case for baby soap bar.", price:500, disc:0, emo:"&#128705;", badge:"", photo:""},
+  {id:127, name:"Bed Jacket (3pcs)",                 cat:"mother",  desc:"3 soft bed jackets for postpartum comfort.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:128, name:"Cotton Cheeta (3pcs)",              cat:"mother",  desc:"3 cotton cheetas (traditional wrap).", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:129, name:"White Bed Jacket (1pc)",            cat:"mother",  desc:"Pure white bed jacket for hospital use.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:130, name:"White Cheeta (1pc)",                cat:"mother",  desc:"White cheeta wrap, breathable cotton.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:131, name:"Towel (1pc)",                       cat:"mother",  desc:"Soft towel for mother.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:132, name:"Loop Pad (1pc)",                    cat:"mother",  desc:"Reusable loop pad for maternity use.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:133, name:"Bic Lady Razor (1pc)",              cat:"mother",  desc:"Disposable lady razor for gentle hair removal.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:134, name:"Loop Belt (1pc)",                   cat:"mother",  desc:"Adjustable belt for loop pad.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:135, name:"Wasti Bottle (1pc)",                cat:"mother",  desc:"Perineal wash bottle for postnatal care.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:136, name:"Cloth Rack (1pc)",                  cat:"mother",  desc:"Foldable cloth drying rack.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:137, name:"Cloth Hanger (1pc)",                cat:"mother",  desc:"Durable cloth hanger.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""},
+  {id:138, name:"Cloth Clips (1 Set)",               cat:"mother",  desc:"Set of cloth clips for hanging nappies/clothes.", price:500, disc:0, emo:"&#128155;", badge:"", photo:""}
 ];
 
 let products = [];
@@ -213,26 +252,29 @@ let cart = [];
 let adminMode = false;
 let editingId = null;
 let currentView = "grid";
+let currentQuickViewProduct = null;
+let qvQty = 1;
 
-// Load from localStorage
 function loadProducts() {
   const stored = localStorage.getItem("lc_products");
   if (stored) {
-    try { products = JSON.parse(stored); } catch(e){ products = [...DEFAULT_PRODUCTS]; }
-  } else {
-    products = [...DEFAULT_PRODUCTS];
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed) && parsed.length >= 138) products = parsed;
+      else { products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)); localStorage.setItem("lc_products", JSON.stringify(products)); showToast("✅ Loaded new product catalog"); }
+    } catch(e) { products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)); localStorage.setItem("lc_products", JSON.stringify(products)); }
+  } else { products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)); localStorage.setItem("lc_products", JSON.stringify(products)); }
+  ensureIds(); saveProducts();
+}
+function resetToDefaultProducts() {
+  if(confirm("⚠️ Reset all products to the original Package 03 list? This will delete any custom edits.")) {
+    products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+    ensureIds(); saveProducts(); applyFilters(); showToast("Products reset to default!");
   }
-  ensureIds();
-  saveProducts();
 }
 function saveProducts() { localStorage.setItem("lc_products", JSON.stringify(products)); }
 function ensureIds() { products.forEach((p,idx) => { if(!p.id) p.id = Date.now()+idx; }); }
-
-function loadCart() {
-  const s = localStorage.getItem("lc_cart");
-  if(s) try { cart = JSON.parse(s); } catch(e){ cart = []; }
-  else cart = [];
-}
+function loadCart() { const s = localStorage.getItem("lc_cart"); if(s) try { cart = JSON.parse(s); if(!Array.isArray(cart)) cart = []; } catch(e){ cart = []; } else cart = []; }
 function saveCart() { localStorage.setItem("lc_cart", JSON.stringify(cart)); }
 function dp(p) { return p.disc>0 ? Math.round(p.price*(1-p.disc/100)) : p.price; }
 
@@ -242,7 +284,7 @@ function checkAdminSecret() {
   if(params.get("admin") === ADMIN_SECRET) {
     adminMode = true;
     document.getElementById("adminModeBadge").style.display = "block";
-    // Add floating "Add New Product" button if not already present
+    document.querySelectorAll(".admin-edit-btn, .admin-del-btn").forEach(el => el.style.display = "flex");
     if(!document.getElementById("addProductBtn")) {
       const btn = document.createElement("button");
       btn.id = "addProductBtn";
@@ -251,6 +293,7 @@ function checkAdminSecret() {
       btn.onclick = () => addNewProduct();
       document.querySelector(".products-area .products-toolbar").prepend(btn);
     }
+    document.getElementById("resetShopBtn").style.display = "block";
   }
 }
 
@@ -269,9 +312,7 @@ function applyFilters() {
   const maxP = parseFloat(document.getElementById("price-max").value)||Infinity;
   let list = products.filter(p => {
     const price = dp(p);
-    return (curCat==="all" || p.cat===curCat) &&
-           (!search || p.name.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search)) &&
-           price>=minP && price<=maxP;
+    return (curCat==="all" || p.cat===curCat) && (!search || p.name.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search)) && price>=minP && price<=maxP;
   });
   if(sort==="price-low") list.sort((a,b)=>dp(a)-dp(b));
   else if(sort==="price-high") list.sort((a,b)=>dp(b)-dp(a));
@@ -290,14 +331,6 @@ function clearFilters() {
   document.querySelector('.cat-btn[onclick*="all"]').classList.add("active");
   applyFilters();
 }
-function setView(v) {
-  currentView = v;
-  const grid = document.getElementById("pgrid");
-  grid.classList.toggle("list-view", v==="list");
-  document.getElementById("grid-btn").classList.toggle("active", v==="grid");
-  document.getElementById("list-btn").classList.toggle("active", v==="list");
-  applyFilters();
-}
 function renderProducts(list) {
   const container = document.getElementById("pgrid");
   if(!list.length) { container.innerHTML='<div class="empty-state" style="grid-column:1/-1;text-align:center;padding:60px"><i class="fas fa-search"></i><h3>No products found</h3></div>'; return; }
@@ -311,14 +344,14 @@ function renderProducts(list) {
     if(p.disc>0) badges+=`<span class="badge badge-disc">-${p.disc}%</span>`;
     const imgHtml = p.photo ? `<img src="${p.photo}" alt="${p.name}">` : `<span class="pc-img-emoji">${p.emo}</span>`;
     const discHtml = p.disc>0 ? `<span class="pc-orig">Rs. ${p.price.toLocaleString()}</span><span class="pc-disc">-${p.disc}%</span>` : "";
-    html += `<div class="pc" onclick="openQV(${p.id})">
+    html += `<div class="pc" onclick="openQuickView(${p.id})">
       <div class="pc-badge">${badges}</div>
       <button class="pc-wishlist" onclick="event.stopPropagation();toggleWish(${p.id})"><i class="far fa-heart"></i></button>`;
     if(adminMode) {
       html += `<button class="admin-edit-btn" onclick="event.stopPropagation();editProduct(${p.id})"><i class="fas fa-edit"></i></button>
                <button class="admin-del-btn" onclick="event.stopPropagation();deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>`;
     }
-    html += `<div class="pc-img">${imgHtml}<div class="pc-overlay"><button class="btn-quick" onclick="event.stopPropagation();openQV(${p.id})"><i class="fas fa-eye"></i> Quick View</button></div></div>
+    html += `<div class="pc-img">${imgHtml}<div class="pc-overlay"><button class="btn-quick" onclick="event.stopPropagation();openQuickView(${p.id})"><i class="fas fa-eye"></i> Quick View</button></div></div>
       <div class="pc-body"><div class="pc-cat">${p.cat}</div><div class="pc-name">${p.name}</div><div class="pc-desc">${p.desc}</div><div class="pc-pricing"><span class="pc-price">Rs. ${price.toLocaleString()}</span>${discHtml}</div>
       <button class="btn-add" onclick="event.stopPropagation();addToCart(${p.id},1)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div></div>`;
   });
@@ -334,7 +367,70 @@ function updateCategoryCounts() {
   });
 }
 
-// ---------- CART ----------
+// ---------- QUICK VIEW MODAL ----------
+function openQuickView(id) {
+  const product = products.find(p => p.id === id);
+  if(!product) return;
+  currentQuickViewProduct = product;
+  qvQty = 1;
+  updateQuickViewModal();
+  document.getElementById("qvOverlay").style.display = "flex";
+}
+function updateQuickViewModal() {
+  if(!currentQuickViewProduct) return;
+  const p = currentQuickViewProduct;
+  const price = dp(p);
+  const discHtml = p.disc>0 ? `<span class="qv-orig">Rs. ${p.price.toLocaleString()}</span><span class="qv-save">Save ${p.disc}%</span>` : "";
+  const imgHtml = p.photo ? `<img src="${p.photo}" alt="${p.name}">` : `<span>${p.emo}</span>`;
+  document.getElementById("qvImgArea").innerHTML = imgHtml;
+  document.getElementById("qvDetails").innerHTML = `
+    <div class="qv-cat">${p.cat}</div>
+    <div class="qv-name">${p.name}</div>
+    <div class="qv-desc">${p.desc}</div>
+    <div class="qv-pricing"><span class="qv-price">Rs. ${price.toLocaleString()}</span>${discHtml}</div>
+    <div class="qv-qty-row">
+      <span class="qv-qty-label">Quantity:</span>
+      <div class="qv-qty-ctrl">
+        <button class="qv-qty-btn" onclick="changeQvQty(-1)">-</button>
+        <span class="qv-qty-val" id="qvQtyVal">${qvQty}</span>
+        <button class="qv-qty-btn" onclick="changeQvQty(1)">+</button>
+      </div>
+    </div>
+    <div class="qv-buttons">
+      <button class="btn-qv-add" onclick="addToCartFromQuickView()"><i class="fas fa-cart-plus"></i> Add to Cart — Rs. ${(price * qvQty).toLocaleString()}</button>
+      <button class="btn-qv-chat" onclick="chatAboutProduct()"><i class="fab fa-whatsapp"></i> Chat for Details</button>
+    </div>
+  `;
+}
+function changeQvQty(delta) {
+  qvQty = Math.max(1, qvQty + delta);
+  document.getElementById("qvQtyVal").innerText = qvQty;
+  if(currentQuickViewProduct) {
+    const price = dp(currentQuickViewProduct);
+    const btn = document.querySelector(".btn-qv-add");
+    if(btn) btn.innerHTML = `<i class="fas fa-cart-plus"></i> Add to Cart — Rs. ${(price * qvQty).toLocaleString()}`;
+  }
+}
+function addToCartFromQuickView() {
+  if(currentQuickViewProduct) {
+    addToCart(currentQuickViewProduct.id, qvQty);
+    closeQuickView();
+  }
+}
+function chatAboutProduct() {
+  if(currentQuickViewProduct) {
+    const msg = `Hello Little Cuddle! I'm interested in the product: ${currentQuickViewProduct.name}. Could you please provide more details? Thank you!`;
+    window.open(`https://wa.me/94766787992?text=${encodeURIComponent(msg)}`, "_blank");
+  }
+}
+function closeQuickView(event) {
+  if(event && event.target !== event.currentTarget && event.target !== document.getElementById("qvOverlay")) return;
+  document.getElementById("qvOverlay").style.display = "none";
+  currentQuickViewProduct = null;
+  qvQty = 1;
+}
+
+// ---------- CART FUNCTIONS ----------
 function addToCart(id, qty=1) {
   const p = products.find(x=>x.id===id);
   if(!p) return;
@@ -349,6 +445,7 @@ function changeQty(id, delta) {
   const it = cart.find(x=>x.id===id);
   if(it) { it.qty += delta; if(it.qty<=0) remFromCart(id); else { saveCart(); renderCart(); updateCartBadge(); } }
 }
+function clearCart() { if(confirm("Remove all items from cart?")) { cart = []; saveCart(); renderCart(); updateCartBadge(); showToast("Cart cleared"); } }
 function renderCart() {
   const body = document.getElementById("cart-body");
   const ft = document.getElementById("cart-ft");
@@ -370,170 +467,30 @@ function checkout() {
   if(!cart.length) { showToast("Cart is empty!"); return; }
   let total=0, msg="Hello Little Cuddle!\n\nOrder Request:\n";
   cart.forEach(i=>{ total+=i.price*i.qty; msg+=`- ${i.name} x${i.qty} = Rs. ${(i.price*i.qty).toLocaleString()}\n`; });
-  msg+=`\nTotal: Rs. ${total.toLocaleString()}\n\nPlease confirm. Thank you!`;
+  msg+=`\nSubtotal: Rs. ${total.toLocaleString()}\nDelivery cost will be added based on weight.\n\nPlease confirm availability. Thank you!`;
   window.open(`https://wa.me/94766787992?text=${encodeURIComponent(msg)}`, "_blank");
 }
-function trackOrder() {
-  const n = document.getElementById("track-num").value.trim();
-  if(!n) { alert("Enter tracking number!"); return; }
-  window.open(`https://www.domex.lk/Order-Details.php?wbno=${encodeURIComponent(n)}`,"_blank");
-}
+function trackOrder() { const n = document.getElementById("track-num").value.trim(); if(!n) { alert("Enter tracking number!"); return; } window.open(`https://www.domex.lk/Order-Details.php?wbno=${encodeURIComponent(n)}`,"_blank"); }
 function showToast(msg) { const t=document.getElementById("toast"); t.innerHTML=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2600); }
 
 // ---------- WISHLIST ----------
 let wishlist = JSON.parse(localStorage.getItem("lc_wish")||"[]");
-function toggleWish(id) {
-  const idx = wishlist.indexOf(id);
-  if(idx>=0) wishlist.splice(idx,1); else wishlist.push(id);
-  localStorage.setItem("lc_wish", JSON.stringify(wishlist));
-  showToast(wishlist.includes(id) ? "Added to wishlist" : "Removed from wishlist");
-}
+function toggleWish(id) { const idx = wishlist.indexOf(id); if(idx>=0) wishlist.splice(idx,1); else wishlist.push(id); localStorage.setItem("lc_wish", JSON.stringify(wishlist)); showToast(wishlist.includes(id) ? "Added to wishlist" : "Removed from wishlist"); }
 
-// ---------- QUICK VIEW ----------
-let qvQty=1, qvCurrent=null;
-function openQV(id) {
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
-  qvCurrent=p; qvQty=1;
-  const imgHtml = p.photo ? `<img src="${p.photo}" style="width:100%;max-height:260px;object-fit:cover">` : `<span style="font-size:5rem">${p.emo}</span>`;
-  document.getElementById("qv-img").innerHTML = imgHtml;
-  const price = dp(p);
-  const discHtml = p.disc>0 ? `<span class="qv-orig">Rs. ${p.price.toLocaleString()}</span><span class="qv-save">Save ${p.disc}%</span>` : "";
-  document.getElementById("qv-body").innerHTML = `<div class="qv-cat">${p.cat}</div><div class="qv-name">${p.name}</div><div class="qv-desc">${p.desc}</div><div class="qv-pricing"><span class="qv-price">Rs. ${price.toLocaleString()}</span>${discHtml}</div><div class="qv-qty-row"><span class="qv-qty-label">Quantity:</span><div class="qv-qty-ctrl"><button class="qv-qty-btn" onclick="changeQVQty(-1)">-</button><span class="qv-qty-val" id="qv-qty">1</span><button class="qv-qty-btn" onclick="changeQVQty(1)">+</button></div></div><button class="btn-qv-add" onclick="addToCart(${p.id},qvQty);closeQV()"><i class="fas fa-cart-plus"></i> Add to Cart — Rs. ${price.toLocaleString()}</button>`;
-  document.getElementById("qv-modal").style.display = "flex";
-}
-function changeQVQty(d) { qvQty = Math.max(1, qvQty+d); document.getElementById("qv-qty").innerText = qvQty; if(qvCurrent) { const newPrice = dp(qvCurrent)*qvQty; const btn = document.querySelector(".btn-qv-add"); if(btn) btn.innerHTML = `<i class="fas fa-cart-plus"></i> Add to Cart — Rs. ${newPrice.toLocaleString()}`; } }
-function closeQV() { document.getElementById("qv-modal").style.display = "none"; qvCurrent=null; }
-
-// ---------- ADMIN FUNCTIONS (only called when adminMode=true) ----------
-function editProduct(id) {
-  if(!adminMode) return;
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
-  editingId = id;
-  document.getElementById("adminModalTitle").innerText = "Edit Product";
-  document.getElementById("prodName").value = p.name;
-  document.getElementById("prodCat").value = p.cat;
-  document.getElementById("prodDesc").value = p.desc;
-  document.getElementById("prodPrice").value = p.price;
-  document.getElementById("prodDisc").value = p.disc;
-  document.getElementById("prodBadge").value = p.badge || "";
-  document.getElementById("prodEmo").value = p.emo;
-  const preview = document.getElementById("prodPhotoPreview");
-  if(p.photo) { preview.src = p.photo; preview.style.display = "block"; } else preview.style.display = "none";
-  document.getElementById("adminModal").style.display = "flex";
-}
-function addNewProduct() {
-  if(!adminMode) return;
-  editingId = null;
-  document.getElementById("adminModalTitle").innerText = "Add New Product";
-  document.getElementById("prodName").value = "";
-  document.getElementById("prodCat").value = "newborn";
-  document.getElementById("prodDesc").value = "";
-  document.getElementById("prodPrice").value = "";
-  document.getElementById("prodDisc").value = "0";
-  document.getElementById("prodBadge").value = "";
-  document.getElementById("prodEmo").value = "&#128118;";
-  document.getElementById("prodPhotoPreview").style.display = "none";
-  document.getElementById("adminModal").style.display = "flex";
-}
-function deleteProduct(id) {
-  if(!adminMode) return;
-  if(confirm("Delete this product permanently?")) {
-    products = products.filter(p=>p.id!==id);
-    saveProducts();
-    applyFilters();
-    showToast("Product deleted.");
-  }
-}
+// ---------- ADMIN FUNCTIONS (unchanged) ----------
+function editProduct(id) { if(!adminMode) return; const p = products.find(x=>x.id===id); if(!p) return; editingId = id; document.getElementById("adminModalTitle").innerText = "Edit Product"; document.getElementById("prodName").value = p.name; document.getElementById("prodCat").value = p.cat; document.getElementById("prodDesc").value = p.desc; document.getElementById("prodPrice").value = p.price; document.getElementById("prodDisc").value = p.disc; document.getElementById("prodBadge").value = p.badge || ""; document.getElementById("prodEmo").value = p.emo; const preview = document.getElementById("prodPhotoPreview"); if(p.photo) { preview.src = p.photo; preview.style.display = "block"; } else preview.style.display = "none"; document.getElementById("adminModal").style.display = "flex"; }
+function addNewProduct() { if(!adminMode) return; editingId = null; document.getElementById("adminModalTitle").innerText = "Add New Product"; document.getElementById("prodName").value = ""; document.getElementById("prodCat").value = "newborn"; document.getElementById("prodDesc").value = ""; document.getElementById("prodPrice").value = ""; document.getElementById("prodDisc").value = "0"; document.getElementById("prodBadge").value = ""; document.getElementById("prodEmo").value = "&#128118;"; document.getElementById("prodPhotoPreview").style.display = "none"; document.getElementById("adminModal").style.display = "flex"; }
+function deleteProduct(id) { if(!adminMode) return; if(confirm("Delete this product permanently?")) { products = products.filter(p=>p.id!==id); saveProducts(); applyFilters(); showToast("Product deleted."); } }
 function closeAdminModal() { document.getElementById("adminModal").style.display = "none"; editingId = null; }
-document.getElementById("adminForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  if(!adminMode) return;
-  const name = document.getElementById("prodName").value.trim();
-  const cat = document.getElementById("prodCat").value;
-  const desc = document.getElementById("prodDesc").value.trim();
-  const price = parseFloat(document.getElementById("prodPrice").value);
-  const disc = parseInt(document.getElementById("prodDisc").value)||0;
-  const badge = document.getElementById("prodBadge").value.trim();
-  let emo = document.getElementById("prodEmo").value.trim();
-  if(!emo) emo = "&#128118;";
-  let photo = "";
-  const fileInput = document.getElementById("prodPhotoFile");
-  if(fileInput.files && fileInput.files[0]) {
-    const reader = new FileReader();
-    reader.onload = function(ev) { photo = ev.target.result; saveProductFinal(name, cat, desc, price, disc, badge, emo, photo); };
-    reader.readAsDataURL(fileInput.files[0]);
-  } else {
-    const prevPhoto = document.getElementById("prodPhotoPreview").src;
-    photo = (prevPhoto && prevPhoto !== "" && !prevPhoto.includes("blob")) ? prevPhoto : "";
-    saveProductFinal(name, cat, desc, price, disc, badge, emo, photo);
-  }
-});
-function saveProductFinal(name, cat, desc, price, disc, badge, emo, photo) {
-  if(editingId) {
-    const idx = products.findIndex(p=>p.id===editingId);
-    if(idx!==-1) {
-      products[idx] = {...products[idx], name, cat, desc, price, disc, badge, emo, photo};
-    }
-  } else {
-    const newId = Date.now();
-    products.push({id:newId, name, cat, desc, price, disc, badge, emo, photo});
-  }
-  saveProducts();
-  closeAdminModal();
-  applyFilters();
-  showToast(editingId ? "Product updated" : "New product added");
-  editingId = null;
-}
-document.getElementById("prodPhotoFile").addEventListener("change", function(e) {
-  if(e.target.files && e.target.files[0]) {
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      const preview = document.getElementById("prodPhotoPreview");
-      preview.src = ev.target.result;
-      preview.style.display = "block";
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  }
-});
-function exportData() {
-  const dataStr = JSON.stringify(products, null, 2);
-  const blob = new Blob([dataStr], {type:"application/json"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "littlecuddle_products.json";
-  a.click(); URL.revokeObjectURL(url);
-}
-function importData() {
-  const inp = document.getElementById("importFile");
-  inp.onchange = function(e) {
-    const file = e.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      try {
-        const imported = JSON.parse(ev.target.result);
-        if(Array.isArray(imported)) {
-          products = imported;
-          ensureIds();
-          saveProducts();
-          applyFilters();
-          showToast("Products imported successfully!");
-        } else throw new Error();
-      } catch(e) { alert("Invalid JSON file"); }
-    };
-    reader.readAsText(file);
-    inp.value = "";
-  };
-  inp.click();
-}
+document.getElementById("adminForm").addEventListener("submit", (e) => { e.preventDefault(); if(!adminMode) return; const name = document.getElementById("prodName").value.trim(); const cat = document.getElementById("prodCat").value; const desc = document.getElementById("prodDesc").value.trim(); const price = parseFloat(document.getElementById("prodPrice").value); const disc = parseInt(document.getElementById("prodDisc").value)||0; const badge = document.getElementById("prodBadge").value.trim(); let emo = document.getElementById("prodEmo").value.trim(); if(!emo) emo = "&#128118;"; let photo = ""; const fileInput = document.getElementById("prodPhotoFile"); if(fileInput.files && fileInput.files[0]) { const reader = new FileReader(); reader.onload = function(ev) { photo = ev.target.result; saveProductFinal(name, cat, desc, price, disc, badge, emo, photo); }; reader.readAsDataURL(fileInput.files[0]); } else { const prevPhoto = document.getElementById("prodPhotoPreview").src; photo = (prevPhoto && prevPhoto !== "" && !prevPhoto.includes("blob")) ? prevPhoto : ""; saveProductFinal(name, cat, desc, price, disc, badge, emo, photo); } });
+function saveProductFinal(name, cat, desc, price, disc, badge, emo, photo) { if(editingId) { const idx = products.findIndex(p=>p.id===editingId); if(idx!==-1) products[idx] = {...products[idx], name, cat, desc, price, disc, badge, emo, photo}; } else { const newId = Date.now(); products.push({id:newId, name, cat, desc, price, disc, badge, emo, photo}); } saveProducts(); closeAdminModal(); applyFilters(); showToast(editingId ? "Product updated" : "New product added"); editingId = null; }
+document.getElementById("prodPhotoFile").addEventListener("change", function(e) { if(e.target.files && e.target.files[0]) { const reader = new FileReader(); reader.onload = function(ev) { const preview = document.getElementById("prodPhotoPreview"); preview.src = ev.target.result; preview.style.display = "block"; }; reader.readAsDataURL(e.target.files[0]); } });
+function exportData() { const dataStr = JSON.stringify(products, null, 2); const blob = new Blob([dataStr], {type:"application/json"}); const url = URL.createObjectURL(blob); const a = document.createElement("a"); a.href = url; a.download = "littlecuddle_products.json"; a.click(); URL.revokeObjectURL(url); }
+function importData() { const inp = document.getElementById("importFile"); inp.onchange = function(e) { const file = e.target.files[0]; if(!file) return; const reader = new FileReader(); reader.onload = function(ev) { try { const imported = JSON.parse(ev.target.result); if(Array.isArray(imported) && imported.length) { products = imported; ensureIds(); saveProducts(); applyFilters(); showToast("Products imported successfully!"); } else throw new Error(); } catch(e) { alert("Invalid JSON file"); } }; reader.readAsText(file); inp.value = ""; }; inp.click(); }
 
-// close modal on outside click
-window.onclick = function(e) { if(e.target === document.getElementById("adminModal")) closeAdminModal(); if(e.target === document.getElementById("qv-modal")) closeQV(); };
+window.onclick = function(e) { if(e.target === document.getElementById("adminModal")) closeAdminModal(); };
+document.getElementById("resetShopBtn").addEventListener("click", resetToDefaultProducts);
 
-// ---------- INITIALIZATION ----------
 loadProducts(); loadCart(); renderCart(); updateCartBadge(); checkAdminSecret(); applyFilters();
 </script>
 </body>
