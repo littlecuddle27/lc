@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
+/* ========== STYLES (same as before) ========== */
 :root{
   --pk:#e91e8c; --pkl:#fce4ec; --pkm:#f48fb1;
   --bl:#1565c0; --bll:#e3f2fd; --blm:#90caf9;
@@ -37,9 +38,10 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
 .filter-card h3{font-weight:800;color:var(--text);font-size:.92rem;margin-bottom:14px;display:flex;align-items:center;gap:7px}
 .search-box{display:flex;gap:6px}.search-box input{flex:1;padding:9px 12px;border:2px solid var(--bll);border-radius:10px;font-size:.85rem;outline:none}
 .search-box button{background:var(--grad);color:#fff;border:none;width:38px;border-radius:10px;cursor:pointer}
-.cat-filter{display:flex;flex-direction:column;gap:4px}.cat-btn{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:10px;cursor:pointer;font-weight:700;font-size:.85rem;color:var(--tl);background:transparent;width:100%;text-align:left}
-.cat-btn:hover{background:var(--bll);color:var(--bl)}.cat-btn.active{background:var(--bll);color:var(--bl);font-weight:800}
-.cat-btn .cat-count{margin-left:auto;background:var(--bll);color:var(--bl);font-size:.7rem;font-weight:800;padding:1px 7px;border-radius:50px}
+.cat-filter-multi{display:flex;flex-direction:column;gap:8px}
+.cat-checkbox{display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;font-weight:600;font-size:.85rem;color:var(--text)}
+.cat-checkbox input{width:18px;height:18px;cursor:pointer;accent-color:var(--pk)}
+.cat-checkbox .count{ margin-left:auto; background:var(--bll); color:var(--bl); font-size:.7rem; font-weight:800; padding:2px 8px; border-radius:50px}
 .price-filter .price-range{display:flex;gap:8px;margin-bottom:8px}.price-filter input{flex:1;padding:7px 9px;border:2px solid var(--bll);border-radius:9px;outline:none}
 .sort-sel{width:100%;padding:9px 12px;border:2px solid var(--bll);border-radius:10px;background:#fff;cursor:pointer}.btn-clear{width:100%;background:var(--pkl);color:var(--pk);border:none;padding:9px;border-radius:10px;font-weight:700;cursor:pointer;margin-top:8px}
 .products-area{flex:1}.products-toolbar{display:flex;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;align-items:center}
@@ -87,7 +89,7 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
 .scroll-btns{position:fixed;right:26px;bottom:24px;z-index:399;display:flex;flex-direction:column;gap:8px}
 .scroll-btn{background:#fff;border:2px solid var(--bll);color:var(--bl);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;box-shadow:0 4px 14px rgba(21,101,192,.14);transition:all .2s}
 .scroll-btn:hover{background:var(--bl);color:#fff;border-color:var(--bl);transform:translateY(-2px)}
-/* Quick View Modal - with carousel arrows */
+/* Quick View Modal carousel styles */
 .qv-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:1100;display:none;align-items:center;justify-content:center;padding:20px}
 .qv-modal{background:#fff;border-radius:28px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 40px rgba(0,0,0,.2);position:relative;animation:fadeInUp 0.3s ease}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -146,7 +148,10 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
 <div class="shop-wrap">
   <div class="filter-sidebar">
     <div class="filter-card"><h3><i class="fas fa-search"></i> Search</h3><div class="search-box"><input type="text" id="search-inp" placeholder="Search products..." oninput="applyFilters()"><button onclick="applyFilters()"><i class="fas fa-search"></i></button></div></div>
-    <div class="filter-card"><h3><i class="fas fa-tags"></i> Categories</h3><div class="cat-filter" id="cat-filter"><button class="cat-btn active" onclick="setCat('all',this)"><i class="fas fa-border-all"></i> All Products <span class="cat-count" id="cnt-all">0</span></button><button class="cat-btn" onclick="setCat('newborn',this)"><i class="fas fa-baby"></i> Newborn <span class="cat-count" id="cnt-newborn">0</span></button><button class="cat-btn" onclick="setCat('clothing',this)"><i class="fas fa-tshirt"></i> Clothing <span class="cat-count" id="cnt-clothing">0</span></button><button class="cat-btn" onclick="setCat('feeding',this)"><i class="fas fa-baby-carriage"></i> Feeding <span class="cat-count" id="cnt-feeding">0</span></button><button class="cat-btn" onclick="setCat('bath',this)"><i class="fas fa-pump-soap"></i> Bath &amp; Care <span class="cat-count" id="cnt-bath">0</span></button><button class="cat-btn" onclick="setCat('mother',this)"><i class="fas fa-heart"></i> Mother Care <span class="cat-count" id="cnt-mother">0</span></button></div></div>
+    <div class="filter-card">
+      <h3><i class="fas fa-tags"></i> Categories</h3>
+      <div class="cat-filter-multi" id="cat-filter-multi"></div>
+    </div>
     <div class="filter-card"><h3><i class="fas fa-sort"></i> Sort By</h3><select class="sort-sel" id="sort-sel" onchange="applyFilters()"><option value="default">Default</option><option value="price-low">Price: Low to High</option><option value="price-high">Price: High to Low</option><option value="discount">Biggest Discount</option><option value="name">Name A-Z</option></select></div>
     <div class="filter-card"><h3><i class="fas fa-rupee-sign"></i> Price Range</h3><div class="price-filter"><div class="price-range"><input type="number" id="price-min" placeholder="Min Rs." oninput="applyFilters()"><input type="number" id="price-max" placeholder="Max Rs." oninput="applyFilters()"></div></div></div>
     <button class="btn-clear" onclick="clearFilters()"><i class="fas fa-times"></i> Clear All Filters</button>
@@ -156,7 +161,7 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
 
 <div class="page-footer"><a href="index.html"><i class="fas fa-home"></i> Back to Home</a> &nbsp;|&nbsp;<a href="https://wa.me/94766787992" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Us</a><p>&copy; 2025 Little Cuddle. All rights reserved.</p></div>
 
-<!-- Scroll buttons (Up / Down) -->
+<!-- Scroll buttons -->
 <div class="scroll-btns">
   <button class="scroll-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top"><i class="fas fa-chevron-up"></i></button>
   <button class="scroll-btn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})" title="Go to Bottom"><i class="fas fa-chevron-down"></i></button>
@@ -176,7 +181,7 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
   </div>
 </div>
 
-<!-- Quick View Modal with Carousel -->
+<!-- Quick View Modal -->
 <div id="qvOverlay" class="qv-modal-overlay" onclick="closeQuickView(event)">
   <div class="qv-modal" onclick="event.stopPropagation()">
     <button class="qv-close-btn" onclick="closeQuickView()"><i class="fas fa-times"></i></button>
@@ -206,10 +211,9 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
 // ========== CONFIGURATION ==========
 const ADMIN_SECRET = "littlecuddle2025";
 
-// ========== DEFAULT PRODUCTS (138 items, each with photos array) ==========
-// For simplicity, we keep original single photo as emoji, but structure includes photos array.
+// ========== DEFAULT PRODUCTS (138 items) ==========
 function buildDefaultProducts() {
-  const base = [
+  return [
     {id:1,  name:"Newborn Gift Set",        cat:"newborn",  desc:"Complete starter set: onesie, hat, mittens and booties.",            price:2800, disc:10, emo:"&#128118;", badge:"NEW",  photos:[]},
     {id:2,  name:"Baby Swaddle Blanket",    cat:"newborn",  desc:"Ultra-soft muslin swaddle blanket, breathable and gentle on skin.",  price:1200, disc:0,  emo:"&#129528;", badge:"",     photos:[]},
     {id:3,  name:"Baby Onesie Set (5pcs)",  cat:"clothing", desc:"5 soft cotton onesies in mixed colours, 0-3 months.",               price:2500, disc:15, emo:"&#128085;", badge:"HOT",  photos:[]},
@@ -222,7 +226,7 @@ function buildDefaultProducts() {
     {id:10, name:"Nursing Cover",           cat:"mother",   desc:"Breathable nursing cover for discreet breastfeeding on the go.",    price:1200, disc:0,  emo:"&#128155;", badge:"",     photos:[]},
     {id:11, name:"Diaper Bag Backpack",     cat:"newborn",  desc:"Large capacity waterproof organiser bag with USB charging port.",   price:3800, disc:15, emo:"&#127890;", badge:"HOT",  photos:[]},
     {id:12, name:"Baby Monitor",            cat:"newborn",  desc:"Digital audio baby monitor with long range and clear sound.",       price:5500, disc:0,  emo:"&#128251;", badge:"",     photos:[]},
-    {id:101, name:"18x18 Printed Nappi Single (12pcs)", cat:"newborn", desc:"Pack of 12 printed nappies, soft cotton.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:101, name:"18x18 Printed Nappi Single (12pcs)", cat:"newborn", desc:"Pack of 12 printed nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
     {id:102, name:"18x18 Plain Nappi Single (6pcs)",   cat:"newborn", desc:"Pack of 6 plain white nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
     {id:103, name:"22x22 Printed Nappi Double (6pcs)", cat:"newborn", desc:"6 double-layered printed nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
     {id:104, name:"22x22 Plain Nappi Double (6pcs)",   cat:"newborn", desc:"6 double-layered plain nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
@@ -261,20 +265,17 @@ function buildDefaultProducts() {
     {id:137, name:"Cloth Hanger (1pc)",                cat:"mother",  desc:"Durable hanger.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
     {id:138, name:"Cloth Clips (1 Set)",               cat:"mother",  desc:"Set of clips.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]}
   ];
-  // assign an empty photos array for each (will be populated later)
-  return base;
 }
 
 let products = [];
 let cart = [];
 let adminMode = false;
 let editingId = null;
-let currentView = "grid";
 let currentQuickViewProduct = null;
 let qvQty = 1;
 let qvCurrentPhotoIndex = 0;
+let selectedCategories = ["all"]; // array of selected category names
 
-// Helper to convert legacy photo field to photos array
 function migrateProduct(p) {
   if (!p.photos) {
     if (p.photo && typeof p.photo === 'string' && p.photo.startsWith('data:')) {
@@ -282,7 +283,7 @@ function migrateProduct(p) {
     } else {
       p.photos = [];
     }
-    delete p.photo; // remove old field
+    delete p.photo;
   }
   return p;
 }
@@ -326,7 +327,8 @@ function checkAdminSecret() {
   if(params.get("admin") === ADMIN_SECRET) {
     adminMode = true;
     document.getElementById("adminModeBadge").style.display = "block";
-    document.querySelectorAll(".admin-edit-btn, .admin-del-btn").forEach(el => el.style.display = "flex");
+    // Re-render products to show edit/delete buttons
+    applyFilters();
     if(!document.getElementById("addProductBtn")) {
       const btn = document.createElement("button");
       btn.id = "addProductBtn";
@@ -339,39 +341,102 @@ function checkAdminSecret() {
   }
 }
 
-let curCat = "all";
-function setCat(cat, btn) {
-  curCat = cat;
-  document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));
-  if(btn) btn.classList.add("active");
+// ---------- MULTI-CATEGORY FILTERING (fixed) ----------
+function buildCategoryCheckboxes() {
+  const cats = ["all", "newborn", "clothing", "feeding", "bath", "mother"];
+  const container = document.getElementById("cat-filter-multi");
+  if(!container) return;
+  let html = "";
+  cats.forEach(cat => {
+    const displayName = cat === "all" ? "All Categories" : cat.charAt(0).toUpperCase() + cat.slice(1);
+    html += `<label class="cat-checkbox">
+      <input type="checkbox" value="${cat}" ${selectedCategories.includes(cat) ? 'checked' : ''} onchange="toggleCategory('${cat}', this.checked)">
+      <span>${displayName}</span>
+      <span class="count" id="cnt-${cat}">0</span>
+    </label>`;
+  });
+  container.innerHTML = html;
+}
+
+function toggleCategory(cat, isChecked) {
+  if(cat === "all") {
+    if(isChecked) {
+      // Select all, uncheck all individual categories
+      selectedCategories = ["all"];
+      document.querySelectorAll('.cat-checkbox input[value]').forEach(cb => {
+        if(cb.value !== "all") cb.checked = false;
+      });
+    } else {
+      // Unchecking "All" does nothing if no other category is selected; we'll keep "All" checked.
+      // To allow deselecting "All", we would need to ensure at least one category remains.
+      // Better: if unchecking "All", we select all individual categories.
+      if(selectedCategories.includes("all")) {
+        selectedCategories = ["newborn", "clothing", "feeding", "bath", "mother"];
+        document.querySelectorAll('.cat-checkbox input[value]').forEach(cb => {
+          if(cb.value !== "all") cb.checked = true;
+        });
+        document.getElementById("cat-filter-multi").querySelector('input[value="all"]').checked = false;
+      }
+    }
+  } else {
+    if(isChecked) {
+      // Remove "all" if present
+      selectedCategories = selectedCategories.filter(c => c !== "all");
+      if(!selectedCategories.includes(cat)) selectedCategories.push(cat);
+      // Uncheck the "All" checkbox
+      const allCheckbox = document.getElementById("cat-filter-multi").querySelector('input[value="all"]');
+      if(allCheckbox) allCheckbox.checked = false;
+    } else {
+      selectedCategories = selectedCategories.filter(c => c !== cat);
+      if(selectedCategories.length === 0) {
+        selectedCategories = ["all"];
+        const allCheckbox = document.getElementById("cat-filter-multi").querySelector('input[value="all"]');
+        if(allCheckbox) allCheckbox.checked = true;
+      }
+    }
+  }
   applyFilters();
 }
+
+function updateCategoryCounts() {
+  const cats = ["all","newborn","clothing","feeding","bath","mother"];
+  cats.forEach(c => {
+    const cnt = c === "all" ? products.length : products.filter(p => p.cat === c).length;
+    const el = document.getElementById(`cnt-${c}`);
+    if(el) el.textContent = cnt;
+  });
+}
+
 function applyFilters() {
-  const search = (document.getElementById("search-inp").value||"").toLowerCase();
+  const search = (document.getElementById("search-inp").value || "").toLowerCase();
   const sort = document.getElementById("sort-sel").value;
-  const minP = parseFloat(document.getElementById("price-min").value)||0;
-  const maxP = parseFloat(document.getElementById("price-max").value)||Infinity;
+  const minP = parseFloat(document.getElementById("price-min").value) || 0;
+  const maxP = parseFloat(document.getElementById("price-max").value) || Infinity;
   let list = products.filter(p => {
     const price = dp(p);
-    return (curCat==="all" || p.cat===curCat) && (!search || p.name.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search)) && price>=minP && price<=maxP;
+    const catMatch = selectedCategories.includes("all") || selectedCategories.includes(p.cat);
+    const searchMatch = !search || p.name.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search);
+    const priceMatch = price >= minP && price <= maxP;
+    return catMatch && searchMatch && priceMatch;
   });
-  if(sort==="price-low") list.sort((a,b)=>dp(a)-dp(b));
-  else if(sort==="price-high") list.sort((a,b)=>dp(b)-dp(a));
-  else if(sort==="discount") list.sort((a,b)=>b.disc-a.disc);
-  else if(sort==="name") list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(sort === "price-low") list.sort((a,b) => dp(a) - dp(b));
+  else if(sort === "price-high") list.sort((a,b) => dp(b) - dp(a));
+  else if(sort === "discount") list.sort((a,b) => b.disc - a.disc);
+  else if(sort === "name") list.sort((a,b) => a.name.localeCompare(b.name));
   document.getElementById("prod-count").textContent = list.length;
   renderProducts(list);
 }
+
 function clearFilters() {
-  curCat="all";
-  document.getElementById("search-inp").value="";
-  document.getElementById("price-min").value="";
-  document.getElementById("price-max").value="";
-  document.getElementById("sort-sel").value="default";
-  document.querySelectorAll(".cat-btn").forEach(b=>b.classList.remove("active"));
-  document.querySelector('.cat-btn[onclick*="all"]').classList.add("active");
+  document.getElementById("search-inp").value = "";
+  document.getElementById("price-min").value = "";
+  document.getElementById("price-max").value = "";
+  document.getElementById("sort-sel").value = "default";
+  selectedCategories = ["all"];
+  buildCategoryCheckboxes();
   applyFilters();
 }
+
 function renderProducts(list) {
   const container = document.getElementById("pgrid");
   if(!list.length) { container.innerHTML='<div class="empty-state" style="grid-column:1/-1;text-align:center;padding:60px"><i class="fas fa-search"></i><h3>No products found</h3></div>'; return; }
@@ -400,16 +465,8 @@ function renderProducts(list) {
   container.innerHTML = html;
   updateCategoryCounts();
 }
-function updateCategoryCounts() {
-  const cats = ["all","newborn","clothing","feeding","bath","mother"];
-  cats.forEach(c => {
-    const cnt = c==="all" ? products.length : products.filter(p=>p.cat===c).length;
-    const el = document.getElementById(`cnt-${c}`);
-    if(el) el.textContent = cnt;
-  });
-}
 
-// ---------- QUICK VIEW WITH CAROUSEL ----------
+// ---------- QUICK VIEW (unchanged) ----------
 function openQuickView(id) {
   const product = products.find(p => p.id === id);
   if(!product) return;
@@ -424,7 +481,6 @@ function updateQuickViewModal() {
   const p = currentQuickViewProduct;
   const price = dp(p);
   const discHtml = p.disc>0 ? `<span class="qv-orig">Rs. ${p.price.toLocaleString()}</span><span class="qv-save">Save ${p.disc}%</span>` : "";
-  // Update image carousel
   const photos = (p.photos && p.photos.length) ? p.photos : [];
   const hasMultiple = photos.length >= 2;
   const leftArrow = document.getElementById("qvArrowLeft");
@@ -437,7 +493,6 @@ function updateQuickViewModal() {
     rightArrow.style.display = "none";
   }
   renderCurrentPhoto();
-  // Update details area (same as before)
   document.getElementById("qvDetails").innerHTML = `
     <div class="qv-cat">${p.cat}</div>
     <div class="qv-name">${p.name}</div>
@@ -468,49 +523,13 @@ function renderCurrentPhoto() {
   }
   document.getElementById("qvCurrentImage").innerHTML = imgHtml;
 }
-function qvNextPhoto() {
-  const p = currentQuickViewProduct;
-  const photos = (p.photos && p.photos.length) ? p.photos : [];
-  if(photos.length <= 1) return;
-  qvCurrentPhotoIndex = (qvCurrentPhotoIndex + 1) % photos.length;
-  renderCurrentPhoto();
-}
-function qvPrevPhoto() {
-  const p = currentQuickViewProduct;
-  const photos = (p.photos && p.photos.length) ? p.photos : [];
-  if(photos.length <= 1) return;
-  qvCurrentPhotoIndex = (qvCurrentPhotoIndex - 1 + photos.length) % photos.length;
-  renderCurrentPhoto();
-}
-function changeQvQty(delta) {
-  qvQty = Math.max(1, qvQty + delta);
-  document.getElementById("qvQtyVal").innerText = qvQty;
-  if(currentQuickViewProduct) {
-    const price = dp(currentQuickViewProduct);
-    const btn = document.querySelector(".btn-qv-add");
-    if(btn) btn.innerHTML = `<i class="fas fa-cart-plus"></i> Add to Cart — Rs. ${(price * qvQty).toLocaleString()}`;
-  }
-}
-function addToCartFromQuickView() {
-  if(currentQuickViewProduct) {
-    addToCart(currentQuickViewProduct.id, qvQty);
-    closeQuickView();
-  }
-}
-function chatAboutProduct() {
-  if(currentQuickViewProduct) {
-    const msg = `Hello Little Cuddle! I'm interested in the product: ${currentQuickViewProduct.name}. Could you please provide more details? Thank you!`;
-    window.open(`https://wa.me/94766787992?text=${encodeURIComponent(msg)}`, "_blank");
-  }
-}
-function closeQuickView(event) {
-  if(event && event.target !== event.currentTarget && event.target !== document.getElementById("qvOverlay")) return;
-  document.getElementById("qvOverlay").style.display = "none";
-  currentQuickViewProduct = null;
-  qvQty = 1;
-  qvCurrentPhotoIndex = 0;
-}
-// Arrow event listeners (bind after DOM ready)
+function qvNextPhoto() { const p = currentQuickViewProduct; const photos = (p.photos && p.photos.length) ? p.photos : []; if(photos.length <= 1) return; qvCurrentPhotoIndex = (qvCurrentPhotoIndex + 1) % photos.length; renderCurrentPhoto(); }
+function qvPrevPhoto() { const p = currentQuickViewProduct; const photos = (p.photos && p.photos.length) ? p.photos : []; if(photos.length <= 1) return; qvCurrentPhotoIndex = (qvCurrentPhotoIndex - 1 + photos.length) % photos.length; renderCurrentPhoto(); }
+function changeQvQty(delta) { qvQty = Math.max(1, qvQty + delta); document.getElementById("qvQtyVal").innerText = qvQty; if(currentQuickViewProduct) { const price = dp(currentQuickViewProduct); const btn = document.querySelector(".btn-qv-add"); if(btn) btn.innerHTML = `<i class="fas fa-cart-plus"></i> Add to Cart — Rs. ${(price * qvQty).toLocaleString()}`; } }
+function addToCartFromQuickView() { if(currentQuickViewProduct) { addToCart(currentQuickViewProduct.id, qvQty); closeQuickView(); } }
+function chatAboutProduct() { if(currentQuickViewProduct) { const msg = `Hello Little Cuddle! I'm interested in the product: ${currentQuickViewProduct.name}. Could you please provide more details? Thank you!`; window.open(`https://wa.me/94766787992?text=${encodeURIComponent(msg)}`, "_blank"); } }
+function closeQuickView(event) { if(event && event.target !== event.currentTarget && event.target !== document.getElementById("qvOverlay")) return; document.getElementById("qvOverlay").style.display = "none"; currentQuickViewProduct = null; qvQty = 1; qvCurrentPhotoIndex = 0; }
+
 document.getElementById("qvArrowLeft")?.addEventListener("click", (e) => { e.stopPropagation(); qvPrevPhoto(); });
 document.getElementById("qvArrowRight")?.addEventListener("click", (e) => { e.stopPropagation(); qvNextPhoto(); });
 
@@ -561,7 +580,7 @@ function showToast(msg) { const t=document.getElementById("toast"); t.innerHTML=
 let wishlist = JSON.parse(localStorage.getItem("lc_wish")||"[]");
 function toggleWish(id) { const idx = wishlist.indexOf(id); if(idx>=0) wishlist.splice(idx,1); else wishlist.push(id); localStorage.setItem("lc_wish", JSON.stringify(wishlist)); showToast(wishlist.includes(id) ? "Added to wishlist" : "Removed from wishlist"); }
 
-// ---------- ADMIN FUNCTIONS (with two photo uploads) ----------
+// ---------- ADMIN FUNCTIONS (with edit/delete) ----------
 function editProduct(id) {
   if(!adminMode) return;
   const p = products.find(x=>x.id===id);
@@ -575,7 +594,6 @@ function editProduct(id) {
   document.getElementById("prodDisc").value = p.disc;
   document.getElementById("prodBadge").value = p.badge || "";
   document.getElementById("prodEmo").value = p.emo;
-  // preview photos
   const photos = p.photos || [];
   const preview1 = document.getElementById("prodPhotoPreview1");
   const preview2 = document.getElementById("prodPhotoPreview2");
@@ -652,7 +670,7 @@ function saveProductFinal(name, cat, desc, price, disc, badge, emo, photos) {
     }
   } else {
     const newId = Date.now();
-    products.push({id:newId, name, cat, desc, price, disc, badge, emo, photos: photos || []});
+    products.push({id:newId, name, cat, desc, price, disc, badge, emo, photos});
   }
   saveProducts();
   closeAdminModal();
@@ -664,9 +682,8 @@ document.getElementById("prodPhoto1").addEventListener("change", function(e) {
   if(e.target.files && e.target.files[0]) {
     const reader = new FileReader();
     reader.onload = function(ev) {
-      const preview = document.getElementById("prodPhotoPreview1");
-      preview.src = ev.target.result;
-      preview.style.display = "block";
+      document.getElementById("prodPhotoPreview1").src = ev.target.result;
+      document.getElementById("prodPhotoPreview1").style.display = "block";
     };
     reader.readAsDataURL(e.target.files[0]);
   }
@@ -675,9 +692,8 @@ document.getElementById("prodPhoto2").addEventListener("change", function(e) {
   if(e.target.files && e.target.files[0]) {
     const reader = new FileReader();
     reader.onload = function(ev) {
-      const preview = document.getElementById("prodPhotoPreview2");
-      preview.src = ev.target.result;
-      preview.style.display = "block";
+      document.getElementById("prodPhotoPreview2").src = ev.target.result;
+      document.getElementById("prodPhotoPreview2").style.display = "block";
     };
     reader.readAsDataURL(e.target.files[0]);
   }
@@ -688,7 +704,8 @@ function importData() { const inp = document.getElementById("importFile"); inp.o
 window.onclick = function(e) { if(e.target === document.getElementById("adminModal")) closeAdminModal(); };
 document.getElementById("resetShopBtn").addEventListener("click", resetToDefaultProducts);
 
-loadProducts(); loadCart(); renderCart(); updateCartBadge(); checkAdminSecret(); applyFilters();
+// ---------- INITIALIZATION ----------
+loadProducts(); loadCart(); renderCart(); updateCartBadge(); buildCategoryCheckboxes(); applyFilters(); checkAdminSecret();
 </script>
 </body>
 </html>
