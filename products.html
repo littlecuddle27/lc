@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-/* ========== STYLES (same as before) ========== */
+/* ========== STYLES (same as before, with price filter vertical) ========== */
 :root{
   --pk:#e91e8c; --pkl:#fce4ec; --pkm:#f48fb1;
   --bl:#1565c0; --bll:#e3f2fd; --blm:#90caf9;
@@ -42,7 +42,8 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
 .cat-checkbox{display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;font-weight:600;font-size:.85rem;color:var(--text)}
 .cat-checkbox input{width:18px;height:18px;cursor:pointer;accent-color:var(--pk)}
 .cat-checkbox .count{ margin-left:auto; background:var(--bll); color:var(--bl); font-size:.7rem; font-weight:800; padding:2px 8px; border-radius:50px}
-.price-filter .price-range{display:flex;gap:8px;margin-bottom:8px}.price-filter input{flex:1;padding:7px 9px;border:2px solid var(--bll);border-radius:9px;outline:none}
+.price-filter{display:flex;flex-direction:column;gap:10px}
+.price-filter input{width:100%;padding:7px 9px;border:2px solid var(--bll);border-radius:9px;outline:none}
 .sort-sel{width:100%;padding:9px 12px;border:2px solid var(--bll);border-radius:10px;background:#fff;cursor:pointer}.btn-clear{width:100%;background:var(--pkl);color:var(--pk);border:none;padding:9px;border-radius:10px;font-weight:700;cursor:pointer;margin-top:8px}
 .products-area{flex:1}.products-toolbar{display:flex;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;align-items:center}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
@@ -153,7 +154,7 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
       <div class="cat-filter-multi" id="cat-filter-multi"></div>
     </div>
     <div class="filter-card"><h3><i class="fas fa-sort"></i> Sort By</h3><select class="sort-sel" id="sort-sel" onchange="applyFilters()"><option value="default">Default</option><option value="price-low">Price: Low to High</option><option value="price-high">Price: High to Low</option><option value="discount">Biggest Discount</option><option value="name">Name A-Z</option></select></div>
-    <div class="filter-card"><h3><i class="fas fa-rupee-sign"></i> Price Range</h3><div class="price-filter"><div class="price-range"><input type="number" id="price-min" placeholder="Min Rs." oninput="applyFilters()"><input type="number" id="price-max" placeholder="Max Rs." oninput="applyFilters()"></div></div></div>
+    <div class="filter-card"><h3><i class="fas fa-rupee-sign"></i> Price Range</h3><div class="price-filter"><input type="number" id="price-min" placeholder="Min Rs." oninput="applyFilters()"><input type="number" id="price-max" placeholder="Max Rs." oninput="applyFilters()"></div></div>
     <button class="btn-clear" onclick="clearFilters()"><i class="fas fa-times"></i> Clear All Filters</button>
   </div>
   <div class="products-area"><div class="products-toolbar"><div class="toolbar-left">Showing <span id="prod-count">0</span> products</div><div style="visibility:hidden"></div></div><div class="pgrid" id="pgrid"></div></div>
@@ -198,11 +199,27 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
   </div>
 </div>
 
-<!-- Admin Modal -->
-<div id="adminModal" class="admin-modal"><div class="admin-modal-content"><button class="modal-close" onclick="closeAdminModal()">&times;</button><h3 id="adminModalTitle">Edit Product</h3><form id="adminForm"><div class="admin-form-group"><label>Name</label><input type="text" id="prodName" required></div><div class="admin-form-group"><label>Category</label><select id="prodCat"><option value="newborn">Newborn</option><option value="clothing">Clothing</option><option value="feeding">Feeding</option><option value="bath">Bath & Care</option><option value="mother">Mother Care</option></select></div><div class="admin-form-group"><label>Description</label><textarea id="prodDesc" rows="2"></textarea></div><div class="admin-form-group"><label>Price (Rs.)</label><input type="number" id="prodPrice" required></div><div class="admin-form-group"><label>Discount (%)</label><input type="number" id="prodDisc" value="0"></div><div class="admin-form-group"><label>Badge (NEW, HOT, SALE or empty)</label><input type="text" id="prodBadge" placeholder="NEW / HOT / SALE"></div><div class="admin-form-group"><label>Emoji (fallback icon)</label><input type="text" id="prodEmo" placeholder="e.g., &#128118;"></div>
-<div class="admin-form-group"><label>Photo 1 (primary)</label><input type="file" id="prodPhoto1" accept="image/jpeg,image/png,image/webp"><img id="prodPhotoPreview1" class="image-preview" style="display:none"></div>
-<div class="admin-form-group"><label>Photo 2 (optional)</label><input type="file" id="prodPhoto2" accept="image/jpeg,image/png,image/webp"><img id="prodPhotoPreview2" class="image-preview" style="display:none"></div>
-<div class="admin-buttons"><button type="button" class="btn-cancel" onclick="closeAdminModal()">Cancel</button><button type="submit" class="btn-save">Save Product</button></div></form><div class="export-import"><button onclick="exportData()"><i class="fas fa-download"></i> Export Products</button><button onclick="importData()"><i class="fas fa-upload"></i> Import Products</button><input type="file" id="importFile" style="display:none" accept="application/json"></div><button id="resetShopBtn" style="margin-top:15px;background:#e53935;color:#fff;border:none;padding:8px;border-radius:40px;font-weight:800;cursor:pointer;width:100%">🔄 Reset to Default Products</button></div></div>
+<!-- Admin Modal (multi-category checkboxes) -->
+<div id="adminModal" class="admin-modal"><div class="admin-modal-content"><button class="modal-close" onclick="closeAdminModal()">&times;</button><h3 id="adminModalTitle">Edit Product</h3><form id="adminForm">
+  <div class="admin-form-group"><label>Name</label><input type="text" id="prodName" required></div>
+  <div class="admin-form-group"><label>Categories (select one or more)</label>
+    <div id="prodCategoriesContainer" style="display:flex; flex-wrap:wrap; gap:12px; margin-top:5px">
+      <label style="display:flex; align-items:center; gap:6px"><input type="checkbox" value="newborn"> Newborn</label>
+      <label style="display:flex; align-items:center; gap:6px"><input type="checkbox" value="clothing"> Clothing</label>
+      <label style="display:flex; align-items:center; gap:6px"><input type="checkbox" value="feeding"> Feeding</label>
+      <label style="display:flex; align-items:center; gap:6px"><input type="checkbox" value="bath"> Bath & Care</label>
+      <label style="display:flex; align-items:center; gap:6px"><input type="checkbox" value="mother"> Mother Care</label>
+    </div>
+  </div>
+  <div class="admin-form-group"><label>Description</label><textarea id="prodDesc" rows="2"></textarea></div>
+  <div class="admin-form-group"><label>Price (Rs.)</label><input type="number" id="prodPrice" required></div>
+  <div class="admin-form-group"><label>Discount (%)</label><input type="number" id="prodDisc" value="0"></div>
+  <div class="admin-form-group"><label>Badge (NEW, HOT, SALE or empty)</label><input type="text" id="prodBadge" placeholder="NEW / HOT / SALE"></div>
+  <div class="admin-form-group"><label>Emoji (fallback icon)</label><input type="text" id="prodEmo" placeholder="e.g., &#128118;"></div>
+  <div class="admin-form-group"><label>Photo 1 (primary)</label><input type="file" id="prodPhoto1" accept="image/jpeg,image/png,image/webp"><img id="prodPhotoPreview1" class="image-preview" style="display:none"></div>
+  <div class="admin-form-group"><label>Photo 2 (optional)</label><input type="file" id="prodPhoto2" accept="image/jpeg,image/png,image/webp"><img id="prodPhotoPreview2" class="image-preview" style="display:none"></div>
+  <div class="admin-buttons"><button type="button" class="btn-cancel" onclick="closeAdminModal()">Cancel</button><button type="submit" class="btn-save">Save Product</button></div>
+</form><div class="export-import"><button onclick="exportData()"><i class="fas fa-download"></i> Export Products</button><button onclick="importData()"><i class="fas fa-upload"></i> Import Products</button><input type="file" id="importFile" style="display:none" accept="application/json"></div><button id="resetShopBtn" style="margin-top:15px;background:#e53935;color:#fff;border:none;padding:8px;border-radius:40px;font-weight:800;cursor:pointer;width:100%">🔄 Reset to Default Products</button></div></div>
 
 <div class="toast" id="toast"></div>
 <div id="adminModeBadge" class="admin-mode-badge">🔧 Admin Mode Active</div>
@@ -210,61 +227,64 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
 <script>
 // ========== CONFIGURATION ==========
 const ADMIN_SECRET = "littlecuddle2025";
+const ALL_CATEGORIES = ["newborn","clothing","feeding","bath","mother"];
 
-// ========== DEFAULT PRODUCTS (138 items) ==========
+// ========== DEFAULT PRODUCTS (with multiple categories) ==========
+// For simplicity, all default products keep a single cat (converted to array)
 function buildDefaultProducts() {
-  return [
-    {id:1,  name:"Newborn Gift Set",        cat:"newborn",  desc:"Complete starter set: onesie, hat, mittens and booties.",            price:2800, disc:10, emo:"&#128118;", badge:"NEW",  photos:[]},
-    {id:2,  name:"Baby Swaddle Blanket",    cat:"newborn",  desc:"Ultra-soft muslin swaddle blanket, breathable and gentle on skin.",  price:1200, disc:0,  emo:"&#129528;", badge:"",     photos:[]},
-    {id:3,  name:"Baby Onesie Set (5pcs)",  cat:"clothing", desc:"5 soft cotton onesies in mixed colours, 0-3 months.",               price:2500, disc:15, emo:"&#128085;", badge:"HOT",  photos:[]},
-    {id:4,  name:"Newborn Sleepsuit",       cat:"clothing", desc:"Warm cosy all-in-one sleepsuit for nighttime comfort.",              price:1500, disc:0,  emo:"&#127769;", badge:"",     photos:[]},
-    {id:5,  name:"Baby Feeding Bottle Set", cat:"feeding",  desc:"Anti-colic BPA-free feeding bottles, 3 sizes included.",            price:1800, disc:10, emo:"&#127868;", badge:"",     photos:[]},
-    {id:6,  name:"Breast Pump (Manual)",    cat:"feeding",  desc:"Ergonomic manual breast pump, soft silicone, easy to clean.",       price:3500, disc:20, emo:"&#129329;", badge:"SALE", photos:[]},
-    {id:7,  name:"Baby Bath Kit",           cat:"bath",     desc:"Complete bath set: shampoo, lotion, wash and soft brush.",          price:2200, disc:0,  emo:"&#128705;", badge:"",     photos:[]},
-    {id:8,  name:"Baby Skincare Set",       cat:"bath",     desc:"Gentle moisturiser and powder for sensitive baby skin.",            price:1600, disc:5,  emo:"&#129396;", badge:"",     photos:[]},
-    {id:9,  name:"Maternity Pillow",        cat:"mother",   desc:"Full-body U-shaped pillow for pregnancy support and comfort.",      price:4500, disc:10, emo:"&#127800;", badge:"NEW",  photos:[]},
-    {id:10, name:"Nursing Cover",           cat:"mother",   desc:"Breathable nursing cover for discreet breastfeeding on the go.",    price:1200, disc:0,  emo:"&#128155;", badge:"",     photos:[]},
-    {id:11, name:"Diaper Bag Backpack",     cat:"newborn",  desc:"Large capacity waterproof organiser bag with USB charging port.",   price:3800, disc:15, emo:"&#127890;", badge:"HOT",  photos:[]},
-    {id:12, name:"Baby Monitor",            cat:"newborn",  desc:"Digital audio baby monitor with long range and clear sound.",       price:5500, disc:0,  emo:"&#128251;", badge:"",     photos:[]},
-    {id:101, name:"18x18 Printed Nappi Single (12pcs)", cat:"newborn", desc:"Pack of 12 printed nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
-    {id:102, name:"18x18 Plain Nappi Single (6pcs)",   cat:"newborn", desc:"Pack of 6 plain white nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
-    {id:103, name:"22x22 Printed Nappi Double (6pcs)", cat:"newborn", desc:"6 double-layered printed nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
-    {id:104, name:"22x22 Plain Nappi Double (6pcs)",   cat:"newborn", desc:"6 double-layered plain nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
-    {id:105, name:"Baby Printed Gown (6pcs)",          cat:"clothing",desc:"Set of 6 printed baby gowns.", price:500, disc:0, emo:"&#128090;", badge:"", photos:[]},
-    {id:106, name:"Baby Muslin Gown (6pcs)",           cat:"clothing",desc:"6 muslin gowns.", price:500, disc:0, emo:"&#128090;", badge:"", photos:[]},
-    {id:107, name:"Flannel Blanket (Kolko) (4pcs)",    cat:"newborn", desc:"4 soft flannel blankets.", price:500, disc:0, emo:"&#129528;", badge:"", photos:[]},
-    {id:108, name:"Baby Soft Blanket (1pc)",           cat:"newborn", desc:"Extra soft blanket.", price:500, disc:0, emo:"&#129528;", badge:"", photos:[]},
-    {id:109, name:"Printed Towel Set (S/D) (1 Set)",   cat:"bath",    desc:"Set of small and large printed baby towels.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
-    {id:110, name:"Baby Wool Suit (1pc)",              cat:"clothing",desc:"Warm wool suit.", price:500, disc:0, emo:"&#128090;", badge:"", photos:[]},
-    {id:111, name:"Baby Rubber Sheet (1pc)",           cat:"newborn", desc:"Waterproof rubber sheet.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
-    {id:112, name:"Nipon Baby Bath Basin (1pc)",       cat:"bath",    desc:"Plastic baby bath basin.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
-    {id:113, name:"Rainco Mosquito Net (1pc)",         cat:"newborn", desc:"Protective mosquito net.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
-    {id:114, name:"Baby Hospital Bag (1pc)",           cat:"newborn", desc:"Spacious bag.", price:500, disc:0, emo:"&#127890;", badge:"", photos:[]},
-    {id:115, name:"Hospital Basket (1pc)",             cat:"newborn", desc:"Woven basket.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
-    {id:116, name:"Baby Care Kit (10 pcs)",            cat:"newborn", desc:"Complete care kit.", price:500, disc:0, emo:"&#129516;", badge:"", photos:[]},
-    {id:117, name:"Safety Pin (1pc)",                  cat:"newborn", desc:"Large safety pin.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
-    {id:118, name:"Nappy Pins (1pc)",                  cat:"newborn", desc:"Durable nappy pins.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
-    {id:119, name:"Baby Pillow Set & Mattress (1pc)",  cat:"newborn", desc:"Pillow with mattress.", price:500, disc:0, emo:"&#127912;", badge:"", photos:[]},
-    {id:120, name:"Baby Sleeping Bag (1pc)",           cat:"clothing",desc:"Wearable blanket.", price:500, disc:0, emo:"&#128164;", badge:"", photos:[]},
-    {id:121, name:"Mawal Baby Wet Wipes (1 Pack)",     cat:"bath",    desc:"Biodegradable wipes.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
-    {id:122, name:"Mawal Newborn Diaper (04) (1 Pack)",cat:"newborn", desc:"Pack of 4 newborn diapers.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
-    {id:123, name:"Cotton Balls (1 Pack)",             cat:"bath",    desc:"Pure cotton balls.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
-    {id:124, name:"Panda Baby Set (Powder/Wash/Cologne)", cat:"bath",desc:"3-piece set.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
-    {id:125, name:"Powder Puff (1pc)",                 cat:"bath",    desc:"Soft powder puff.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
-    {id:126, name:"Soap Case (1pc)",                   cat:"bath",    desc:"Travel case for soap.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
-    {id:127, name:"Bed Jacket (3pcs)",                 cat:"mother",  desc:"3 soft bed jackets.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:128, name:"Cotton Cheeta (3pcs)",              cat:"mother",  desc:"3 cotton cheetas.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:129, name:"White Bed Jacket (1pc)",            cat:"mother",  desc:"White bed jacket.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:130, name:"White Cheeta (1pc)",                cat:"mother",  desc:"White cheeta wrap.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:131, name:"Towel (1pc)",                       cat:"mother",  desc:"Soft towel.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:132, name:"Loop Pad (1pc)",                    cat:"mother",  desc:"Reusable loop pad.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:133, name:"Bic Lady Razor (1pc)",              cat:"mother",  desc:"Disposable razor.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:134, name:"Loop Belt (1pc)",                   cat:"mother",  desc:"Adjustable belt.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:135, name:"Wasti Bottle (1pc)",                cat:"mother",  desc:"Perineal wash bottle.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:136, name:"Cloth Rack (1pc)",                  cat:"mother",  desc:"Foldable drying rack.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:137, name:"Cloth Hanger (1pc)",                cat:"mother",  desc:"Durable hanger.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
-    {id:138, name:"Cloth Clips (1 Set)",               cat:"mother",  desc:"Set of clips.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]}
+  const base = [
+    {id:1,  categories:["newborn"], name:"Newborn Gift Set",        desc:"Complete starter set: onesie, hat, mittens and booties.",            price:2800, disc:10, emo:"&#128118;", badge:"NEW",  photos:[]},
+    {id:2,  categories:["newborn"], name:"Baby Swaddle Blanket",    desc:"Ultra-soft muslin swaddle blanket, breathable and gentle on skin.",  price:1200, disc:0,  emo:"&#129528;", badge:"",     photos:[]},
+    {id:3,  categories:["clothing"], name:"Baby Onesie Set (5pcs)",  desc:"5 soft cotton onesies in mixed colours, 0-3 months.",               price:2500, disc:15, emo:"&#128085;", badge:"HOT",  photos:[]},
+    {id:4,  categories:["clothing"], name:"Newborn Sleepsuit",       desc:"Warm cosy all-in-one sleepsuit for nighttime comfort.",              price:1500, disc:0,  emo:"&#127769;", badge:"",     photos:[]},
+    {id:5,  categories:["feeding"],  name:"Baby Feeding Bottle Set", desc:"Anti-colic BPA-free feeding bottles, 3 sizes included.",            price:1800, disc:10, emo:"&#127868;", badge:"",     photos:[]},
+    {id:6,  categories:["feeding"],  name:"Breast Pump (Manual)",    desc:"Ergonomic manual breast pump, soft silicone, easy to clean.",       price:3500, disc:20, emo:"&#129329;", badge:"SALE", photos:[]},
+    {id:7,  categories:["bath"],     name:"Baby Bath Kit",           desc:"Complete bath set: shampoo, lotion, wash and soft brush.",          price:2200, disc:0,  emo:"&#128705;", badge:"",     photos:[]},
+    {id:8,  categories:["bath"],     name:"Baby Skincare Set",       desc:"Gentle moisturiser and powder for sensitive baby skin.",            price:1600, disc:5,  emo:"&#129396;", badge:"",     photos:[]},
+    {id:9,  categories:["mother"],   name:"Maternity Pillow",        desc:"Full-body U-shaped pillow for pregnancy support and comfort.",      price:4500, disc:10, emo:"&#127800;", badge:"NEW",  photos:[]},
+    {id:10, categories:["mother"],   name:"Nursing Cover",           desc:"Breathable nursing cover for discreet breastfeeding on the go.",    price:1200, disc:0,  emo:"&#128155;", badge:"",     photos:[]},
+    {id:11, categories:["newborn"], name:"Diaper Bag Backpack",     desc:"Large capacity waterproof organiser bag with USB charging port.",   price:3800, disc:15, emo:"&#127890;", badge:"HOT",  photos:[]},
+    {id:12, categories:["newborn"], name:"Baby Monitor",            desc:"Digital audio baby monitor with long range and clear sound.",       price:5500, disc:0,  emo:"&#128251;", badge:"",     photos:[]},
+    {id:101, categories:["newborn"], name:"18x18 Printed Nappi Single (12pcs)", desc:"Pack of 12 printed nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:102, categories:["newborn"], name:"18x18 Plain Nappi Single (6pcs)",   desc:"Pack of 6 plain white nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:103, categories:["newborn"], name:"22x22 Printed Nappi Double (6pcs)", desc:"6 double-layered printed nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:104, categories:["newborn"], name:"22x22 Plain Nappi Double (6pcs)",   desc:"6 double-layered plain nappies.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:105, categories:["clothing"], name:"Baby Printed Gown (6pcs)",          desc:"Set of 6 printed baby gowns.", price:500, disc:0, emo:"&#128090;", badge:"", photos:[]},
+    {id:106, categories:["clothing"], name:"Baby Muslin Gown (6pcs)",           desc:"6 muslin gowns.", price:500, disc:0, emo:"&#128090;", badge:"", photos:[]},
+    {id:107, categories:["newborn"], name:"Flannel Blanket (Kolko) (4pcs)",    desc:"4 soft flannel blankets.", price:500, disc:0, emo:"&#129528;", badge:"", photos:[]},
+    {id:108, categories:["newborn"], name:"Baby Soft Blanket (1pc)",           desc:"Extra soft blanket.", price:500, disc:0, emo:"&#129528;", badge:"", photos:[]},
+    {id:109, categories:["bath"], name:"Printed Towel Set (S/D) (1 Set)",   desc:"Set of small and large printed baby towels.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
+    {id:110, categories:["clothing"], name:"Baby Wool Suit (1pc)",              desc:"Warm wool suit.", price:500, disc:0, emo:"&#128090;", badge:"", photos:[]},
+    {id:111, categories:["newborn"], name:"Baby Rubber Sheet (1pc)",           desc:"Waterproof rubber sheet.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:112, categories:["bath"], name:"Nipon Baby Bath Basin (1pc)",       desc:"Plastic baby bath basin.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
+    {id:113, categories:["newborn"], name:"Rainco Mosquito Net (1pc)",         desc:"Protective mosquito net.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:114, categories:["newborn"], name:"Baby Hospital Bag (1pc)",           desc:"Spacious bag.", price:500, disc:0, emo:"&#127890;", badge:"", photos:[]},
+    {id:115, categories:["newborn"], name:"Hospital Basket (1pc)",             desc:"Woven basket.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:116, categories:["newborn"], name:"Baby Care Kit (10 pcs)",            desc:"Complete care kit.", price:500, disc:0, emo:"&#129516;", badge:"", photos:[]},
+    {id:117, categories:["newborn"], name:"Safety Pin (1pc)",                  desc:"Large safety pin.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:118, categories:["newborn"], name:"Nappy Pins (1pc)",                  desc:"Durable nappy pins.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:119, categories:["newborn"], name:"Baby Pillow Set & Mattress (1pc)",  desc:"Pillow with mattress.", price:500, disc:0, emo:"&#127912;", badge:"", photos:[]},
+    {id:120, categories:["clothing"], name:"Baby Sleeping Bag (1pc)",           desc:"Wearable blanket.", price:500, disc:0, emo:"&#128164;", badge:"", photos:[]},
+    {id:121, categories:["bath"], name:"Mawal Baby Wet Wipes (1 Pack)",     desc:"Biodegradable wipes.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
+    {id:122, categories:["newborn"], name:"Mawal Newborn Diaper (04) (1 Pack)",desc:"Pack of 4 newborn diapers.", price:500, disc:0, emo:"&#128118;", badge:"", photos:[]},
+    {id:123, categories:["bath"], name:"Cotton Balls (1 Pack)",             desc:"Pure cotton balls.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
+    {id:124, categories:["bath"], name:"Panda Baby Set (Powder/Wash/Cologne)", desc:"3-piece set.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
+    {id:125, categories:["bath"], name:"Powder Puff (1pc)",                 desc:"Soft powder puff.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
+    {id:126, categories:["bath"], name:"Soap Case (1pc)",                   desc:"Travel case for soap.", price:500, disc:0, emo:"&#128705;", badge:"", photos:[]},
+    {id:127, categories:["mother"], name:"Bed Jacket (3pcs)",                 desc:"3 soft bed jackets.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:128, categories:["mother"], name:"Cotton Cheeta (3pcs)",              desc:"3 cotton cheetas.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:129, categories:["mother"], name:"White Bed Jacket (1pc)",            desc:"White bed jacket.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:130, categories:["mother"], name:"White Cheeta (1pc)",                desc:"White cheeta wrap.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:131, categories:["mother"], name:"Towel (1pc)",                       desc:"Soft towel.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:132, categories:["mother"], name:"Loop Pad (1pc)",                    desc:"Reusable loop pad.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:133, categories:["mother"], name:"Bic Lady Razor (1pc)",              desc:"Disposable razor.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:134, categories:["mother"], name:"Loop Belt (1pc)",                   desc:"Adjustable belt.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:135, categories:["mother"], name:"Wasti Bottle (1pc)",                desc:"Perineal wash bottle.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:136, categories:["mother"], name:"Cloth Rack (1pc)",                  desc:"Foldable drying rack.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:137, categories:["mother"], name:"Cloth Hanger (1pc)",                desc:"Durable hanger.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]},
+    {id:138, categories:["mother"], name:"Cloth Clips (1 Set)",               desc:"Set of clips.", price:500, disc:0, emo:"&#128155;", badge:"", photos:[]}
   ];
+  return base;
 }
 
 let products = [];
@@ -274,14 +294,21 @@ let editingId = null;
 let currentQuickViewProduct = null;
 let qvQty = 1;
 let qvCurrentPhotoIndex = 0;
-let selectedCategories = ["all"]; // array of selected category names
+let selectedCategories = ["all"]; // filter selection
 
 function migrateProduct(p) {
-  if (!p.photos) {
+  if (!p.categories) {
+    if (p.cat) {
+      p.categories = [p.cat];
+      delete p.cat;
+    } else {
+      p.categories = [];
+    }
+  }
+  if (!p.photos) p.photos = [];
+  if (p.photo) {
     if (p.photo && typeof p.photo === 'string' && p.photo.startsWith('data:')) {
       p.photos = [p.photo];
-    } else {
-      p.photos = [];
     }
     delete p.photo;
   }
@@ -327,7 +354,7 @@ function checkAdminSecret() {
   if(params.get("admin") === ADMIN_SECRET) {
     adminMode = true;
     document.getElementById("adminModeBadge").style.display = "block";
-    // Re-render products to show edit/delete buttons
+    // Force re-render to show edit/delete buttons
     applyFilters();
     if(!document.getElementById("addProductBtn")) {
       const btn = document.createElement("button");
@@ -341,9 +368,9 @@ function checkAdminSecret() {
   }
 }
 
-// ---------- MULTI-CATEGORY FILTERING (fixed) ----------
+// ---------- MULTI-CATEGORY FILTERING (checkbox) ----------
 function buildCategoryCheckboxes() {
-  const cats = ["all", "newborn", "clothing", "feeding", "bath", "mother"];
+  const cats = ["all", ...ALL_CATEGORIES];
   const container = document.getElementById("cat-filter-multi");
   if(!container) return;
   let html = "";
@@ -361,36 +388,31 @@ function buildCategoryCheckboxes() {
 function toggleCategory(cat, isChecked) {
   if(cat === "all") {
     if(isChecked) {
-      // Select all, uncheck all individual categories
       selectedCategories = ["all"];
       document.querySelectorAll('.cat-checkbox input[value]').forEach(cb => {
         if(cb.value !== "all") cb.checked = false;
       });
     } else {
-      // Unchecking "All" does nothing if no other category is selected; we'll keep "All" checked.
-      // To allow deselecting "All", we would need to ensure at least one category remains.
-      // Better: if unchecking "All", we select all individual categories.
+      // If unchecking "All" and no other category selected, select all individual
       if(selectedCategories.includes("all")) {
-        selectedCategories = ["newborn", "clothing", "feeding", "bath", "mother"];
+        selectedCategories = [...ALL_CATEGORIES];
         document.querySelectorAll('.cat-checkbox input[value]').forEach(cb => {
           if(cb.value !== "all") cb.checked = true;
         });
-        document.getElementById("cat-filter-multi").querySelector('input[value="all"]').checked = false;
+        document.querySelector('.cat-checkbox input[value="all"]').checked = false;
       }
     }
   } else {
     if(isChecked) {
-      // Remove "all" if present
       selectedCategories = selectedCategories.filter(c => c !== "all");
       if(!selectedCategories.includes(cat)) selectedCategories.push(cat);
-      // Uncheck the "All" checkbox
-      const allCheckbox = document.getElementById("cat-filter-multi").querySelector('input[value="all"]');
+      const allCheckbox = document.querySelector('.cat-checkbox input[value="all"]');
       if(allCheckbox) allCheckbox.checked = false;
     } else {
       selectedCategories = selectedCategories.filter(c => c !== cat);
       if(selectedCategories.length === 0) {
         selectedCategories = ["all"];
-        const allCheckbox = document.getElementById("cat-filter-multi").querySelector('input[value="all"]');
+        const allCheckbox = document.querySelector('.cat-checkbox input[value="all"]');
         if(allCheckbox) allCheckbox.checked = true;
       }
     }
@@ -399,9 +421,11 @@ function toggleCategory(cat, isChecked) {
 }
 
 function updateCategoryCounts() {
-  const cats = ["all","newborn","clothing","feeding","bath","mother"];
+  const cats = ["all", ...ALL_CATEGORIES];
   cats.forEach(c => {
-    const cnt = c === "all" ? products.length : products.filter(p => p.cat === c).length;
+    let cnt;
+    if(c === "all") cnt = products.length;
+    else cnt = products.filter(p => p.categories.includes(c)).length;
     const el = document.getElementById(`cnt-${c}`);
     if(el) el.textContent = cnt;
   });
@@ -414,7 +438,7 @@ function applyFilters() {
   const maxP = parseFloat(document.getElementById("price-max").value) || Infinity;
   let list = products.filter(p => {
     const price = dp(p);
-    const catMatch = selectedCategories.includes("all") || selectedCategories.includes(p.cat);
+    const catMatch = selectedCategories.includes("all") || p.categories.some(c => selectedCategories.includes(c));
     const searchMatch = !search || p.name.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search);
     const priceMatch = price >= minP && price <= maxP;
     return catMatch && searchMatch && priceMatch;
@@ -459,14 +483,14 @@ function renderProducts(list) {
                <button class="admin-del-btn" onclick="event.stopPropagation();deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>`;
     }
     html += `<div class="pc-img">${imgHtml}<div class="pc-overlay"><button class="btn-quick" onclick="event.stopPropagation();openQuickView(${p.id})"><i class="fas fa-eye"></i> Quick View</button></div></div>
-      <div class="pc-body"><div class="pc-cat">${p.cat}</div><div class="pc-name">${p.name}</div><div class="pc-desc">${p.desc}</div><div class="pc-pricing"><span class="pc-price">Rs. ${price.toLocaleString()}</span>${discHtml}</div>
+      <div class="pc-body"><div class="pc-cat">${p.categories ? p.categories[0] : ""}</div><div class="pc-name">${p.name}</div><div class="pc-desc">${p.desc}</div><div class="pc-pricing"><span class="pc-price">Rs. ${price.toLocaleString()}</span>${discHtml}</div>
       <button class="btn-add" onclick="event.stopPropagation();addToCart(${p.id},1)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div></div>`;
   });
   container.innerHTML = html;
   updateCategoryCounts();
 }
 
-// ---------- QUICK VIEW (unchanged) ----------
+// ---------- QUICK VIEW (unchanged, uses first category) ----------
 function openQuickView(id) {
   const product = products.find(p => p.id === id);
   if(!product) return;
@@ -494,7 +518,7 @@ function updateQuickViewModal() {
   }
   renderCurrentPhoto();
   document.getElementById("qvDetails").innerHTML = `
-    <div class="qv-cat">${p.cat}</div>
+    <div class="qv-cat">${p.categories ? p.categories[0] : ""}</div>
     <div class="qv-name">${p.name}</div>
     <div class="qv-desc">${p.desc}</div>
     <div class="qv-pricing"><span class="qv-price">Rs. ${price.toLocaleString()}</span>${discHtml}</div>
@@ -580,7 +604,7 @@ function showToast(msg) { const t=document.getElementById("toast"); t.innerHTML=
 let wishlist = JSON.parse(localStorage.getItem("lc_wish")||"[]");
 function toggleWish(id) { const idx = wishlist.indexOf(id); if(idx>=0) wishlist.splice(idx,1); else wishlist.push(id); localStorage.setItem("lc_wish", JSON.stringify(wishlist)); showToast(wishlist.includes(id) ? "Added to wishlist" : "Removed from wishlist"); }
 
-// ---------- ADMIN FUNCTIONS (with edit/delete) ----------
+// ---------- ADMIN FUNCTIONS (multi-category) ----------
 function editProduct(id) {
   if(!adminMode) return;
   const p = products.find(x=>x.id===id);
@@ -588,7 +612,11 @@ function editProduct(id) {
   editingId = id;
   document.getElementById("adminModalTitle").innerText = "Edit Product";
   document.getElementById("prodName").value = p.name;
-  document.getElementById("prodCat").value = p.cat;
+  // Set category checkboxes
+  const catCheckboxes = document.querySelectorAll("#prodCategoriesContainer input");
+  catCheckboxes.forEach(cb => {
+    cb.checked = p.categories.includes(cb.value);
+  });
   document.getElementById("prodDesc").value = p.desc;
   document.getElementById("prodPrice").value = p.price;
   document.getElementById("prodDisc").value = p.disc;
@@ -608,7 +636,7 @@ function addNewProduct() {
   editingId = null;
   document.getElementById("adminModalTitle").innerText = "Add New Product";
   document.getElementById("prodName").value = "";
-  document.getElementById("prodCat").value = "newborn";
+  document.querySelectorAll("#prodCategoriesContainer input").forEach(cb => cb.checked = false);
   document.getElementById("prodDesc").value = "";
   document.getElementById("prodPrice").value = "";
   document.getElementById("prodDisc").value = "0";
@@ -634,7 +662,7 @@ document.getElementById("adminForm").addEventListener("submit", (e) => {
   e.preventDefault();
   if(!adminMode) return;
   const name = document.getElementById("prodName").value.trim();
-  const cat = document.getElementById("prodCat").value;
+  const categories = Array.from(document.querySelectorAll("#prodCategoriesContainer input:checked")).map(cb => cb.value);
   const desc = document.getElementById("prodDesc").value.trim();
   const price = parseFloat(document.getElementById("prodPrice").value);
   const disc = parseInt(document.getElementById("prodDisc").value)||0;
@@ -658,19 +686,19 @@ document.getElementById("adminForm").addEventListener("submit", (e) => {
   processPhoto(file1, oldPhotos[0] || "", (p1) => {
     processPhoto(file2, oldPhotos[1] || "", (p2) => {
       const photos = [p1, p2].filter(p => p && p !== "");
-      saveProductFinal(name, cat, desc, price, disc, badge, emo, photos);
+      saveProductFinal(name, categories, desc, price, disc, badge, emo, photos);
     });
   });
 });
-function saveProductFinal(name, cat, desc, price, disc, badge, emo, photos) {
+function saveProductFinal(name, categories, desc, price, disc, badge, emo, photos) {
   if(editingId) {
     const idx = products.findIndex(p=>p.id===editingId);
     if(idx!==-1) {
-      products[idx] = {...products[idx], name, cat, desc, price, disc, badge, emo, photos};
+      products[idx] = {...products[idx], name, categories, desc, price, disc, badge, emo, photos};
     }
   } else {
     const newId = Date.now();
-    products.push({id:newId, name, cat, desc, price, disc, badge, emo, photos});
+    products.push({id:newId, name, categories, desc, price, disc, badge, emo, photos});
   }
   saveProducts();
   closeAdminModal();
