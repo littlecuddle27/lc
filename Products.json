@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "name": "Newborn Gift Set",
+    "cat": "newborn",
+    "desc": "Complete starter set: onesie, hat, mittens and booties.",
+    "price": 2800,
+    "disc": 10,
+    "emo": "👶",
+    "badge": "NEW",
+    "photo": ""
+  },
+  {
+    "id": 2,
+    "name": "Baby Swaddle Blanket",
+    "cat": "newborn",
+    "desc": "Ultra-soft muslin swaddle blanket, breathable and gentle.",
+    "price": 1200,
+    "disc": 0,
+    "emo": "🧸",
+    "badge": "",
+    "photo": ""
+  },
+  {
+    "id": 3,
+    "name": "Baby Onesie Set (5pcs)",
+    "cat": "clothing",
+    "desc": "5 soft cotton onesies in mixed colours, 0-3 months.",
+    "price": 2500,
+    "disc": 15,
+    "emo": "👕",
+    "badge": "HOT",
+    "photo": ""
+  },
+  {
+    "id": 4,
+    "name": "Newborn Sleepsuit",
+    "cat": "clothing",
+    "desc": "Warm cosy all-in-one sleepsuit for nighttime comfort.",
+    "price": 1500,
+    "disc": 0,
+    "emo": "🌙",
+    "badge": "",
+    "photo": ""
+  },
+  {
+    "id": 5,
+    "name": "Baby Feeding Bottle Set",
+    "cat": "feeding",
+    "desc": "Anti-colic BPA-free feeding bottles, 3 sizes included.",
+    "price": 1800,
+    "disc": 10,
+    "emo": "🍼",
+    "badge": "",
+    "photo": ""
+  },
+  {
+    "id": 6,
+    "name": "Breast Pump (Manual)",
+    "cat": "feeding",
+    "desc": "Ergonomic manual breast pump, soft silicone, easy to clean.",
+    "price": 3500,
+    "disc": 20,
+    "emo": "🤱",
+    "badge": "SALE",
+    "photo": ""
+  },
+  {
+    "id": 7,
+    "name": "Baby Bath Kit",
+    "cat": "bath",
+    "desc": "Complete bath set: shampoo, lotion, wash and soft brush.",
+    "price": 2200,
+    "disc": 0,
+    "emo": "🛁",
+    "badge": "",
+    "photo": ""
+  },
+  {
+    "id": 8,
+    "name": "Baby Skincare Set",
+    "cat": "bath",
+    "desc": "Gentle moisturiser and powder for sensitive baby skin.",
+    "price": 1600,
+    "disc": 5,
+    "emo": "🧴",
+    "badge": "",
+    "photo": ""
+  },
+  {
+    "id": 9,
+    "name": "Maternity Pillow",
+    "cat": "mother",
+    "desc": "Full-body U-shaped pillow for pregnancy support and comfort.",
+    "price": 4500,
+    "disc": 10,
+    "emo": "🌸",
+    "badge": "NEW",
+    "photo": ""
+  },
+  {
+    "id": 10,
+    "name": "Nursing Cover",
+    "cat": "mother",
+    "desc": "Breathable nursing cover for discreet breastfeeding on the go.",
+    "price": 1200,
+    "disc": 0,
+    "emo": "🤍",
+    "badge": "",
+    "photo": ""
+  },
+  {
+    "id": 11,
+    "name": "Diaper Bag Backpack",
+    "cat": "newborn",
+    "desc": "Large capacity waterproof organiser bag with USB charging port.",
+    "price": 3800,
+    "disc": 15,
+    "emo": "🎒",
+    "badge": "HOT",
+    "photo": ""
+  },
+  {
+    "id": 12,
+    "name": "Baby Monitor",
+    "cat": "newborn",
+    "desc": "Digital audio baby monitor with long range and clear sound.",
+    "price": 5500,
+    "disc": 0,
+    "emo": "📻",
+    "badge": "",
+    "photo": ""
+  }
+]
