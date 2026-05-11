@@ -4,11 +4,11 @@
     "name": "Newborn Gift Set",
     "cat": "newborn",
     "desc": "Complete starter set: onesie, hat, mittens and booties.",
-    "price": 2800,
+    "price": 2670,
     "disc": 10,
-    "emo": babynetpink.png,
+    "emo": "",
     "badge": "NEW",
-    "photo": babynetpink.png
+    "photo": ""
   },
   {
     "id": 2,
