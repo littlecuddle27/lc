@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-/* ========== ALL STYLES (unchanged – same as previous version) ========== */
+/* ========== ALL STYLES (same as before – kept intact) ========== */
 :root{
   --pk:#e91e8c; --pkl:#fce4ec; --pkm:#f48fb1;
   --bl:#1565c0; --bll:#e3f2fd; --blm:#90caf9;
@@ -80,27 +80,10 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
 .crow.grand{font-size:1.25rem;color:var(--pk);margin-top:9px;padding-top:9px;border-top:1px dashed var(--pkl)}.delivery-note{font-size:.7rem;color:var(--tl);text-align:center;margin-top:8px;font-weight:600}
 .btn-co{width:100%;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;padding:14px;border-radius:13px;font-weight:800;font-size:.97rem;margin-top:11px;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer}
 .btn-co:hover{transform:translateY(-2px)}.page-footer{background:linear-gradient(135deg,#0d2b6b,#1565c0);color:#fff;padding:28px;text-align:center;margin-top:40px}.toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--grad);color:#fff;padding:10px 22px;border-radius:50px;font-weight:700;z-index:2000;opacity:0;transition:all .32s;white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.admin-edit-btn,.admin-del-btn{position:absolute;bottom:10px;right:10px;background:#fff;border:none;border-radius:30px;width:30px;height:30px;font-size:.8rem;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.1);z-index:5;display:flex;align-items:center;justify-content:center;transition:0.2s;opacity:0;visibility:hidden}
-.admin-mode-active .admin-edit-btn, .admin-mode-active .admin-del-btn{opacity:1;visibility:visible}
-.admin-edit-btn{right:50px;background:var(--bl);color:#fff}.admin-del-btn{background:#e53935;color:#fff}
-.add-product-btn{background:var(--pk);color:#fff;border:none;padding:8px 20px;border-radius:40px;font-weight:800;margin-right:15px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
-.admin-mode-badge{position:fixed;top:80px;right:20px;background:var(--pk);color:#fff;padding:6px 12px;border-radius:40px;font-weight:800;font-size:.7rem;z-index:400;box-shadow:0 2px 8px rgba(0,0,0,.2);display:none}
-.admin-mode-active .admin-mode-badge{display:block}
-.admin-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:1200;display:none;align-items:center;justify-content:center;padding:20px}
-.admin-modal-content{background:#fff;border-radius:28px;max-width:750px;width:100%;max-height:90vh;overflow-y:auto;padding:28px;position:relative}
-.modal-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--tl)}.modal-close:hover{color:var(--pk)}
-.admin-form-group{margin-bottom:16px}.admin-form-group label{display:block;font-weight:800;font-size:.8rem;margin-bottom:5px;color:var(--text)}
-.admin-form-group input,.admin-form-group select,.admin-form-group textarea{width:100%;padding:10px 12px;border:2px solid var(--bll);border-radius:14px;font-family:"Nunito",sans-serif;font-size:.85rem;outline:none}
-.admin-form-group input:focus,.admin-form-group select:focus,.admin-form-group textarea:focus{border-color:var(--pkm)}.image-preview{width:100%;max-height:140px;object-fit:contain;margin-top:8px;border-radius:12px;background:#f0f2f5;padding:8px;border:1px solid var(--bll)}
-.admin-buttons{display:flex;gap:12px;justify-content:flex-end;margin-top:20px}.admin-buttons button{padding:10px 24px;border-radius:40px;font-weight:800;cursor:pointer;border:none}
-.btn-save{background:var(--grad);color:#fff}.btn-save:hover{opacity:.85}.btn-cancel{background:#e2e6ea;color:var(--text)}.export-import{display:flex;gap:10px;margin-top:20px}
-.export-import button{background:var(--bll);color:var(--bl);border:none;padding:6px 12px;border-radius:30px;font-size:.7rem;font-weight:800;cursor:pointer}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .scroll-btns{position:fixed;right:26px;bottom:24px;z-index:399;display:flex;flex-direction:column;gap:8px}
 .scroll-btn{background:#fff;border:2px solid var(--bll);color:var(--bl);width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem;box-shadow:0 4px 14px rgba(21,101,192,.14);transition:all .2s}
 .scroll-btn:hover{background:var(--bl);color:#fff;border-color:var(--bl);transform:translateY(-2px)}
-.admin-btn-bottom{position:fixed;bottom:24px;left:24px;z-index:400;background:#2c3e66;color:#fff;border:none;padding:10px 18px;border-radius:50px;cursor:pointer;font-weight:800;font-size:.85rem;display:flex;align-items:center;gap:8px;box-shadow:0 4px 14px rgba(0,0,0,.2);transition:all 0.2s}
-.admin-btn-bottom:hover{transform:translateY(-2px);background:#0d2b6b}
-.admin-mode-active .admin-btn-bottom{background:var(--grad);box-shadow:0 4px 14px rgba(233,30,140,.3)}
 .qv-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:1100;display:none;align-items:center;justify-content:center;padding:20px}
 .qv-modal{background:#fff;border-radius:28px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 40px rgba(0,0,0,.2);position:relative;animation:fadeInUp 0.3s ease}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -175,7 +158,6 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
 
 <div class="page-footer"><a href="index.html"><i class="fas fa-home"></i> Back to Home</a> &nbsp;|&nbsp;<a href="https://wa.me/94766787992" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Us</a><p>&copy; 2025 Little Cuddle. All rights reserved.</p></div>
 
-<button class="admin-btn-bottom" id="adminModeBtn"><i class="fas fa-shield-alt"></i> Admin Mode</button>
 <div class="scroll-btns">
   <button class="scroll-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top"><i class="fas fa-chevron-up"></i></button>
   <button class="scroll-btn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})" title="Go to Bottom"><i class="fas fa-chevron-down"></i></button>
@@ -210,62 +192,27 @@ body{font-family:"Nunito",sans-serif;background:var(--cream);color:var(--text)}
   </div>
 </div>
 
-<div id="adminModal" class="admin-modal"><div class="admin-modal-content"><button class="modal-close" onclick="closeAdminModal()">&times;</button><h3 id="adminModalTitle">Edit Product</h3><form id="adminForm">
-  <div class="admin-form-group"><label>Name</label><input type="text" id="prodName" required></div>
-  <div class="admin-form-group"><label>Categories (select one or more)</label>
-    <div id="prodCategoriesContainer" style="display:flex; flex-wrap:wrap; gap:12px; margin-top:5px">
-      <label><input type="checkbox" value="newborn"> Newborn</label>
-      <label><input type="checkbox" value="clothing"> Clothing</label>
-      <label><input type="checkbox" value="feeding"> Feeding</label>
-      <label><input type="checkbox" value="bath"> Bath & Care</label>
-      <label><input type="checkbox" value="mother"> Mother Care</label>
-    </div>
-  </div>
-  <div class="admin-form-group"><label>Description</label><textarea id="prodDesc" rows="2"></textarea></div>
-  <div class="admin-form-group"><label>Price (Rs.)</label><input type="number" id="prodPrice" required></div>
-  <div class="admin-form-group"><label>Discount (%)</label><input type="number" id="prodDisc" value="0"></div>
-  <div class="admin-form-group"><label>Stock Quantity</label><input type="number" id="prodStock" value="0" min="0"></div>
-  <div class="admin-form-group"><label>Badge (NEW, HOT, SALE or empty)</label><input type="text" id="prodBadge" placeholder="NEW / HOT / SALE"></div>
-  <div class="admin-form-group"><label>Emoji (fallback icon)</label><input type="text" id="prodEmo" placeholder="e.g., &#128118;"></div>
-  <div class="admin-form-group"><label>Photo 1 (primary)</label><input type="file" id="prodPhoto1" accept="image/jpeg,image/png,image/webp"><img id="prodPhotoPreview1" class="image-preview" style="display:none"></div>
-  <div class="admin-form-group"><label>Photo 2 (optional)</label><input type="file" id="prodPhoto2" accept="image/jpeg,image/png,image/webp"><img id="prodPhotoPreview2" class="image-preview" style="display:none"></div>
-  <div class="admin-buttons"><button type="button" class="btn-cancel" onclick="closeAdminModal()">Cancel</button><button type="submit" class="btn-save">Save Product</button></div>
-</form><div class="export-import"><button onclick="exportData()"><i class="fas fa-download"></i> Download JSON</button><button onclick="importData()"><i class="fas fa-upload"></i> Upload JSON File</button><input type="file" id="importFile" style="display:none" accept="application/json"></div><button id="resetShopBtn" style="margin-top:15px;background:#e53935;color:#fff;border:none;padding:8px;border-radius:40px;font-weight:800;cursor:pointer;width:100%">🔄 Reset to Default Products</button></div></div>
-
 <div class="toast" id="toast"></div>
-<div id="adminModeBadge" class="admin-mode-badge">🔧 Admin Mode Active</div>
 
 <script>
 // ========== CONFIGURATION ==========
-const ADMIN_PASSWORD_PREFIX = "littlecuddle";
-function getTodaysAdminPassword() {
-  const today = new Date();
-  const y = today.getFullYear();
-  const m = String(today.getMonth() + 1).padStart(2,'0');
-  const d = String(today.getDate()).padStart(2,'0');
-  return ADMIN_PASSWORD_PREFIX + y + m + d;
-}
-
 const ALL_CATEGORIES = ["newborn","clothing","feeding","bath","mother"];
 let products = [];
 let cart = [];
-let adminMode = false;
-let editingId = null;
 let currentQuickViewProduct = null;
 let qvQty = 1, qvCurrentPhotoIndex = 0;
 let selectedCategories = ["all"];
 let showOutOfStock = false;
 
-// ---------- LOAD PRODUCTS FROM products.json ----------
+// ---------- LOAD PRODUCTS FROM JSON ----------
 async function loadProductsFromJSON() {
   showToast("Loading products...");
   try {
-    const response = await fetch("products.json?t=" + Date.now()); // cache buster
+    const response = await fetch("products.json?t=" + Date.now());
     if (!response.ok) throw new Error("HTTP " + response.status);
     const data = await response.json();
     if (Array.isArray(data) && data.length) {
       products = data;
-      // Ensure each product has required fields
       products.forEach(p => {
         if (!p.categories) p.categories = [];
         if (!p.photos) p.photos = [];
@@ -278,24 +225,16 @@ async function loadProductsFromJSON() {
     }
   } catch(e) {
     console.error(e);
-    showToast("Error loading products.json. Using default products.");
-    useDefaultProducts();
+    showToast("Failed to load products.json. Make sure the file exists.");
   }
 }
 
-function useDefaultProducts() {
-  // Minimal default product list (you can embed the full default array here if desired)
-  // For brevity, we call a local builder; but in practice you'd have the full 138 list.
-  // Here I include a short fallback to avoid breaking.
-  products = [
-    {id:1, categories:["newborn"], name:"Newborn Gift Set", desc:"Complete starter set", price:2800, disc:10, emo:"&#128118;", badge:"NEW", stock:10, photos:[]},
-    {id:2, categories:["newborn"], name:"Baby Swaddle Blanket", desc:"Ultra-soft muslin swaddle", price:1200, disc:0, emo:"&#129528;", badge:"", stock:10, photos:[]}
-  ];
-  applyFilters();
+// ---------- CART FUNCTIONS ----------
+function loadCart() {
+  const s = localStorage.getItem("lc_cart");
+  if(s) try { cart = JSON.parse(s); if(!Array.isArray(cart)) cart = []; } catch(e){ cart = []; }
+  else cart = [];
 }
-
-// ---------- CART (unchanged) ----------
-function loadCart() { const s = localStorage.getItem("lc_cart"); if(s) try { cart = JSON.parse(s); if(!Array.isArray(cart)) cart = []; } catch(e){ cart = []; } else cart = []; }
 function saveCart() { localStorage.setItem("lc_cart", JSON.stringify(cart)); }
 function dp(p) { return p.disc>0 ? Math.round(p.price*(1-p.disc/100)) : p.price; }
 
@@ -445,8 +384,6 @@ function renderProducts(list) {
     html += `<div class="pc" onclick="openQuickView(${p.id})">
       <div class="pc-badge">${badges}</div>
       <button class="pc-wishlist" onclick="event.stopPropagation();toggleWish(${p.id})"><i class="far fa-heart"></i></button>
-      <button class="admin-edit-btn" onclick="event.stopPropagation();editProduct(${p.id})"><i class="fas fa-edit"></i></button>
-      <button class="admin-del-btn" onclick="event.stopPropagation();deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
       <div class="pc-img">${imgHtml}<div class="pc-overlay"><button class="btn-quick" onclick="event.stopPropagation();openQuickView(${p.id})"><i class="fas fa-eye"></i> Quick View</button></div></div>
       <div class="pc-body">
         <div class="pc-cat">${p.categories ? p.categories[0] : ""}</div>
@@ -524,166 +461,11 @@ function closeQuickView(event) { if(event && event.target !== event.currentTarge
 document.getElementById("qvArrowLeft")?.addEventListener("click", (e) => { e.stopPropagation(); qvPrevPhoto(); });
 document.getElementById("qvArrowRight")?.addEventListener("click", (e) => { e.stopPropagation(); qvNextPhoto(); });
 
-// ---------- ADMIN MODE (JSON editing & download) ----------
+// ---------- WISHLIST ----------
 let wishlist = JSON.parse(localStorage.getItem("lc_wish")||"[]");
 function toggleWish(id) { const idx = wishlist.indexOf(id); if(idx>=0) wishlist.splice(idx,1); else wishlist.push(id); localStorage.setItem("lc_wish", JSON.stringify(wishlist)); showToast(wishlist.includes(id) ? "Added to wishlist" : "Removed from wishlist"); }
 
-function enterAdminMode() {
-  const pwd = prompt("Enter admin password:");
-  if(pwd === getTodaysAdminPassword()) {
-    adminMode = true;
-    document.body.classList.add("admin-mode-active");
-    applyFilters();
-    if(!document.getElementById("addProductBtn")) {
-      const btn = document.createElement("button");
-      btn.id = "addProductBtn";
-      btn.className = "add-product-btn";
-      btn.innerHTML = '<i class="fas fa-plus-circle"></i> Add New Product';
-      btn.onclick = () => addNewProduct();
-      document.querySelector(".products-area .products-toolbar").prepend(btn);
-    }
-    document.getElementById("adminModeBtn").innerHTML = '<i class="fas fa-shield-alt"></i> Exit Admin Mode';
-    showToast("Admin mode enabled – edit products and use Download JSON.");
-  } else alert("Wrong password!");
-}
-function exitAdminMode() {
-  adminMode = false;
-  document.body.classList.remove("admin-mode-active");
-  const addBtn = document.getElementById("addProductBtn");
-  if(addBtn) addBtn.remove();
-  applyFilters();
-  document.getElementById("adminModeBtn").innerHTML = '<i class="fas fa-shield-alt"></i> Admin Mode';
-  showToast("Admin mode disabled.");
-}
-document.getElementById("adminModeBtn").addEventListener("click", () => { if(adminMode) exitAdminMode(); else enterAdminMode(); });
-
-// Admin CRUD (modifies local products array)
-function editProduct(id) {
-  if(!adminMode) return;
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
-  editingId = id;
-  document.getElementById("adminModalTitle").innerText = "Edit Product";
-  document.getElementById("prodName").value = p.name;
-  document.querySelectorAll("#prodCategoriesContainer input").forEach(cb => { cb.checked = p.categories.includes(cb.value); });
-  document.getElementById("prodDesc").value = p.desc;
-  document.getElementById("prodPrice").value = p.price;
-  document.getElementById("prodDisc").value = p.disc;
-  document.getElementById("prodStock").value = p.stock;
-  document.getElementById("prodBadge").value = p.badge || "";
-  document.getElementById("prodEmo").value = p.emo;
-  const preview1 = document.getElementById("prodPhotoPreview1");
-  const preview2 = document.getElementById("prodPhotoPreview2");
-  if(p.photos && p.photos[0]) { preview1.src = p.photos[0]; preview1.style.display = "block"; } else preview1.style.display = "none";
-  if(p.photos && p.photos[1]) { preview2.src = p.photos[1]; preview2.style.display = "block"; } else preview2.style.display = "none";
-  document.getElementById("prodPhoto1").value = "";
-  document.getElementById("prodPhoto2").value = "";
-  document.getElementById("adminModal").style.display = "flex";
-}
-function addNewProduct() {
-  if(!adminMode) return;
-  editingId = null;
-  document.getElementById("adminModalTitle").innerText = "Add New Product";
-  document.getElementById("prodName").value = "";
-  document.querySelectorAll("#prodCategoriesContainer input").forEach(cb => cb.checked = false);
-  document.getElementById("prodDesc").value = "";
-  document.getElementById("prodPrice").value = "";
-  document.getElementById("prodDisc").value = "0";
-  document.getElementById("prodStock").value = "0";
-  document.getElementById("prodBadge").value = "";
-  document.getElementById("prodEmo").value = "&#128118;";
-  document.getElementById("prodPhotoPreview1").style.display = "none";
-  document.getElementById("prodPhotoPreview2").style.display = "none";
-  document.getElementById("prodPhoto1").value = "";
-  document.getElementById("prodPhoto2").value = "";
-  document.getElementById("adminModal").style.display = "flex";
-}
-function deleteProduct(id) {
-  if(!adminMode) return;
-  if(confirm("Delete permanently?")) {
-    products = products.filter(p=>p.id!==id);
-    applyFilters();
-    showToast("Product deleted. Use Download JSON to save changes permanently.");
-  }
-}
-document.getElementById("adminForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  if(!adminMode) return;
-  const name = document.getElementById("prodName").value.trim();
-  const categories = Array.from(document.querySelectorAll("#prodCategoriesContainer input:checked")).map(cb => cb.value);
-  const desc = document.getElementById("prodDesc").value.trim();
-  const price = parseFloat(document.getElementById("prodPrice").value);
-  const disc = parseInt(document.getElementById("prodDisc").value)||0;
-  const stock = parseInt(document.getElementById("prodStock").value)||0;
-  const badge = document.getElementById("prodBadge").value.trim();
-  let emo = document.getElementById("prodEmo").value.trim();
-  if(!emo) emo = "&#128118;";
-  let photo1 = "", photo2 = "";
-  const file1 = document.getElementById("prodPhoto1").files[0];
-  const file2 = document.getElementById("prodPhoto2").files[0];
-  const oldPhotos = editingId ? (products.find(p=>p.id===editingId)?.photos || []) : [];
-  const processPhoto = (file, existing, cb) => {
-    if(file) { const reader = new FileReader(); reader.onload = ev => cb(ev.target.result); reader.readAsDataURL(file); }
-    else cb(existing);
-  };
-  processPhoto(file1, oldPhotos[0] || "", (p1) => {
-    processPhoto(file2, oldPhotos[1] || "", (p2) => {
-      const photos = [p1, p2].filter(p => p && p !== "");
-      if(editingId) {
-        const idx = products.findIndex(p=>p.id===editingId);
-        if(idx!==-1) products[idx] = {...products[idx], name, categories, desc, price, disc, stock, badge, emo, photos};
-      } else {
-        const newId = Date.now();
-        products.push({id:newId, name, categories, desc, price, disc, stock, badge, emo, photos});
-      }
-      closeAdminModal();
-      applyFilters();
-      showToast(editingId ? "Product updated. Download JSON to save." : "Product added. Download JSON to save.");
-      editingId = null;
-    });
-  });
-});
-function closeAdminModal() { document.getElementById("adminModal").style.display = "none"; editingId = null; }
-function exportData() {
-  const dataStr = JSON.stringify(products, null, 2);
-  const blob = new Blob([dataStr], {type:"application/json"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "products.json";
-  a.click(); URL.revokeObjectURL(url);
-  showToast("Downloaded products.json – now upload this file to your GitHub repository (replace the old one).");
-}
-function importData() {
-  const inp = document.getElementById("importFile");
-  inp.onchange = function(e) {
-    const file = e.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      try {
-        const imported = JSON.parse(ev.target.result);
-        if(Array.isArray(imported) && imported.length) {
-          products = imported;
-          applyFilters();
-          showToast("Products imported! Use Download JSON to keep changes permanent? To really save, you need to replace the JSON file on GitHub.");
-        } else throw new Error();
-      } catch(e) { alert("Invalid JSON file"); }
-    };
-    reader.readAsText(file);
-    inp.value = "";
-  };
-  inp.click();
-}
-function resetToDefaultProducts() {
-  if(confirm("Reset to default products? Any unsaved changes will be lost.")) {
-    useDefaultProducts();
-    showToast("Reset to default. Use Download JSON to save permanently.");
-  }
-}
-window.onclick = function(e) { if(e.target === document.getElementById("adminModal")) closeAdminModal(); };
-document.getElementById("resetShopBtn")?.addEventListener("click", resetToDefaultProducts);
-
+// ---------- INIT ----------
 loadProductsFromJSON();
 loadCart(); renderCart(); updateCartBadge(); buildCategoryCheckboxes(); applyFilters();
 </script>
